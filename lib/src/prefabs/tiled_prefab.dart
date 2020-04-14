@@ -9,38 +9,38 @@ export 'package:pogo/src/entities/game_entity.dart';
 ///
 /// This creates a prefabricated entity intended for single-use entities.
 class TiledPrefab extends GameEntity {
-	TiledComponent tiledComponent;
+  TiledComponent tiledComponent;
 
-	TiledPrefab(
-			this.tiledComponent,
-			{
-				Vector2 position,
-				int     zOrder = 0,
-				double  rotation,
-				double  rotationDeg,
-				Vector2 scale,
-				bool    enabled = true,
-				GameEntity parent,
-			}
-	) : super(
-		position:    position,
-		zOrder:      zOrder,
-		rotation:    rotation,
-		rotationDeg: rotationDeg,
-		scale:       scale,
-		enabled:     enabled,
-		parent:      parent,
-	);
+  TiledPrefab(
+      this.tiledComponent,
+      {
+        Vector2 position,
+        int     zOrder = 0,
+        double  rotation,
+        double  rotationDeg,
+        Vector2 scale,
+        bool    enabled = true,
+        GameEntity parent,
+      }
+  ) : super(
+    position:    position,
+    zOrder:      zOrder,
+    rotation:    rotation,
+    rotationDeg: rotationDeg,
+    scale:       scale,
+    enabled:     enabled,
+    parent:      parent,
+  );
 
-	@override
-	void update() {
-		tiledComponent.render();
-	}
+  @override
+  void update() {
+    tiledComponent.render();
+  }
 
-	/*@override
-	void render() {
-		super.render();
-		tiledComponent.render();
-	}*/
+  /*@override
+  void render() {
+    super.render();
+    tiledComponent.render();
+  }*/
 
 }

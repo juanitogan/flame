@@ -141,9 +141,9 @@ class AnimationComponent {
         Pivot pivot,
       }
   ) {
-		frameWidth ??= raster.intWidth;
-		frameHeight ??= raster.intHeight;
-		//
+    frameWidth ??= raster.intWidth;
+    frameHeight ??= raster.intHeight;
+    //
     int x = frameLeft, y = frameTop;
     x += firstFrame * frameWidth; // Exceeding image.width handled later.
     SpriteComponent sprite;

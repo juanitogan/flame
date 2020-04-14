@@ -82,8 +82,8 @@ abstract class GameCore {
   }
 
   /// Gesture callbacks.
-	void onTapDown(TapDownDetails details);
-	void onTapUp(TapUpDetails details);
+  void onTapDown(TapDownDetails details);
+  void onTapUp(TapUpDetails details);
   void onTapCancel();
   void onSecondaryTapDown(TapDownDetails details);
   void onSecondaryTapUp(TapUpDetails details);
@@ -149,19 +149,19 @@ class EmbeddedGameWidget extends LeafRenderObjectWidget {
     return RenderConstrainedBox(
         child: GameRenderBox(context, game),
         additionalConstraints:
-        		BoxConstraints.expand(width: size?.width, height: size?.height)
-		);
+            BoxConstraints.expand(width: size?.width, height: size?.height)
+    );
   }
 
   @override
   void updateRenderObject(
       BuildContext context,
-			RenderConstrainedBox renderBox
-	) {
+      RenderConstrainedBox renderBox
+  ) {
     renderBox
       ..child = GameRenderBox(context, game)
       ..additionalConstraints =
-      		BoxConstraints.expand(width: size?.width, height: size?.height);
+          BoxConstraints.expand(width: size?.width, height: size?.height);
   }
 }
 
@@ -184,7 +184,7 @@ class GameRenderBox extends RenderBox with WidgetsBindingObserver {
   void performResize() {
     super.performResize();
     Screen.setSize(constraints.biggest);
-		//Camera.rect ??= Rect.fromLTWH(0, 0, constraints.biggest.width, constraints.biggest.height);
+    //Camera.rect ??= Rect.fromLTWH(0, 0, constraints.biggest.width, constraints.biggest.height);
     //game.resize(); //TODO why hit twice at startup?
     if (Screen.onResize != null) Screen.onResize();
   }

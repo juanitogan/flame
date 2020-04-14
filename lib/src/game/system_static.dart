@@ -10,9 +10,9 @@ export 'package:pogo/src/pivot.dart';
 /// Static class for system setup and such.
 class System {
 
-	//TODO not sure of the best home for this
-	/// Allows changing the default pivot from center to another pivot point.
-	static Pivot defaultPivot = Pivot.center;
+  //TODO not sure of the best home for this
+  /// Allows changing the default pivot from center to another pivot point.
+  static Pivot defaultPivot = Pivot.center;
 
 
   /// TODONE Verify if this is still needed (I don't think so).

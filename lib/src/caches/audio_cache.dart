@@ -10,13 +10,13 @@ class AudioCache {
   final ac.AudioCache _audioCache = ac.AudioCache(prefix: 'audio/');
 
   /// Override the default subdirectory for audio files.
-	/// Must specify a path underneath `assets/` (or set to empty for `assets/` root).
-	/// Default: `audio/`.
-	///
-	/// `assets/` limitation due to AudioPlayers plugin.
+  /// Must specify a path underneath `assets/` (or set to empty for `assets/` root).
+  /// Default: `audio/`.
+  ///
+  /// `assets/` limitation due to AudioPlayers plugin.
   void setSubPath(String subPath) {
-  	_audioCache.prefix = subPath;
-	}
+    _audioCache.prefix = subPath;
+  }
 
   /// Plays a single run of the given file (takes an optional volume parameter).
   Future<AudioPlayer> play(String filename, {volume = 1.0}) {
@@ -38,8 +38,8 @@ class AudioCache {
   /// This method supports long audio files.
   ///
   /// NOTE: Long audio files on Android have an audio gap between loop iterations.
-	/// This happens due to limitations on Android's native media player features.
-	/// If you need a gapless loop, prefer the `loop()` method.
+  /// This happens due to limitations on Android's native media player features.
+  /// If you need a gapless loop, prefer the `loop()` method.
   Future<AudioPlayer> loopLongAudio(String filename, {volume = 1.0}) {
     return _audioCache.loop(filename, volume: volume);
   }

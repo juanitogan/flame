@@ -41,8 +41,8 @@ class TimerPrefab extends GameEntity {
     timerComponent.update();
     //TODO if (destroyOnFinish && timer.isFinished) {
     if (timerComponent.isFinished) {
-    	destroy();
-		}
+      destroy();
+    }
   }
 
 }
