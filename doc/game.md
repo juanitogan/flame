@@ -22,9 +22,7 @@ void main() async {
   GestureInitializer.detectPans = true;
 
   await Assets.audioCache.load("explosion.mp3");
-
   await Assets.rasterCache.load("background.png");
-
   await Assets.svgCache.loadAll(["enemy.svg", "player.svg"], scale: 0.75);
 
   runApp(Game().widget); // required
@@ -63,7 +61,7 @@ See the [debug example app](/doc/examples/debug).
 
 ## Flutter widgets
 
-:warning: I can't say this feature is working at the moment.
+**//TODO :warning: I can't say this feature is working at the moment.**
 
 Because a Pogo game is a widget itself, it is possible to use Flutter widgets and a Pogo game together. To facilitate this, Pogo provides a `mixin` called `HasWidgetsOverlay` which will enable any Flutter widget to be shown on top of your game instance. This makes it easy to create things like a pause menu or an inventory screen, for example.
 

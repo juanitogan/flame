@@ -2,7 +2,7 @@
 
 Components are the building blocks of [game entities](game_entity.md).
 
-An entity can instantiate as many components as needed.  It is, however, unusual to have more than one of a type of component in a single entity.  For example, an entity will not typically have more than one sprite component unless you have images that should be composed, such as a border image and a content image or animation.  Entities that use multiple images that need to move independent of each other should instead create a child entity for each part.
+An entity can instantiate as many components as needed.  It is, however, unusual to have multiple components of a the same type in a single entity.  For example, an entity will not typically have more than one sprite component unless you have images that should be composed, such as a border image and a content image or animation.  Entities that use multiple images that need to move independent of each other should instead create a child entity for each part.
 
 ## Built-in components
 

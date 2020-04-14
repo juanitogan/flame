@@ -1,10 +1,17 @@
 # :full_moon: Pogo Game Engine
 
-Pogo is a 2D game engine for [Flutter](https://flutter.dev/).
+Pogo is a 2D game engine for [Flutter](https://flutter.dev/) (Android, iOS, etc.).
 
 Pogo aims to implement what I'm calling a "pseudo Entity Component System" for lack of a better term.  Pogo should feel fairly similar to some of the other game engines that are popular for rapid game development with its use of game entities (or game objects) and the components that are used to build entities.
 
 "Pseudo ECS" because it is not what ECS purists would call an ECS.  Why not a more pure ECS?  1) I didn't see myself as having time to go that far into the ECS pattern; and 2) I believe this pattern is quicker to ramp up on while also being robust enough for most games.  Regardless, hopefully Pogo gives a foundation for building a more pure ECS should anyone choose to launch that spin-off project.
+
+### Documentation
+
+ * [**Getting Started Guide**](#getting-started-guide) :beginner: (further down on this page)
+ * [**Pogo Reference Documentation**](doc/README.md) :books:
+ * [The main example app](example/lib/main.dart) shows how the core features fit together
+ * [Various other example apps](doc/examples) demonstrate each component
 
 ### Background
 
@@ -18,7 +25,7 @@ By the time I release _Pogo Bug_ this engine should be at version 0.1.0.
 
 Hit me with a PR and I'll try to find time to engage it.  No promises, but I'll try.  Hopefully others will jump in and help.  I have pretty high standards for PRs (particularly on naming and lingo more so than code style), but I also enjoy people who make a great case for significant changes in design (and I certainly am no expert in designing game engines).
 
-There is still much to be done.  I quickly hacked through many components from the previous engine, that I didn't need at the moment, just to get them working.  Thus, many of the components here still needs to be refactored to be more like the rest.
+There is still much to be done.  I quickly hacked through many components from the previous engine, that I didn't need at the moment, just to get them working.  Thus, many of the components here still need to be refactored to be more like the rest.
 
 `NinePatchComponent`, `ParallaxComponent`, and `ParticleComponent` are some examples as things I just quick-hacked and saved for later.  (See the [`[Unreleased]` section in the changelog](CHANGELOG.md#unreleased) for a better TODO list.)  Most things still work as Flame had them working, but they may not be fully "Pogo-ized" yet.  I also haven't touched Box2D yet because _Pogo Bug_ doesn't need it.  (Another game of mine, _GRITS Racing_, uses it super heavily, so I should have the skills to work it in well when I get to it).
 
@@ -52,7 +59,7 @@ import 'package:pogo/game_engine.dart';
 
 All asset files are assumed to be found under the `assets` folder.  This is a limitation of at least one of the current plugins.
 
-Furthermore, some subfolder defaults are set for certain asset types (a default can be changed with `setSubPath()` if desired).
+Furthermore, some subfolder defaults are set for certain asset types (the default can be changed with `setSubPath()` if desired).
 
 The default asset tree looks like this:
 
@@ -95,9 +102,7 @@ void main() async {
   GestureInitializer.detectPans = true;
 
   await Assets.audioCache.load("explosion.mp3");
-
   await Assets.rasterCache.load("background.png");
-
   await Assets.svgCache.loadAll(["enemy.svg", "player.svg"], scale: 0.75);
 
   runApp(Game().widget); // required
@@ -116,7 +121,7 @@ Note that you must initialize all gestures here that will be used anywhere in yo
 
 It is recommended to cache your assets (the ones that currently _can_ be cached).  It is not required to cache them your `main()` but this is a good place to do it for simple games.  More complex games will want to use the cache features to load and clear assets.
 
-[More details here](doc/game.md).
+[More game engine details here](doc/game.md).
 
 ## Game entities
 
@@ -128,7 +133,7 @@ Every game entity has:
  * the core `update()` method
  * an `enabled` property and a few other features
 
-[More details here](doc/game_entity.md).
+[More game entity details here](doc/game_entity.md).
 
 Game entities are made up of components.  Some components are built into the entity (such as position/movable), some are added through mixins (such as the `TapDetector` mixin), and some are added by calling [component classes](/doc/components.md) (such as `SpriteComponent`).
 
@@ -159,7 +164,7 @@ class Player extends GameEntity with {
 
 Note the paradigm here that is typical to many game engines: you transform the entity and not the component.  Also, components can have size properties, whereas entities only have scale.  Components can have a pivot property, whereas entities have position and rotation.  _(Warning: Not all objects from Flame have been updated to this paradigm yet.)_
 
-Regarding the above paradigm, it is therefore unusual to have more than one of a type of component in a single entity.  For example, an entity will not typically have more than one sprite component unless you have images that should be composed, such as a border image and a content image or animation.  Entities that use multiple images that need to move independent of each other should instead create a child entity for each part.
+Regarding the above paradigm, it is therefore unusual to have multiple components of a the same type in a single entity.  For example, an entity will not typically have more than one sprite component unless you have images that should be composed, such as a border image and a content image or animation.  Entities that use multiple images that need to move independent of each other should instead create a child entity for each part.
 
 ### Entity hierarchy
 
@@ -228,7 +233,7 @@ class Enemy extends GameEntity with GestureZone, TapDetector {
 }
 ```
 
-[More details here](doc/input.md).
+[More gesture details here](doc/input.md).
 
 ### Prefabs
 
@@ -256,15 +261,6 @@ If you `destroy()` a parent, all the children will be automatically destroyed fo
 
 (TODO: Think all this through more.)
 
-## Further reading
-
-Well, that's it!  Recommended next stops:
-
- * Look at the main [example app](example/lib/main.dart) for a better overview of how the core features fit together.
- * Read the [**Pogo Reference Documentation**](doc). :books:
- 
-There are also [various example apps](doc/examples) demonstrating each component.
-
 ----
 
 ## External plugins
@@ -274,7 +270,7 @@ Built in:
  * [AudioPlayers](https://github.com/luanpotter/audioplayers) is the audio engine.
  * [Tiled](https://github.com/feroult/tiled.dart) adds support for parsing and using TMX files from Tiled.
  * [Box2D](https://github.com/flame-engine/box2d.dart) adds wrappers over Box2D for the physics engine.
- * TODO finish this list
+ * TODO: finish this list
 
 Others you might add:
 

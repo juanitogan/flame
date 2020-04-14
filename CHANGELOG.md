@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Evaluate `palette.dart`.
 
 
-## [0.0.1] - 2020-04-04
+## [0.0.1] - 2020-04-13
 This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) and this is the first commit as Pogo.  I have some previous commits after Flame 0.18.1 that were submitted as a PR to Flame but that PR was not accepted.  Thus, Pogo was born.  Those changes are here along with many more changes to just about every part of the code.  This includes the introduction of entities and a significant redefinition of what a component is.  I will attempt to give a pretty good overview of all changes here.  The degree of changes is too great to hope to list in absolute detail.  Just look at the diffs over my last few commits and you'll see what I mean.
 
 ### Added
@@ -86,7 +86,7 @@ This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flam
 - `renderFlipX/Y` props.  Replaced by negative scaling which does the same thing.
 - `angleBetween()` helper.  Made redundant by `position.angleTo()`.
 - `distance()` helper.  Made redundant by `position.distanceTo()`.
-- `prepareCanvas()` made redundant by new design. **************************
+- `prepareCanvas()` made redundant by new design.
 - `add(Component)` is no longer needed to add objects to the game loop.  "Adding" is now automatic in the entity constructor.
 - `/doc/examples/tapable` example app removed as it became redundant to `gestures`.  At least one other I don't recall.
 
