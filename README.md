@@ -261,7 +261,7 @@ If you `destroy()` a parent, all the children will be automatically destroyed fo
 Well, that's it!  Recommended next stops:
 
  * Look at the main [example app](example/lib/main.dart) for a better overview of how the core features fit together.
- * Read the [reference documentation](doc).
+ * Read the [**Pogo Reference Documentation**](doc). :books:
  
 There are also [various example apps](doc/examples) demonstrating each component.
 
