@@ -64,62 +64,24 @@ instead:
 | :-- | :-- |
 | gestureZoneOffset | Top-left corner of the zone relative to entity position.  Default: `Offset.zero`. |
 | gestureZoneSize   | Sets the size of the rectangle that taps and drag-starts are limited to.  Set to `Size.zero` to disable zone sizing and respond to gestures anywhere in the game window.  Hint: small objects and drag/pan objects may need sizes larger than the visible components.  Default: `Size.zero`. |
-| gestureZonePivot  | Pivot of the zone.  Default: `System.defaultPivot`. |
+| gestureZonePivot  | Pivot of the zone.  Default: `System.defaultPivot` which defaults to `Pivot.center`. |
 
 
 # Gesture-detector mixins
 
-## Required method overrides
+| Mixin | Required method overrides |
+| :-- | :-- |
+| TapDetector            * | onTapDown, onTapUp, onTapDown |
+| SecondaryTapDetector   * | onSecondaryTapDown, onSecondaryTapUp, onSecondaryTapDown |
+| SingleTapDetector        | onSingleTap |
+| DoubleTapDetector        | onDoubleTap |
+| LongPressDetector        | onLongPress |
+| VerticalDragDetector   * | onVerticalDragStart, onVerticalDragUpdate, onVerticalDragEnd |
+| HorizontalDragDetector * | onHorizontalDragStart, onHorizontalDragUpdate, onHorizontalDragEnd |
+| PanDetector            * | onPanStart, onPanUpdate, onPanEnd |
+| ScaleDetector          * | onScaleStart, onScaleUpdate, onScaleEnd |
 
-| TapDetector * |
-| :-- |
-| onTapDown |
-| onTapUp |
-| onTapDown |
-
-| SecondaryTapDetector * |
-| :-- |
-| onSecondaryTapDown |
-| onSecondaryTapUp |
-| onSecondaryTapDown |
-
-| VerticalDragDetector * |
-| :-- |
-| onVerticalDragStart |
-| onVerticalDragUpdate |
-| onVerticalDragEnd |
-
-| HorizontalDragDetector * |
-| :-- |
-| onHorizontalDragStart |
-| onHorizontalDragUpdate |
-| onHorizontalDragEnd |
-
-| PanDetector * |
-| :-- |
-| onPanStart |
-| onPanUpdate |
-| onPanEnd |
-
-| ScaleDetector * |
-| :-- |
-| onScaleStart |
-| onScaleUpdate |
-| onScaleEnd |
-
-/* Requires `GestureZone` mixin.
-
-| SingleTapDetector |
-| :-- |
-| onSingleTap |
-
-| DoubleTapDetector |
-| :-- |
-| onDoubleTap |
-
-| LongPressDetector |
-| :-- |
-| onLongPress |
+\* Requires the `GestureZone` mixin as well.
 
 Note that the detectors that do not require the `GestureZone` mixin cannot be limited by a zone and will trigger their events from gestures anywhere in the game window.  They will also have a slower response time by their very nature.
 
