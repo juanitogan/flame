@@ -1,9 +1,8 @@
-import 'package:flame/game.dart';
+import 'package:pogo/game_engine.dart';
 
 import 'package:flutter/services.dart';
-import 'package:flutter/material.dart';
 
-class MyGame extends BaseGame {
+class MainEntity extends GameEntity {
   static final Paint paint = Paint()..color = const Color(0xFFFFFFFF);
 
   var movingLeft = false;
@@ -11,10 +10,7 @@ class MyGame extends BaseGame {
   var movingUp = false;
   var movingDown = false;
 
-  double x = 0;
-  double y = 0;
-
-  MyGame() {
+  MainEntity() {
     _start();
   }
 
@@ -43,22 +39,19 @@ class MyGame extends BaseGame {
   }
 
   @override
-  void update(double dt) {
+  void update() {
     if (movingLeft) {
-      x -= 100 * dt;
+      position.x -= 100 * Time.deltaTime;
     } else if (movingRight) {
-      x += 100 * dt;
+      position.x += 100 * Time.deltaTime;
     }
 
     if (movingUp) {
-      y -= 100 * dt;
+      position.y -= 100 * Time.deltaTime;
     } else if (movingDown) {
-      y += 100 * dt;
+      position.y += 100 * Time.deltaTime;
     }
-  }
 
-  @override
-  void render(Canvas canvas) {
-    canvas.drawRect(Rect.fromLTWH(x, y, 100, 100), paint);
+    GameCanvas.main.drawRect(Rect.fromLTWH(position.x, position.y, 100, 100), paint);
   }
 }

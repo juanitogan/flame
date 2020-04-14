@@ -1,0 +1,17 @@
+name: primatives
+description: Example project showing drawing primatives
+
+version: 0.1.0
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  pogo:
+    path: ../../../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

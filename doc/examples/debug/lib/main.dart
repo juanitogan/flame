@@ -1,84 +1,71 @@
-import 'package:flame/game.dart';
-import 'package:flame/flame.dart';
-import 'package:flame/svg.dart';
-import 'package:flame/position.dart';
-import 'package:flame/components/component.dart' show SvgComponent;
-import 'package:flame/components/mixins/resizable.dart';
-import 'package:flame/text_config.dart';
-
-import 'package:flutter/material.dart';
+import 'package:pogo/game_engine.dart';
 
 void main() async {
-  await Flame.util.initialDimensions();
+  Game().debugMode = true;
+  runApp(Game().widget);
 
-  final myGame = MyGame();
-  runApp(myGame.widget);
-  myGame.start();
+  await Assets.svgCache.load('android.svg', scale: 1.0);
+
+  await Screen.waitForStartupSizing();
+
+  MainEntity();
 }
 
-class AndroidComponent extends SvgComponent with Resizable {
-  static const int SPEED = 150;
+
+class MainEntity extends GameEntity {
+  final TextConfig fpsTextConfig = const TextConfig(color: const Color(0xFFFFFFFF));
+  TextPrefab fpsText;
+
+  MainEntity() {
+    // Instantiate some androids (var assignment not really needed in this simple demo).
+    final android1 = Android(Vector2(100, 400), 1, 1);
+    final android2 = Android(Vector2(100, 400), 1, -1);
+    final android3 = Android(Vector2(100, 400), -1, 1);
+
+    fpsText = TextPrefab(
+      TextComponent("", textConfig: fpsTextConfig, pivot: Pivot.topLeft),
+      position: Vector2(0, 50),
+      enabled: false,
+    );
+  }
+
+  @override
+  void update() {
+    fpsText.enabled = Game().debugMode;
+    if (fpsText.enabled) {
+      fpsText.textComponent.text = Game().fps(120).toStringAsFixed(1);
+    }
+  }
+}
+
+
+class Android extends SpritePrefab {
+  static const int speed = 150;
   int xDirection = 1;
   int yDirection = 1;
 
-  AndroidComponent() : super.fromSvg(100, 100, Svg('android.svg'));
+  Android(Vector2 position, this.xDirection, this.yDirection) : super(
+    SpriteComponent.fromSvgCache('android.svg'),
+    position: position,
+  );
 
   @override
-  void update(double dt) {
-    if (size == null) {
-      return;
+  void update() {
+
+    position.x += xDirection * speed * Time.deltaTime;
+
+    if ((position.x - spriteComponent.frameWidth / 2 <= 0 && xDirection == -1) ||
+        (position.x + spriteComponent.frameWidth / 2 >= Screen.size.width && xDirection == 1))
+    {
+      xDirection *= -1;
     }
 
-    x += xDirection * SPEED * dt;
+    position.y += yDirection * speed * Time.deltaTime;
 
-    final rect = toRect();
-
-    if ((x <= 0 && xDirection == -1) ||
-        (rect.right >= size.width && xDirection == 1)) {
-      xDirection = xDirection * -1;
-    }
-
-    y += yDirection * SPEED * dt;
-
-    if ((y <= 0 && yDirection == -1) ||
-        (rect.bottom >= size.height && yDirection == 1)) {
-      yDirection = yDirection * -1;
-    }
-  }
-}
-
-class MyGame extends BaseGame {
-  final fpsTextConfig = const TextConfig(color: const Color(0xFFFFFFFF));
-
-  @override
-  bool debugMode() => true;
-
-  void start() {
-    final android = AndroidComponent();
-    android.x = 100;
-    android.y = 400;
-
-    final android2 = AndroidComponent();
-    android2.x = 100;
-    android2.y = 400;
-    android2.yDirection = -1;
-
-    final android3 = AndroidComponent();
-    android3.x = 100;
-    android3.y = 400;
-    android3.xDirection = -1;
-
-    add(android);
-    add(android2);
-    add(android3);
-  }
-
-  @override
-  void render(Canvas canvas) {
-    super.render(canvas);
-
-    if (debugMode()) {
-      fpsTextConfig.render(canvas, fps(120).toString(), Position(0, 50));
+    if ((position.y - spriteComponent.frameHeight / 2 <= 0 && yDirection == -1) ||
+        (position.y + spriteComponent.frameHeight / 2 >= Screen.size.height && yDirection == 1))
+    {
+      yDirection *= -1;
     }
   }
 }

@@ -1,5 +1,5 @@
 name: gestures
-description: A flame game showcasing the use of gestures callbacks
+description: Example app showing the use of gesture mixins
 
 version: 1.0.0+1
 
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flame:
+  pogo:
       path: ../../../
 
 flutter:

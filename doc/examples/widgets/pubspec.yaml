@@ -1,5 +1,5 @@
 name: widgets
-description: A Flutter project showcasing Flame's widgets.
+description: Example project showing use of PogoWidget
 
 version: 1.0.0+1
 
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flame:
+  pogo:
       path: ../../../
   dashbook: ^0.0.2
 

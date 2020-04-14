@@ -1,26 +1,29 @@
-import 'package:flame/flame.dart';
-import 'package:flame/game.dart';
-import 'package:flame/components/parallax_component.dart';
-import 'package:flutter/material.dart';
+import 'package:pogo/game_engine.dart';
 
 void main() async {
-  await Flame.util.fullScreen();
-  runApp(MyGame().widget);
+  runApp(Game().widget);
+
+  await Screen.waitForStartupSizing();
+
+  MainEntity();
 }
 
-class MyGame extends BaseGame {
-  MyGame() {
+class MainEntity extends GameEntity {
+
+  MainEntity() {
     final images = [
-      ParallaxImage("bg.png"),
-      ParallaxImage("mountain-far.png"),
-      ParallaxImage("mountains.png"),
-      ParallaxImage("trees.png"),
-      ParallaxImage("foreground-trees.png"),
+      ParallaxImage("bg.png", fill: LayerFill.height),
+      ParallaxImage("mountain-far.png", fill: LayerFill.height),
+      ParallaxImage("mountains.png", fill: LayerFill.height),
+      ParallaxImage("trees.png", fill: LayerFill.height),
+      ParallaxImage("foreground-trees.png", fill: LayerFill.height),
     ];
 
-    final parallaxComponent = ParallaxComponent(images,
-        baseSpeed: const Offset(20, 0), layerDelta: const Offset(30, 0));
+    final parallax = ParallaxComponent(images,
+        baseSpeed: const Offset(20, 0),
+        layerDelta: const Offset(30, 0)
+    );
 
-    add(parallaxComponent);
+    ParallaxPrefab(parallax);
   }
 }

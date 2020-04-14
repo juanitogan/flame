@@ -1,5 +1,5 @@
 name: spritesheet
-description: Flame sample game showcasing spritesheet features
+description: Example app showing spritesheet features
 
 version: 1.0.0+1
 
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flame:
+  pogo:
       path: ../../../
 
 dev_dependencies:

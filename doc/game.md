@@ -1,55 +1,73 @@
-# Game Loop
+# Game Engine Basics
 
-The Game Loop module is a simple abstraction over the game loop concept. Basically most games are built upon two methods:
+The game loop iterates over game entities and executes the `update()` methods in each.  This is where you update entity and component state, and render any components that need rendering (by calling component `update()` and/or `render()` methods).  Seconds since the last update is found in `Time.deltaTime`.
 
-* The render method takes the canvas ready for drawing the current state of the game.
-* The update method receives the delta time in seconds since last update and allows you to move the next state.
+The class `Game` is a singleton that gets instantiated on the first reference to it.  The singleton is always available as `Game()`.
+ 
+`Game().widget` is a reference to the game widget.  `runApp()` will run a widget and attach it to the screen.  Thus, `runApp(Game().widget)` will start the game engine.
 
-The class `Game` can be subclassed and will provide both these methods for you to implement. In return it will provide you with a `widget` property that returns the game widget, that can be rendered in your app.
+## Game engine config and startup
 
-You can either render it directly in your `runApp`, or you can have a bigger structure, with routing, other screens and menus for your game.
-
-To start, just add your game widget directly to your runApp, like so:
-
-```dart
-    main() {
-        Game game = MyGameImpl();
-        runApp(game.widget);
-    }
-```
-
-Instead of implementing the low level `Game` class, you should probably use the more full-featured `BaseGame` class.
-
-The `BaseGame` implements a `Component` based `Game` for you; basically it has a list of `Component`s and repasses the `update` and `render` calls appropriately. You can still extend those methods to add custom behavior, and you will get a few other features for free, like the repassing of `resize` methods (every time the screen is resized the information will be passed to the resize methods of all your components) and also a basic camera feature. The `BaseGame.camera` controls which point in coordinate space should be the top-left of the screen (defaults to [0,0] like a regular `Canvas`).
-
-A very simple `BaseGame` implementation example can be seen below:
+This is the recommended sequence of code to start a game (the rest will be explained below):
 
 ```dart
-    class MyCrate extends SpriteComponent {
+import 'package:pogo/game_engine.dart';
 
-        // creates a component that renders the crate.png sprite, with size 16 x 16
-        MyCrate() : super.fromSprite(16.0, 16.0, new Sprite('crate.png'));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // required
+  await Screen.setFullScreen();
+  await Screen.setPortrait();
 
-        @override
-        void resize(Size size) {
-            // we don't need to set the x and y in the constructor, we can set then here
-            this.x = (size.width - this.width)/ 2;
-            this.y = (size.height - this.height) / 2;
-        }
-    }
+  GestureInitializer.detectTaps = true;
+  GestureInitializer.detectPans = true;
 
-    class MyGame extends BaseGame {
-        MyGame() {
-            add(new MyCrate()); // this will call resize the first time as well
-        }
-    }
+  await Assets.audioCache.load("explosion.mp3");
+
+  await Assets.rasterCache.load("background.png");
+
+  await Assets.svgCache.loadAll(["enemy.svg", "player.svg"], scale: 0.75);
+
+  runApp(Game().widget); // required
+
+  await Screen.waitForStartupSizing(); // required
+
+  MainEntity(); // you can name your startup entity whatever you like
+}
+
+class MainEntity extends GameEntity {
+  MainEntity() {}
+}
 ```
 
-## Flutter Widgets and Game instances
+Line by line:
 
-Since a Flame game is a widget itself, it is quite easy to use Flutter widgets and Flame game together. But to make it even easier, Flame provides a `mixin` called `HasWidgetsOverlay` which will enable any Flutter widget to be show on top of your game instance, this makes it very easy to create things like a pause menu, or an inventory screen for example.
+`WidgetsFlutterBinding.ensureInitialized()` is required as the first line if you want to call setup features like `Screen.setFullScreen()` before you call `runApp()`.
 
-To use it, simple add the `HasWidgetsOverlay` `mixin` on your game class, by doing so, you will have two new methods available `addWidgetOverlay` and `removeWidgetOverlay`, like the name suggests, they can be used to add, or remove widgets overlay above your game, they can be used like as show below:
+The [`Screen` static class](/doc/statics/screen.md) contains some setup functions.
+
+The [`GestureInitializer` static class](/doc/input.md#gestureinitializer-class) contains flags for setting up the main [`GestureDetector`](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html) in the game engine.  You must initialize all gestures here that will be used anywhere in your game.
+
+The [`Assets` static class](/doc/statics/assets.md) contains caches for some assets.  It is recommended to cache your assets (the ones that currently _can_ be cached).  It is not required to cache them in your `main()` but this is a good place to do it for simple games.  More complex games will want to use the cache features to load and clear assets.
+
+`Screen.waitForStartupSizing()` is the current recommended way to allow Flutter time to startup and size the game widget.  This also sets `Screen.size` for the first time.
+
+`runApp(Game().widget)` starts the game engine.
+
+At this point, you can now call and instantiate your first [game entity](/doc/game_entity.md) (called `MainEntity()` in this example).
+
+## Debug mode
+
+Debug mode can be turned on with `Game().debugMode = true`.  This enables FPS calculating with `Game().fps(frameSpan)`.  This also turns on some extra visualizations for game entities.  Some components may also provide extra visualizations.
+
+See the [debug example app](/doc/examples/debug).
+
+## Flutter widgets
+
+:warning: I can't say this feature is working at the moment.
+
+Because a Pogo game is a widget itself, it is possible to use Flutter widgets and a Pogo game together. To facilitate this, Pogo provides a `mixin` called `HasWidgetsOverlay` which will enable any Flutter widget to be shown on top of your game instance. This makes it easy to create things like a pause menu or an inventory screen, for example.
+
+To use it, simply add the `HasWidgetsOverlay` `mixin` on your game class, by doing so, you will have two new methods available `addWidgetOverlay` and `removeWidgetOverlay`, like the name suggests, they can be used to add, or remove widgets overlay above your game, they can be used as shown below:
 
 ```dart
 addWidgetOverlay(
@@ -67,14 +85,6 @@ addWidgetOverlay(
 removeWidgetOverlay("PauseMenu"); // Use the overlay identifier to remove the overlay
 ```
 
-Under the hood, Flame uses a [Stack widget](https://api.flutter.dev/flutter/widgets/Stack-class.html) to display the overlay, so it is important to __note that the order which the ovarlays are added matter__, where the last added ovarlay, will be in the front of those added before.
+Under the hood, Flame uses a [Stack widget](https://api.flutter.dev/flutter/widgets/Stack-class.html) to display the overlay, so it is important to __note that the order which the overlays are added matter__, where the last added overlay will be in front of those added before.
 
-Here you can see a [working example](/doc/examples/with_widgets_overlay) of this feature.
-
-## BaseGame debug mode
-
-Flame's `BaseGame` class provides a method called `debugMode`, which by default returns false. It can however, be overridden to enable debug features over the components of the game. __Be aware__ that the state returned by this method is passed through its component when they added to the game, so if you change the `debugMode` in runtime, it may not affect already added components.
-
-To see more about debugMode on Flame, please refer to the [Debug Docs](/doc/debug.md)
-
-
+See the [widgets overlay example app](/doc/examples/with_widgets_overlay).

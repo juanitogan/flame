@@ -1,5 +1,7 @@
 # Palette
 
+**//TODO: this is old and up for evaluation vs other solutions**
+
 Throughout your game you are going to need to use colors in lots of places. There are two classes on `dart:ui` that can be used, `Color` and `Paint`.
 
 The `Color` class is nothing but a wrapper over a single simple ARGB color in hexadecimal integer format, so, to create a Color object, just pass in the color as an integer in the ARGB format.
@@ -41,7 +43,7 @@ However, the idea is that you can create your own palette, following the `BasicP
 ```dart
 import 'dart:ui';
 
-import 'package:flame/palette.dart';
+import 'package:pogo/src/palette.dart';
 
 class Palette {
   static PaletteEntry white = BasicPalette.white;

@@ -1,118 +1,132 @@
 # Input
 
-Inside `package:flame/gestures.dart` you can find a whole set of `mixin` which can be included on your game class instance to be able to receive touch input events. Bellow you can see the full list of these `mixin`s and its methods:
+Input is made available through a collection of [gesture-detector mixins](#gesture-detector-mixins) on `GameEntity`.  Most of these also work through another mixin, [`GestureZone`](#gesturezone-mixin), that allows defining a gesture zone relative to the entity's position.
 
-```dart
-- TapDetector
-  - onTap
-  - onTapCancel
-  - onTapDown
-  - onTapUp
+Note that Pogo goes a step beyond Flutter and divided the onTap events into two mixins: `TapDetector` and `SingleTapDetector`.  This allows Pogo to keep Flutter's gesture arena as simple as possible when setting up Flutter's [`GestureDetector` widget](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html).  Most games will want Pogo's `TapDetector` and not need `SingleTapDetector`.
 
-- SecondaryTapDetector
-  - onSecondaryTapDown
-  - onSecondaryTapUp
-  - onSecondaryTapCancel
+[More on Flutter's gestures is found here](https://flutter.dev/docs/development/ui/advanced/gestures).
 
-- DoubleTapDetector
-  - onDoubleTap
+See also: [Gamepad](gamepad.md).
 
-- LongPressDetector
-  - onLongPress
-  - onLongPressStart
-  - onLongPressMoveUpdate
-  - onLongPressUp
-  - onLongPressEnd
 
-- VerticalDragDetector
-  - onVerticalDragDown
-  - onVerticalDragStart
-  - onVerticalDragUpdate
-  - onVerticalDragEnd
-  - onVerticalDragCancel
+# GestureInitializer class
 
-- HorizontalDragDetector
-  - onHorizontalDragDown
-  - onHorizontalDragStart
-  - onHorizontalDragUpdate
-  - onHorizontalDragEnd
-  - onHorizontalDragCancel
+The `GestureInitializer` static class provides central access to static flags used to initialize the main [GestureDetector]((https://api.flutter.dev/flutter/widgets/GestureDetector-class.html)).
 
-- ForcePressDetector
-  - onForcePressStart
-  - onForcePressPeak
-  - onForcePressUpdate
-  - onForcePressEnd
+You must initialize all gestures that will be used anywhere in your game.  Do this in your `main()` before referencing `Game()`.
 
-- PanDetector
-  - onPanDown
-  - onPanStart
-  - onPanUpdate
-  - onPanEnd
-  - onPanCancel
+## Properties
 
-- ScaleDetector
-  - onScaleStart
-  - onScaleUpdate
-  - onScaleEnd
-```
+| | |
+| :-- | :-- |
+| detectTaps            | Default: `false`. |
+| detectSecondaryTaps   | Default: `false`. |
+| detectSingleTaps      | Default: `false`. |
+| detectDoubleTaps      | Default: `false`. |
+| detectLongPresses     | Default: `false`. |
+| detectVerticalDrags   | Default: `false`. |
+| detectHorizontalDrags | Default: `false`. |
+| detectPans            | Default: `false`. |
+| detectScales          | Default: `false`. |
 
-Many of these detectors can conflict with each other, for example, you can't register both Vertical and Horizontal drags, so not all of then can be used together.
+Note: Because games run in a single widget, there are limitations on multiple
+gesture detections within a game (this is game-wide, regardless of which
+game entities use which gestures):
 
-All of these methods are basically a mirror from the callbacks available on the [GestureDetector widget](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html), you can also read more about Flutter's gestures [here](https://api.flutter.dev/flutter/gestures/gestures-library.html).
+1. Both horizontal and vertical drag cannot be enabled.
+~~Trying to do so should generate an error.~~
+The current workaround is to use pan instead, with your own code to
+determine direction of movement.
 
-## Example
+2. Both pan and scale cannot be enabled.
+Trying to do so should generate an error.
+Scale is considered a superset of pan and should be used instead.
 
-```dart
-class MyGame extends Game with TapDetector {
-  // Other methods ommited
+3. The Flutter source code does not match the rules stated in the Flutter
+docs, so expect variations on the above as things evolve.
+Such as, no error if trying to use both horizontal and vertical drag unless
+also using both of them with pan or scale.
 
-  @override
-  void onTapDown(TapDownDetails details) {
-    print("Player tap down on ${details.globalPosition.dx} - ${details.globalPosition.dy}");
-  }
+4. Avoid enabling more gestures than needed as it can slow down gesture
+recognition in the _gesture arena_.
 
-  @override
-  void onTapUp(TapUpDetails details) {
-    print("Player tap up on ${details.globalPosition.dx} - ${details.globalPosition.dy}");
-  }
-}
-```
-You can also check a more complete example [here](/doc/examples/gestures).
+If needing many types of gestures in your game, it may be best to not use
+Flutter's `GestureDetector` and implement your own pointer `Listener`
+instead:
+[Flutter Deep Dive: Gestures](https://medium.com/flutter-community/flutter-deep-dive-gestures-c16203b3434f).
 
-## Tapable components
 
-Flame also offers a simple helper to make it easier to handle tap events on `PositionComponent`, by using the mixin `Tapable` your components can override the following methods, enabling easy to use tap events on your Component.
+# GestureZone mixin
 
-```dart
-  void onTapCancel() {}
-  void onTapDown(TapDownDetails details) {}
-  void onTapUp(TapUpDetails details) {}
-```
+## Properties
 
-Minimal component example:
+| | |
+| :-- | :-- |
+| gestureZoneOffset | Top-left corner of the zone relative to entity position.  Default: `Offset.zero`. |
+| gestureZoneSize   | Sets the size of the rectangle that taps and drag-starts are limited to.  Set to `Size.zero` to disable zone sizing and respond to gestures anywhere in the game window.  Hint: small objects and drag/pan objects may need sizes larger than the visible components.  Default: `Size.zero`. |
+| gestureZonePivot  | Pivot of the zone.  Default: `System.defaultPivot`. |
 
-```dart
-import 'package:flame/components/component.dart';
-import 'package:flame/components/events/gestures.dart';
 
-class TapableComponent extends PositionComponent with Tapable {
+# Gesture-detector mixins
 
-  // update and render omitted
+## Required method overrides
 
-  @override
-  void onTapUp(TapUpDetails details) {
-    print("tap up");
-  }
+| TapDetector * |
+| :-- |
+| onTapDown |
+| onTapUp |
+| onTapDown |
 
-  @override
-  void onTapDown(TapDownDetails details) {
-    print("tap down");
-  }
+| SecondaryTapDetector * |
+| :-- |
+| onSecondaryTapDown |
+| onSecondaryTapUp |
+| onSecondaryTapDown |
 
-  @override
-  void onTapCancel() {
-    print("tap cancel");
-  }
-}
-```
+| VerticalDragDetector * |
+| :-- |
+| onVerticalDragStart |
+| onVerticalDragUpdate |
+| onVerticalDragEnd |
+
+| HorizontalDragDetector * |
+| :-- |
+| onHorizontalDragStart |
+| onHorizontalDragUpdate |
+| onHorizontalDragEnd |
+
+| PanDetector * |
+| :-- |
+| onPanStart |
+| onPanUpdate |
+| onPanEnd |
+
+| ScaleDetector * |
+| :-- |
+| onScaleStart |
+| onScaleUpdate |
+| onScaleEnd |
+
+/* Requires `GestureZone` mixin.
+
+| SingleTapDetector |
+| :-- |
+| onSingleTap |
+
+| DoubleTapDetector |
+| :-- |
+| onDoubleTap |
+
+| LongPressDetector |
+| :-- |
+| onLongPress |
+
+Note that the detectors that do not require the `GestureZone` mixin cannot be limited by a zone and will trigger their events from gestures anywhere in the game window.  They will also have a slower response time by their very nature.
+
+----
+
+See the [**gestures** example app](/doc/examples/gestures/lib/main.dart).
+
+See the [**animations** example app](/doc/examples/animations/lib/main.dart).
+
+See the [main example app](/example/lib/main.dart).

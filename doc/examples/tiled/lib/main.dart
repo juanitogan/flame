@@ -1,21 +1,24 @@
-import 'package:flame/components/tiled_component.dart';
-import 'package:flame/game.dart';
-import 'package:flame/flame.dart';
-import 'package:flame/animation.dart';
-import 'package:flame/components/animation_component.dart';
-import 'package:flutter/widgets.dart' hide Animation;
+import 'package:pogo/game_engine.dart';
 import 'package:tiled/tiled.dart' show ObjectGroup, TmxObject;
 
-void main() {
-  Flame.images.load('coins.png');
-  final TiledGame game = TiledGame();
-  runApp(game.widget);
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Assets.rasterCache.load('coins.png');
+
+  runApp(Game().widget);
+
+  await Screen.waitForStartupSizing();
+
+  MainEntity();
 }
 
-class TiledGame extends BaseGame {
-  TiledGame() {
+
+class MainEntity extends GameEntity {
+
+  MainEntity() {
     final TiledComponent tiledMap = TiledComponent('map.tmx');
-    add(tiledMap);
+    TiledPrefab(tiledMap);
     _addCoinsInMap(tiledMap);
   }
 
@@ -25,19 +28,18 @@ class TiledGame extends BaseGame {
     if (obj == null) {
       return;
     }
+    final coinAnim = AnimationComponent.fromRaster(
+      Assets.rasterCache.get('coins.png'),
+      frameCount: 8,
+      frameWidth: 20,
+      frameDuration: 0.1,
+    );
     for (TmxObject obj in obj.tmxObjects) {
-      final comp = AnimationComponent(
-          Animation.fromImage(
-              Flame.images.fromCache('coins.png'),
-              frameCount: 8,
-              frameWidth: 20
-          ),
-          height: 20.0,
-          width: 20.0,
+      AnimationPrefab(
+          coinAnim,
+          position: Vector2(obj.x.toDouble(), obj.y.toDouble()),
       );
-      comp.x = obj.x.toDouble();
-      comp.y = obj.y.toDouble();
-      add(comp);
     }
   }
+
 }

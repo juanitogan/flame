@@ -1,3 +1,3 @@
 # Gamepad
 
-Flame has a separated plugin for gamepad support, please checkout the plugin [github project](https://github.com/fireslime/flame_gamepad) for more information.
+Flame has a plugin for gamepad support.  Please look at [flame_gamepad](https://github.com/fireslime/flame_gamepad) for more information.

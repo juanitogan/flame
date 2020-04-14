@@ -1,5 +1,5 @@
 # spritesheet
 
-A Flame game showcasing how to use spritesheet
+Example app showing spritesheet features
 
-Image from: https://github.com/fireslime/bgug
+Spritesheet from: https://github.com/fireslime/bgug

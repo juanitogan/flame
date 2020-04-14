@@ -1,17 +1,22 @@
-name: position_component
-description: A new Flutter project.
+name: example
+description: Example app showing basic features
 
 version: 0.1.0
 
 environment:
-  sdk: ">=2.0.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
-  flame:
-    path: ../
   flutter:
     sdk: flutter
+  pogo:
+    path: ../
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter:
+  assets:
+    - assets/svgs/planet.svg
+    - assets/svgs/moon.svg

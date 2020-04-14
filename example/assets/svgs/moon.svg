@@ -1,0 +1,16 @@
+<svg version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(0 -9.9583)">
+  <circle cx="50" cy="59.958" r="40" fill="#e3e2db" style="paint-order:normal"/>
+  <circle cx="51.25" cy="41.708" r="8.75" fill="#c8c4b7" style="paint-order:normal"/>
+  <circle cx="64.5" cy="52.333" r="9.125" fill="#c8c4b7" style="paint-order:normal"/>
+  <circle cx="76.5" cy="41.333" r="5.375" fill="#c8c4b7" style="paint-order:normal"/>
+  <circle cx="80.625" cy="56.833" r="6.875" fill="#c8c4b7" style="paint-order:normal"/>
+  <circle cx="32.5" cy="45.583" r="14.5" fill="#c8c4b7" style="paint-order:normal"/>
+  <path transform="translate(0 9.9583)" d="m16.568 28.096a40 40 0 00-6.5684 21.904 40 40 0 00.015625.44141 13.25 13.25 0 0010.484-12.941 13.25 13.25 0 00-3.9316-9.4043z" fill="#c8c4b7" style="paint-order:normal"/>
+  <circle cx="19.938" cy="62.771" r="9.0625" fill="#c8c4b7" style="paint-order:normal"/>
+  <circle cx="22.625" cy="72.208" r="8.5" fill="#c8c4b7" style="paint-order:normal"/>
+  <circle cx="33.875" cy="72.333" r="7.75" fill="#c8c4b7" style="paint-order:normal"/>
+  <circle cx="44.562" cy="76.646" r="6.5625" fill="#c8c4b7" style="paint-order:normal"/>
+  <circle cx="33.562" cy="84.396" r="5.1875" fill="#c8c4b7" style="paint-order:normal"/>
+ </g>
+</svg>

@@ -1,315 +1,287 @@
-[![Pub](https://img.shields.io/pub/v/flame.svg?style=popout)](https://pub.dartlang.org/packages/flame) [![Build Status - Travis](https://travis-ci.org/flame-engine/flame.svg?branch=master)](https://travis-ci.org/flame-engine/flame) [![Discord](https://img.shields.io/discord/509714518008528896.svg)](https://discord.gg/pxrBmy4)
+# :full_moon: Pogo Game Engine
 
-# :fire: flame
+Pogo is a 2D game engine for [Flutter](https://flutter.dev/).
 
-<img src="https://i.imgur.com/vFDilXT.png" width="400">
+Pogo aims to implement what I'm calling a "pseudo Entity Component System" for lack of a better term.  Pogo should feel fairly similar to some of the other game engines that are popular for rapid game development with its use of game entities (or game objects) and the components that are used to build entities.
 
-A minimalist Flutter game engine.
+"Pseudo ECS" because it is not what ECS purists would call an ECS.  Why not a more pure ECS?  1) I didn't see myself as having time to go that far into the ECS pattern; and 2) I believe this pattern is quicker to ramp up on while also being robust enough for most games.  Regardless, hopefully Pogo gives a foundation for building a more pure ECS should anyone choose to launch that spin-off project.
 
-Any help is appreciated! Comment, suggestions, issues, PR's! Give us a star to help!
+### Background
 
-## Help
+Pogo was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1).  All due credit to inu-no-policemen on Reddit and Luan Nico of Flame for setting up the core, which remains largely unchanged.  The rest of Flame, however, was showing growing pains, and a reluctance to large changes in design, so I launched a new project which will, hopefully, be agile to needed change before version 1.0.  Even at Pogo 0.0.1 just about everything above Flame's core was changed (see the [changelog](CHANGELOG.md#001---2020-04-04) for more details).  Therefore, if you find a pre-release version of Pogo you like, lock it in, or suffer the possible breaking changes.
 
-We have a Flame help channel on Fireslime's Discord, join it [here](https://discord.gg/pxrBmy4). Also we now have a [FAQ](FAQ.md), so please search your questions there first.
+The name, Pogo, comes from _Pogo Bug_ (not yet released) -- the game I modded the this engine for.  (_Pogo Bug_ was originally written in QtQuick/QML but not released from that codebase due to their difficult licensing issues.)  Thus, this engine is tried and tested on my own small-but-complete game from day one.  It took maybe 10x longer to work up this Flutter/Dart-based engine than to write the original Qt game.  I hope it proves worth the extra effort.
 
-## Goals
+By the time I release _Pogo Bug_ this engine should be at version 0.1.0.
 
-The goal of this project is to provided a complete set of out-of-the-way solutions for the common problems every game developed in Flutter will share.
+### Contributing
 
-Currently it provides you with: a few utilities, images/sprites/sprite sheets, audio, a game loop and a component/object system.
+Hit me with a PR and I'll try to find time to engage it.  No promises, but I'll try.  Hopefully others will jump in and help.  I have pretty high standards for PRs (particularly on naming and lingo more so than code style), but I also enjoy people who make a great case for significant changes in design (and I certainly am no expert in designing game engines).
 
-You can use whatever ones you want, as they are all somewhat independent.
+There is still much to be done.  I quickly hacked through many components from the previous engine, that I didn't need at the moment, just to get them working.  Thus, many of the components here still needs to be refactored to be more like the rest.
 
-## Support
+`NinePatchComponent`, `ParallaxComponent`, and `ParticleComponent` are some examples as things I just quick-hacked and saved for later.  (See the [`[Unreleased]` section in the changelog](CHANGELOG.md#unreleased) for a better TODO list.)  Most things still work as Flame had them working, but they may not be fully "Pogo-ized" yet.  I also haven't touched Box2D yet because _Pogo Bug_ doesn't need it.  (Another game of mine, _GRITS Racing_, uses it super heavily, so I should have the skills to work it in well when I get to it).
 
-Support us by becoming a patron on Patreon
+The core components I focused on the most are: `SpriteComponent`, `AnimationComponent`, and the gesture mixins.  These should be used as examples for how to refactor the rest.
 
-[![Patreon](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/fireslime)
+----
 
-Or making a single donation buying us a coffee:
+# Getting Started Guide
 
-[![Buy Me A Coffee](https://user-images.githubusercontent.com/835641/60540201-fcd7fa00-9ce4-11e9-87ec-1e98568e9f58.png)](https://www.buymeacoffee.com/fireslime)
+What you need to know up front.
 
-You can also show support by showing on your repository that your game is made with Flame by using one of the following badges:
+## Adding the game engine to your project
 
-[![Powered by Flame](https://img.shields.io/badge/Powered%20by-%F0%9F%94%A5-orange.svg)](https://flame-engine.org)
-[![Powered by Flame](https://img.shields.io/badge/Powered%20by-%F0%9F%94%A5-orange.svg?style=flat-square)](https://flame-engine.org)
-[![Powered by Flame](https://img.shields.io/badge/Powered%20by-%F0%9F%94%A5-orange.svg?style=for-the-badge)](https://flame-engine.org)
-
-```
-[![Powered by Flame](https://img.shields.io/badge/Powered%20by-%F0%9F%94%A5-orange.svg)](https://flame-engine.org)
-[![Powered by Flame](https://img.shields.io/badge/Powered%20by-%F0%9F%94%A5-orange.svg?style=flat-square)](https://flame-engine.org)
-[![Powered by Flame](https://img.shields.io/badge/Powered%20by-%F0%9F%94%A5-orange.svg?style=for-the-badge)](https://flame-engine.org)
-```
-
-## Contributing
-
-Found a bug on Flame and want to contribute with a PR? PRs are always very welcome, just be sure to create your PR from the `develop` branch.
-
-## External Modules
-
-Flame is modular, and you can always pick and choose. Some modules are extracted to separate plugins; some are bundled with flame, and some must be added separately.
-
-* [audioplayers](https://github.com/luanpotter/audioplayers) is the audio engine behind flame. It's included.
-* [tiled](https://github.com/feroult/tiled.dart) adds support for parsing and using TMX files from Tiled. It's included.
-* [box2d](https://github.com/feroult/box2d.dart) adds wrappers over Box2D for the physics engine. It's included.
-
-* [flame_gamepad](https://github.com/fireslime/flame_gamepad) adds support to gamepad. Android only. It's not included, add to your pubspec as desired.
-* [play_games](https://github.com/luanpotter/play_games) integrates to Google Play Games Services (GPGS). Adds login, achievements, saved games and leaderboard. Android only. It's not included, add to your pubspec as desired. Be sure to check the instructions on how to configure, as it's not trivial.
-
-## Usage
-
-Just drop it in your `pubspec.yaml`:
+Clone/copy this repo to next to your game project and add it to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flame: ^0.18.1
+  pogo:
+    path: ../pogo/
 ```
 
-And start using it!
+Maybe I'll get it onto the [pub.dev](https://pub.dev/) site someday so you can add it like a real package.
 
-__Important__
-
-We strive to keep Flame working on the Flutter's stable channel, currently on version v1.7.8+hotfix.2, be sure to check which channel are you using if you encounter any trouble.
-
-## Documentation
-
-The complete documentation can be found [here](doc/README.md).
-
-A very cool docs site can be found [here](https://flame-engine.org/).
-
-## Getting started
-
-Check out this great series of articles/tutorials written by [Alekhin](https://github.com/japalekhin)
-
-Note that these are a bit outdated and don't show how to use the [Component](doc/components.md) system, but still useful.
-
- - [Create a Mobile Game with Flutter and Flame – Beginner Tutorial](https://jap.alekhin.io/create-mobile-game-flutter-flame-beginner-tutorial)
- - [2D Casual Mobile Game Tutorial – Step by Step with Flame and Flutter (Part 1 of 5)](https://jap.alekhin.io/2d-casual-mobile-game-tutorial-flame-flutter-part-1)
- - [Game Graphics and Animation Tutorial – Step by Step with Flame and Flutter (Part 2 of 5)](https://jap.alekhin.io/game-graphics-and-animation-tutorial-flame-flutter-part-2)
- - [Views and Dialog Boxes Tutorial – Step by Step with Flame and Flutter (Part 3 of 5)](https://jap.alekhin.io/views-dialog-boxes-tutorial-flame-flutter-part-3)
- - [Scoring, Storage, and Sound Tutorial – Step by Step with Flame and Flutter (Part 4 of 5)](https://jap.alekhin.io/scoring-storage-sound-tutorial-flame-flutter-part-4)
- - [Game Finishing and Packaging Tutorial – Step by Step with Flame and Flutter (Part 5 of 5)](https://jap.alekhin.io/game-finishing-packaging-tutorial-flame-flutter-part-5)
- 
-We also offer a curated list of Games, Libraries and Articles over at [awesome-flame](https://github.com/flame-engine/awesome-flame).
-
-## Structure
-
-The only structure you are required to comply is a assets folder with two sub folders: audio and images.
-
-An example:
+A single import is required in each source file to access the game engine objects, types, etc.:
 
 ```dart
-Flame.audio.play('explosion.mp3');
-
-Flame.images.load('player.png');
-Flame.images.load('enemy.png');
+import 'package:pogo/game_engine.dart';
 ```
 
-The file structure would have to be:
+## Asset files
 
-```
+All asset files are assumed to be found under the `assets` folder.  This is a limitation of at least one of the current plugins.
+
+Furthermore, some subfolder defaults are set for certain asset types (a default can be changed with `setSubPath()` if desired).
+
+The default asset tree looks like this:
+
+```text
 .
 └── assets
     ├── audio
     │   └── explosion.mp3
-    └── images
-        ├── enemy.png
-        └── player.png
+    ├── images
+    │   └── background.png
+    └── svgs
+        ├── enemy.svg
+        └── player.svg
 ```
 
-Don't forget to add these files to your `pubspec.yaml` file:
+Also, you must list all asset files in your `pubspec.yaml` file:
 
-```
+```yaml
 flutter:
   assets:
     - assets/audio/explosion.mp3
-    - assets/images/player.png
-    - assets/images/enemy.png
+    - assets/images/background.png
+    - assets/svgs/enemy.svg
+    - assets/svgs/player.svg
 ```
 
-## Modules
+## Game engine config and startup
 
-The modular approach allows you to use any of these modules independently, or together, or as you wish.
-
-### Audio
-
-You can pre-load your audios up front and avoid delays with the `loadAll()` method:
+This is the recommended sequence of code to start a game (expect changes here as things evolve):
 
 ```dart
-// in an async prepare function for your game
-await Flame.audio.loadAll(['explosion.mp3']);
-```
+import 'package:pogo/game_engine.dart';
 
-To play an audio, just use the `Flame.audio.play()` method:
-
-```dart
-import 'package:flame/flame.dart';
-
-Flame.audio.play('explosion.mp3');
-```
-
-[Complete Audio Guide](doc/audio.md)
-
-[Looping Background Music Guide](doc/bgm.md)
-
-### Images, Sprites, and Animations
-
-You can pre-load your images up front and avoid delays with the `loadAll()` method:
-
-```dart
-// in an async prepare function for your game
-await Flame.images.loadAll(['player.png', 'enemy.png']);
-```
-
-If you want to load an `Image` and render it on the `Canvas`, you can use the `Sprite` class:
-
-```dart
-import 'package:flame/flame.dart';
-import 'package:flame/sprite.dart';
-
-Image image = await Flame.images.load('player.png');
-
-Sprite sprite = Sprite(image);
-
-// in your render loop
-sprite.render(canvas);
-```
-
-An `Animation` can be defined from an `Image` in a similar way using the `Animation.fromImage()` constructor.
-
-Note that the render method will do nothing while the image is being loaded. You can check for completion using the `loaded` method, or use `async` functions to handle loading up front.
-
-[Complete Images Guide](doc/images.md)
-
-### Component System
-
-If using the `BaseGame` class instead of the `Game` class, as your core game loop, you can use Flame's component system to manage your game objects. 
-
-The base abstract `Component` class implements and automatically calls the usual methods of `update()` and `render()` (among other utility methods).
-
-The intermediate inheritance `PositionComponent` class controls the position and final size of your game objects by adding `x`, `y`, `width`, `height` and `angle`, as well as some useful methods like `distance()` and `angleBetween()`.
-
-The high-level components of `SpriteComponent` and `AnimationComponent` are intended for easy component creation from their respective `Sprite` and `Animation` objects.
-
-For example, to create a `SpriteComponent` from a `Sprite`:
-
-```dart
-import 'package:flame/components/component.dart';
-
-// on your constructor or init logic
-Image image = Flame.images.fromCache('player.png');
-Sprite sprite = Sprite.fromImage(image);
-
-const size = 128.0; // render size, not sprite source size
-final player = SpriteComponent(
-  sprite,
-  width:  size,
-  height: size,
-  x:      ..., // starting X position
-  y:      ..., // starting Y position
-  angle:  ..., // starting rotation (in radians)
-);
-```
-
-Every `Component` has a few other methods that you can optionally implement, that are used by the `BaseGame` class. If you are not using `BaseGame`, you can alternatively use these methods on your own game loop.
-
-The `resize()` method is called whenever the screen is resized, and in the beginning once when the component is added via the `add()` method. You need to apply here any changes to the x, y, width and height of your component, or any other changes, due to the screen resizing. You can start these variables here, as the sprite won't be rendered until everything is set.
-
-The `destroy()` method can be implemented to return true and warn the `BaseGame` that your object is marked for destruction, and it will be remove after the current update loop. It will then no longer be rendered or updated.
-
-The `isHUD()` method can be implemented to return true (default false) to make the `BaseGame` ignore the `camera` for this element.
-
-Other high-level components:
-
-* `ParallaxComponent` can render a parallax background with several frames
-* `Box2DComponent` has a physics engine built-in (using the [Box2D](https://github.com/google/box2d.dart) port for Dart)
-
-[Complete Components Guide](doc/components.md)
-
-### Game Loop
-
-The Game Loop module is a simple abstraction over the game loop concept. Basically most games are built upon two methods: 
-
-* `render()` makes the canvas ready for drawing the current state of the game.
-* `update()` receives the delta time in milliseconds since last update and allows you to move the next state.
-
-The lower-level `Game` class can be subclassed and will provide both these methods for you to implement. In return it will provide you with a `widget` property that returns the game widget, that can be rendered in your app.
-
-You can either render it directly in your `runApp`, or you can have a bigger structure, with routing, other screens and menus for your game.
-
-To start, just add your game widget directly to your runApp, like so:
-
-```dart
-void main() {
-    Game game = MyGameImpl();
-    runApp(game.widget);
-}
-```
-
-The more fully-featured `BaseGame` class implements a component-based `Game` class for you. Basically, it keep a list of `Component`s and passes the `update()` and `render()` calls appropriately. You can still extend those methods to add custom behavior. You will also get a few other features for free. Like, the passing of `resize()` methods (every time the screen is resized the information will be passed to the resize methods of all your components). Also, a basic camera feature (that will translate all your non-HUD components in order to center in the camera you specified).
-
-A very simple `BaseGame` implementation example can be seen below:
-
-```dart
 void main() async {
-  ...
-  await Flame.images.load('crate.png');
+  WidgetsFlutterBinding.ensureInitialized(); // required
+  await Screen.setFullScreen();
+  await Screen.setPortrait();
+
+  GestureInitializer.detectTaps = true;
+  GestureInitializer.detectPans = true;
+
+  await Assets.audioCache.load("explosion.mp3");
+
+  await Assets.rasterCache.load("background.png");
+
+  await Assets.svgCache.loadAll(["enemy.svg", "player.svg"], scale: 0.75);
+
+  runApp(Game().widget); // required
+
+  await Screen.waitForStartupSizing(); // required
+
+  MainEntity(); // you can name your startup entity whatever you like
 }
 
-class MyCrate extends SpriteComponent {
-    static final Image image = Flame.images.fromCache('crate.png');
-
-    // creates a component that renders the crate.png sprite, with size 16 x 16
-    MyCrate() : super(
-      Sprite.fromImage(image),
-      width:  16.0,
-      height: 16.0,
-    );
-
-    @override
-    void resize(Size size) {
-        // we don't need to set x and y in the constructor, we can set them here
-        this.x = (size.width - this.width)/ 2;
-        this.y = (size.height - this.height) / 2;
-    }
-}
-
-class MyGame extends BaseGame {
-    MyGame() {
-        add(new MyCrate()); // this will call resize the first time as well
-    }
+class MainEntity extends GameEntity {
+  MainEntity() {}
 }
 ```
 
-### Input
+Note that you must initialize all gestures here that will be used anywhere in your game.  More on gestures [below](#entity-gestures).
 
-Inside `package:flame/gestures.dart` you can find a whole set of `mixin` which can be included on your game class instance to be able to receive touch input events
+It is recommended to cache your assets (the ones that currently _can_ be cached).  It is not required to cache them your `main()` but this is a good place to do it for simple games.  More complex games will want to use the cache features to load and clear assets.
 
-__Example__
+[More details here](doc/game.md).
+
+## Game entities
+
+A Pogo game is made entirely of game entities.  An entity can be a sprite, a bullet, a container or parent to other entities (such as a scene, menu, or complex player), or whatever you need it to be.
+
+Every game entity has:
+ * a transform: `position`, `zOrder`, `rotation`, and `scale`
+ * hierarchy connectors: `parent` and `_children[]`
+ * the core `update()` method
+ * an `enabled` property and a few other features
+
+[More details here](doc/game_entity.md).
+
+Game entities are made up of components.  Some components are built into the entity (such as position/movable), some are added through mixins (such as the `TapDetector` mixin), and some are added by calling [component classes](/doc/components.md) (such as `SpriteComponent`).
+
+Class-type components typically come with an `update()` or a `render()` method (or both) that must be called from the game entity's own `update()` in order for them to work.
+
+> Note: I may choose to someday automatically register component `update()` and `render()` methods so you don't have to call them explicitly... but not today. 
+
+The construction of a simple entity looks like this:
 
 ```dart
-class MyGame extends Game with TapDetector {
-  // Other methods ommited
+class Player extends GameEntity with {
+  SpriteComponent playerSprite;
+    
+  Player(Vector2 position, int zOrder) {
+    playerSprite = SpriteComponent.fromSvgCache("player.svg");
+    this.position = position;
+    this.zOrder = zOrder;
+  }
+    
+  @override
+  void update() {
+    postition.x += 10 * Time.deltaTime;
+    // Don't forget to render your visible components after updating them.
+    playerSprite.render();
+  }
+}
+```
+
+Note the paradigm here that is typical to many game engines: you transform the entity and not the component.  Also, components can have size properties, whereas entities only have scale.  Components can have a pivot property, whereas entities have position and rotation.  _(Warning: Not all objects from Flame have been updated to this paradigm yet.)_
+
+Regarding the above paradigm, it is therefore unusual to have more than one of a type of component in a single entity.  For example, an entity will not typically have more than one sprite component unless you have images that should be composed, such as a border image and a content image or animation.  Entities that use multiple images that need to move independent of each other should instead create a child entity for each part.
+
+### Entity hierarchy
+
+Any entity can be a parent to other entities.  The transform (position, scale, etc.) of child entities are then relative to the parent.  That is, they move with the parent.
+
+Note that just because an entity (such as a scene) instantiates another entity, this does not automatically make it a child of that entity.  The parent/child relationship must be set explicitly.  This is done by either setting the `parent` property or by calling `addChild()`.
+
+The construction of a simple entity with children looks like this:
+
+```dart
+class Player extends GameEntity with {
+  SpriteComponent playerSprite;
+  GameEntity rightHand;
+  GameEntity leftHand;
+
+  Player(Vector2 position, int zOrder) {
+    playerSprite = SpriteComponent.fromSvgCache("player.svg");
+    this.position = position;
+    this.zOrder = zOrder;
+    // Instantiate and add children.
+    rightHand = Sword(Vecter2(10, 0), 1);
+    leftHand = Saber(Vecter2(-10, 0), 1);
+    addChild(righHand);
+    addChild(leftHand);
+    // Another possible way to add a child.
+    Hat(Vecter2.zero(), -1, parent: this);
+  }
+  ...
+}
+```
+
+### Entity gestures
+
+Gesture recognition is added to entities through mixins such as `TapDetector` and `PanDetector`.  Note that the `GestureZone` mixin is also required for most gesture-detector mixins.
+
+Remember to first initialize any needed gestures in your `main()`.  See the example [above](#game-engine-config-and-startup).
+
+The construction of a simple tappable entity looks like this:
+
+```dart
+class Enemy extends GameEntity with GestureZone, TapDetector {
+  SpriteComponent enemySprite;
+    
+  Enemy(Vector2 position, int zOrder) {
+    enemySprite = SpriteComponent.fromSvgCache("enemy.svg");
+    this.position = position;
+    this.zOrder = zOrder;
+    gestureZoneSize = enemySprite.frameSize;
+  }
+    
+  @override
+  void update() {
+    postition.x += 10 * Time.deltaTime;
+    enemySprite.render();
+  }
 
   @override
   void onTapDown(TapDownDetails details) {
-    print("Player tap down on ${details.globalPosition.dx} - ${details.globalPosition.dy}");
+    doSomething();
   }
 
   @override
-  void onTapUp(TapUpDetails details) {
-    print("Player tap up on ${details.globalPosition.dx} - ${details.globalPosition.dy}");
+  void onTapUp(TapUpDetails details) {}
+  @override
+  void onTapCancel() {}
+}
+```
+
+[More details here](doc/input.md).
+
+### Prefabs
+
+Prefabricated entities (prefabs) are helper classes for creating one-time-use entities quickly -- that is to say, you don't need to make a custom class for every object in your game.  Prefabs are also useful for prototyping and other quick work.
+
+Most class-type components come with a prefab for instantiating just that component.  There are no prefabs that recognize gestures.
+
+A very simple use of the `SpritePrefab` looks like this:
+
+```dart
+class SomeScene extends GameEntity {
+  GameEntity bg;
+
+  SomeScene() {
+    bg = SpritePrefab(SpriteComponent.fromRasterCache("background.png"), zOrder: 1000);
   }
 }
 ```
 
-[Complete Input Guide](doc/input.md)
+### Entity destruction
+
+There currently is no automatic cleanup of out-of-scope entities.  Therefore, be sure to call `destroy()` on all entities when you are done with them.  Thus, it is a good idea to keep a reference variable to at least every parent entity you instantiate.  `destroy()` is the only way to remove an entity from the update loop (and, hopefully, allow Dart to then garbage collect it).
+
+If you `destroy()` a parent, all the children will be automatically destroyed for you.  If you don't want to destroy a child, detach it first with `removeChild()` or by setting the child's `parent` property to null.  Thus, you might find yourself creating parent entities whose only purpose it to make scene destruction easy.
+
+(TODO: Think all this through more.)
+
+## Further reading
+
+Well, that's it!  Recommended next stops:
+
+ * Look at the main [example app](example/lib/main.dart) for a better overview of how the core features fit together.
+ * Read the [reference documentation](doc).
+ 
+There are also [various example apps](doc/examples) demonstrating each component.
+
+----
+
+## External plugins
+
+Built in:
+
+ * [AudioPlayers](https://github.com/luanpotter/audioplayers) is the audio engine.
+ * [Tiled](https://github.com/feroult/tiled.dart) adds support for parsing and using TMX files from Tiled.
+ * [Box2D](https://github.com/flame-engine/box2d.dart) adds wrappers over Box2D for the physics engine.
+ * TODO finish this list
+
+Others you might add:
+
+ * [flame_gamepad](https://github.com/fireslime/flame_gamepad) adds support to gamepad. Android only.
+ * [play_games](https://github.com/luanpotter/play_games) integrates to Google Play Games Services (GPGS). Adds login, achievements, saved games and leaderboard. Android only. Be sure to check the instructions on how to configure, as it's not trivial.
 
 ## Credits
 
- * All the friendly contributors and people who are helping in the community.
- * My own [audioplayers](https://github.com/luanpotter/audioplayer) lib, which in turn is forked from [rxlabz's](https://github.com/rxlabz/audioplayer).
- * The Dart port of [Box2D](https://github.com/google/box2d.dart).
- * [inu-no-policemen's post on reddit](https://www.reddit.com/r/dartlang/comments/69luui/minimal_flutter_game_loop/), which helped me a lot with the basics
- * Everyone who answered my beginner's questions on Stack Overflow
+ * [inu-no-policemen's post on reddit](https://www.reddit.com/r/dartlang/comments/69luui/minimal_flutter_game_loop/).
+ * Luan Nico and all the contributors to the [Flame](https://github.com/flame-engine/flame) project.

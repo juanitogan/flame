@@ -1,73 +1,83 @@
-import 'package:flutter/gestures.dart';
-import 'package:flame/flame.dart';
-import 'package:flame/game.dart';
-import 'package:flame/animation.dart' as flame_animation;
-import 'package:flame/components/animation_component.dart';
-import 'package:flutter/material.dart';
+import 'dart:math';
+
+import 'package:pogo/game_engine.dart';
 
 void main() async {
-  final Size size = await Flame.util.initialDimensions();
-  final game = MyGame(size);
-  runApp(game.widget);
+  GestureInitializer.detectTaps = true;
 
-  await Flame.images.load('chopper.png');
+  await Assets.rasterCache.load('chopper.png');
 
-  Flame.util.addGestureRecognizer(TapGestureRecognizer()
-    ..onTapDown = (TapDownDetails evt) {
-      game.addAnimation();
-    });
+  runApp(Game().widget);
+
+  await Screen.waitForStartupSizing();
+
+  MainEntity();
 }
 
-class MyGame extends BaseGame {
-  final animation = flame_animation.Animation.fromImage(
-      Flame.images.fromCache('chopper.png'),
+class MainEntity extends GameEntity with GestureZone, TapDetector {
+
+  // Predefine some animation components.
+  final animation = AnimationComponent.fromRaster(
+      Assets.rasterCache.get('chopper.png'),
       frameCount: 4,
       frameWidth: 48,
       frameHeight: 48,
-      stepTime: 0.15
+      frameDuration: 0.1,
   );
-  final animationReversed = flame_animation.Animation.fromImage(
-      Flame.images.fromCache('chopper.png'),
+  final animationReversed = AnimationComponent.fromRaster(
+      Assets.rasterCache.get('chopper.png'),
       frameCount: 4,
       frameWidth: 48,
       frameHeight: 48,
-      stepTime: 0.15,
-      reverse: true
+      frameDuration: 0.1,
+      reverse: true,
   );
 
-  void addAnimation() {
-    final animationComponent = AnimationComponent(
+  // Entity constructor.
+  MainEntity() {
+    // Instantiate some animation entities.
+    AnimationPrefab(
         animation,
-        width: 100,
-        height: 100,
-        x: size.width / 2 - 50,
-        y: 200,
+        position: Vector2(Screen.size.width * 0.3, 100),
+        rotationDeg: -90.0,
+        scale:    Vector2(2.0, 2.0),
+    );
+
+    AnimationPrefab(
+        animationReversed,
+        position: Vector2(Screen.size.width * 0.7, 100),
+        rotationDeg: 90.0,
+        scale:    Vector2(2.0, 2.0),
+    );
+  }
+
+  @override
+  void onTapDown(TapDownDetails details) {
+    addAnimation(details.globalPosition);
+  }
+
+  @override
+  void onTapUp(TapUpDetails details) {}
+
+  @override
+  void onTapCancel() {}
+
+  void addAnimation(Offset position) {
+    AnimationPrefab(
+        AnimationComponent.fromRaster(
+            Assets.rasterCache.get('chopper.png'),
+            frameCount: 4,
+            frameWidth: 48,
+            frameHeight: 48,
+            frameDuration: 0.2,
+            loop: false,
+        ),
+        //position: Vector2(screenSize.width / 2, screenSize.height / 2),
+        position: Vector2(position.dx, position.dy),
+        rotation: Random().nextDouble() * 2 * pi,
+        scale:    Vector2(3, 3) * (Random().nextDouble() + 0.1),
         destroyOnFinish: true
     );
-
-    add(animationComponent);
   }
 
-  MyGame(Size screenSize) {
-    size = screenSize;
-
-    final animationComponent = AnimationComponent(
-        animation,
-        width: 100,
-        height: 100,
-        x: size.width / 2 - 100,
-        y: 100,
-    );
-
-    final reversedAnimationComponent = AnimationComponent(
-        animationReversed,
-        width: 100,
-        height: 100,
-        x: size.width / 2,
-        y: 100,
-    );
-
-    add(animationComponent);
-    add(reversedAnimationComponent);
-  }
 }

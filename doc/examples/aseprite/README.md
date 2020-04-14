@@ -1,3 +1,3 @@
 # aseprite
 
-A sample Flame game showcasing how to use Aseprite's animation sprite sheets and data to create in game animations.
+Example project showing how to use Aseprite's animation spritesheets and JSON data to create animations.

@@ -68,7 +68,8 @@ Flame's latest release is `0.10.1`, but this feature is available since `0.10.0`
 dependencies:
   flutter:
     sdk: flutter
-  flame: 0.10.1
+  pogo:
+    path: ../pogo/
 
 dev_dependencies:
   flutter_test:
@@ -113,9 +114,9 @@ Let's you have your `build` method in one of your pages; pretty normal Flutter s
 Note that it could be any component, however complex, inside your widgets tree. Note also that I have omitted the "magic" of the equation here. How is it that we create a component for an animation? Very basically (more details in the flame tutorial), Flame provides components, one of which is the `AnimationComponent` that receives an `Animation` object describing the animation and does exactly what we want. All components live inside a `Game` instance, that can add custom logic relating to the game loop. For our case, we just want to create a simple, empty game and add a single `AnimationComponent` with a simple `Animation` inside. So Flame provides a helper to do that, the `Flame.util.animationAsWidget` method. It takes the size of the object as a Flame's `Position` instance (a generic class to represent a pair of doubles), and also takes in an `Animation` instance representing our frame list. To use that, let's import both `Flame` and the `Animation` class. However, since Flutter adds it's own animation classes, let's use an alias in order to not mess up the names. Therefore, add these imports to the top of the file:
 
 ```dart
-import 'package:flame/animation.dart' as animation; // imports the Animation class under animation.Animation
-import 'package:flame/flame.dart'; // imports the Flame helper class
-import 'package:flame/position.dart'; // imports the Position class
+import 'animation_component.dart' as animation; // imports the Animation class under animation.Animation
+import 'assets_static.dart'; // imports the Flame helper class
+import 'package:pogo/src/vector_math.dart'; // imports the Position class
 ```
 
 How we do the magic then? Just add the following to your widget tree:
@@ -142,6 +143,6 @@ Pretty sweet, huh? And that's just the beginning. Explore Flame to add more comp
 
 Already thinking about the neat graphics you'll add to your apps? Be sure to check flame as an actual game engine, there is much more complex and cool stuff, that can work both as a standalone game or inside a Flutter widget tree (all features are like that). Also, Flame is built in a modular way, so you pick and choose, and also, I strongly encourage you to go through the implementation and see how things are done. If you want to change any details, you might get a lot of insight from the source code.
 
-This whole example is inside the examples folder for flame, and you can see [the source code](https://github.com/luanpotter/flame/tree/master/doc/examples/animation_widget), if you have any doubts or wanna test or run yourself. Also, the article is [committed as well](https://github.com/luanpotter/flame/tree/master/doc/animation_widget_article).
+This whole example is inside the examples folder for flame, and you can see [the source code](/doc/examples/animation_widget), if you have any doubts or wanna test or run yourself. Also, the article is [committed as well](/doc/animation_widget_article).
 
 If you liked Flame, leave your clap, star on GitHub, and please check out our [repository](https://github.com/luanpotter/flame) with full docs, examples, and issues you can ask. Also, for more in-depth questions, be sure to check our [Discord channel](https://discord.gg/pxrBmy4), where we try to answer questions and solve problems.

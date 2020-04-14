@@ -1,3 +1,3 @@
 # tiled
 
-An example usage of the Tiled API on Flame.
+Example app showing Tiled integration.

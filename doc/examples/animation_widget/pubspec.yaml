@@ -1,15 +1,15 @@
 name: animation_widget
-description: A sample Flame project to showcase the animationAsWidget method.
+description: A sample Flame project to show the PogoWidget methods.
 
 version: 0.1.0
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flame:
+  pogo:
     path: ../../../
 
 dev_dependencies:

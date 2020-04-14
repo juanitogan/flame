@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flame/game.dart';
-import 'package:flame/gestures.dart';
-import 'package:flame/palette.dart';
+import 'package:pogo/game_engine.dart';
 
-class ExampleGame extends Game with HasWidgetsOverlay, TapDetector {
+void main() {
+  GestureInitializer.detectSingleTaps = true;
+  runApp(ExampleGame().widget);
+}
+
+class ExampleGame extends Game with HasWidgetsOverlay {
   bool isPaused = false;
 
-  @override
-  void update(double dt) {}
+  ExampleGame() : super.empty() {}
 
   @override
-  void render(Canvas canvas) {
-    canvas.drawRect(const Rect.fromLTWH(100, 100, 100, 100),
-        Paint()..color = BasicPalette.white.color);
+  void update() {}
+
+  @override
+  void render() {
+    GameCanvas.main.drawRect(const Rect.fromLTWH(100, 100, 100, 100),
+        Paint()..color = BasicPalette.white.color
+    );
   }
 
+  //TODO tapping throws an error:
+  // The following StateError was thrown while handling a gesture:
+  // Bad state: Cannot add event after closing
+
   @override
-  void onTap() {
+  void onSingleTap() {
     if (isPaused) {
       removeWidgetOverlay('PauseMenu');
       isPaused = false;
@@ -34,8 +44,4 @@ class ExampleGame extends Game with HasWidgetsOverlay, TapDetector {
       isPaused = true;
     }
   }
-}
-
-void main() {
-  runApp(ExampleGame().widget);
 }

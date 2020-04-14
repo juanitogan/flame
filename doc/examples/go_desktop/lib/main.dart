@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:pogo/game_engine.dart';
 
 import './game.dart';
 
-void main() => runApp(MyGame().widget);
+void main() {
+	runApp(Game().widget);
+	MainEntity();
+}

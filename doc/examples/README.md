@@ -1,6 +1,6 @@
 # examples folder
 
-This folder contains a collection of more specific examples using flame, specially to showcase some more advanced functionality.
+This folder contains a collection examples showing how to use the various components.
 
 To run this examples after cloning, first run `flutter create .` inside to generate the necessary files, as per instructed by the other flutter commands.
 

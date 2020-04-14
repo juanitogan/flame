@@ -1,15 +1,15 @@
-import 'dart:async';
-
-import 'package:flame/animation.dart' as animation;
-import 'package:flame/sprite.dart';
-import 'package:flame/flame.dart';
-import 'package:flame/position.dart';
+import 'package:pogo/game_engine.dart';
 import 'package:flutter/material.dart';
 
-Sprite _sprite;
+SpriteComponent _sprite;
 
 void main() async {
-  _sprite = await Sprite.fromFile('minotaur.png', width: 96, height: 96);
+  WidgetsFlutterBinding.ensureInitialized();
+
+  System.defaultPivot = Pivot.topLeft;
+
+  _sprite = await SpriteComponent.fromRasterFile('minotaur.png', frameWidth: 96, frameHeight: 96);
+
   runApp(MyApp());
 }
 
@@ -30,18 +30,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Position _position = Position(256.0, 256.0);
+  Size _size = const Size(256.0, 256.0);
 
   @override
   void initState() {
     super.initState();
-    changePosition();
+    changeSize();
   }
 
-  void changePosition() async {
+  void changeSize() async {
     await Future.delayed(const Duration(seconds: 1));
     setState(() {
-      _position = Position(10 + _position.x, 10 + _position.y);
+      _size = Size(_size.width + 10, _size.height + 10);
     });
   }
 
@@ -68,19 +68,33 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text('Hi there! This is a regular Flutter app,'),
             const Text('with a complex widget tree and also'),
             const Text('some pretty sprite sheet animations :)'),
-            Flame.util.animationAsWidget(
-                _position,
-                animation.Animation.fromImage(
-                    _sprite.image,
-                    frameCount: 19,
-                    frameWidth: 96,
-                )
+            PogoWidget.fromAnimation(
+                AnimationComponent.fromRaster(
+                  _sprite.image,
+                  frameWidth: 96,
+                  frameCount: 19,
+                ),
+                _size
             ),
+            // Alternative to fromAnimation() with more flexibility:
+            /*PogoWidget.fromEntity(
+                AnimationPrefab(
+                    AnimationComponent.fromRaster(
+                        _sprite.image,
+                        frameWidth: 96,
+                        frameCount: 19,
+                        pivot: Pivot.center,
+                    ),
+                    position: Vector2(_size.width / 2, _size.height / 2),
+                    rotationDeg: 45,
+                    scale: Vector2(_size.width / 96, _size.height / 96),
+                ),
+                _size
+            ),*/
             const Text('Neat, hum?'),
-            const Text(
-                'By the way, you can also use static sprites as widgets:'),
-            Flame.util.spriteAsWidget(const Size(100, 100), _sprite),
-            const SizedBox(height: 40),
+            const Text('By the way, you can also use static sprites as widgets:'),
+            PogoWidget.fromSprite(_sprite, const Size(100, 100)),
+            const SizedBox(height: 20),
             const Text('Sprites from Elthen\'s amazing work on itch.io:'),
             const Text('https://elthen.itch.io/2d-pixel-art-minotaur-sprites'),
           ],

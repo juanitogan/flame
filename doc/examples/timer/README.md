@@ -1,3 +1,3 @@
 # timer
 
-Flame game showcasing Timer class
+Example app using the Timer component.

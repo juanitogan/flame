@@ -1,5 +1,5 @@
 name: particles
-description: Flame sample game showcasing particle effects
+description: Example app showing particle effects
 
 version: 1.0.0
 
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flame:
+  pogo:
       path: ../../../
 
 dev_dependencies:

@@ -1,0 +1,11 @@
+<svg version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(0 -9.9583)">
+  <circle cx="50" cy="59.958" r="40" fill="#0066ff" style="paint-order:normal"/>
+  <circle cx="66.031" cy="72.312" r="17.472" fill="#44aa00" style="paint-order:normal"/>
+  <path transform="translate(0 9.9583)" d="m70.467 15.688a21.42 21.42 0 00-6.2773 15.131 21.42 21.42 0 0021.418 21.42 21.42 21.42 0 004.3047-.45898 40 40 0 00.087891-1.7793 40 40 0 00-19.533-34.312z" fill="#44aa00" style="paint-order:normal"/>
+  <path transform="translate(0 9.9583)" d="m41.33 11.002a40 40 0 00-17.119 8.4766 9.8111 9.8111 0 007.584 3.5957 9.8111 9.8111 0 009.8105-9.8105 9.8111 9.8111 0 00-.27539-2.2617z" fill="#44aa00" style="paint-order:normal"/>
+  <path transform="translate(0 9.9583)" d="m20.539 23.014a40 40 0 00-10.539 26.986 40 40 0 00.95117 8.4453 18.738 18.738 0 001.2461.0625 18.738 18.738 0 0018.738-18.738 18.738 18.738 0 00-10.396-16.756z" fill="#44aa00" style="paint-order:normal"/>
+  <circle cx="29.736" cy="75.508" r="12.874" fill="#44aa00" style="paint-order:normal"/>
+  <circle cx="57.932" cy="40.603" r="11.695" fill="#44aa00" style="paint-order:normal"/>
+ </g>
+</svg>

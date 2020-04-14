@@ -1,43 +1,37 @@
-import 'dart:ui';
+import 'package:pogo/game_engine.dart';
 
-import 'package:flame/anchor.dart';
-import 'package:flame/audio_pool.dart';
-import 'package:flame/flame.dart';
-import 'package:flame/game.dart';
-import 'package:flame/palette.dart';
-import 'package:flame/position.dart';
-import 'package:flame/text_config.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+//TODO yeah... this and/or AudioPool needs work
 
 void main() async {
-  final Size size = await Flame.util.initialDimensions();
-  final MyGame game = MyGame(size);
-  runApp(game.widget);
+  GestureInitializer.detectTaps = true;
 
-  final TapGestureRecognizer taps = TapGestureRecognizer()
-    ..onTapDown = (_) => game.tap();
-  Flame.util.addGestureRecognizer(taps);
+  runApp(Game().widget);
+
+  await Screen.waitForStartupSizing();
+  MainEntity();
 }
 
 TextConfig regular = TextConfig(color: BasicPalette.white.color);
-AudioPool pool = AudioPool('laser.mp3');
+AudioPool pool = AudioPool('sfx/laser.mp3');
 
-class MyGame extends BaseGame {
-  MyGame(Size screenSize) {
-    size = screenSize;
+class MainEntity extends GameEntity with GestureZone, TapDetector {
+
+  MainEntity() {
+    TextPrefab(
+      TextComponent("hit me!", textConfig: regular),
+      position: Vector2(Screen.size.width / 2, Screen.size.height / 2),
+    );
   }
 
   @override
-  void render(Canvas canvas) {
-    canvas.drawRect(Rect.fromLTWH(0.0, 0.0, size.width, size.height),
-        BasicPalette.black.paint);
-    regular.render(canvas, 'hit me!', Position.fromSize(size).div(2),
-        anchor: Anchor.center);
-    super.render(canvas);
-  }
-
-  void tap() {
+  void onTapDown(TapDownDetails details) {
+    //print("hit");
     pool.start();
   }
+
+  @override
+  void onTapUp(TapUpDetails details) {}
+
+  @override
+  void onTapCancel() {}
 }

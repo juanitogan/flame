@@ -1,42 +1,31 @@
-import 'package:flame/game.dart';
-import 'package:flame/svg.dart';
-import 'package:flame/position.dart';
-import 'package:flame/components/component.dart' show SvgComponent;
+import 'package:pogo/game_engine.dart';
 
-import 'package:flutter/material.dart';
-
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final game = MyGame();
-  runApp(game.widget);
+  await Assets.svgCache.load("android.svg", scale: 2.54);
+
+  runApp(Game().widget);
+
+  await Screen.waitForStartupSizing();
+
+  MainEntity();
 }
 
-class MyGame extends BaseGame {
-  Svg svgInstance;
-  SvgComponent android;
 
-  MyGame() {
+class MainEntity extends GameEntity {
+
+  MainEntity() {
     _start();
   }
 
   void _start() {
-    svgInstance = Svg('android.svg');
-    android = SvgComponent(
-      svgInstance,
-      width:  100,
-      height: 100,
-      x:      10,
-      y:      10,
+    // A SpriteComponent can contain either an SVG or a raster image.
+    // Side Note: Because animations are a list of SpriteComponents,
+    // an AnimationComponent can also be built up from SVGs.
+    SpritePrefab(
+      SpriteComponent.fromSvgCache("android.svg"),
+      position: Vector2(Screen.size.width / 2, Screen.size.height / 2),
     );
-
-    add(android);
-  }
-
-  @override
-  void render(Canvas canvas) {
-    super.render(canvas);
-
-    svgInstance.renderPosition(canvas, Position(100, 200), 300, 300);
   }
 }

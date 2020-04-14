@@ -1,5 +1,5 @@
 name: animations
-description: Flame sample game showcasing animations features
+description: Example project showing animated sprite and tap features
 
 version: 1.0.0+1
 
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flame:
+  pogo:
       path: ../../../
 
 dev_dependencies:

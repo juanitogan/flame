@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flame/game.dart';
-import 'package:flame/time.dart';
-import 'package:flame/text_config.dart';
-import 'package:flame/position.dart';
-import 'package:flame/gestures.dart';
-import 'package:flame/components/timer_component.dart';
+import 'package:pogo/game_engine.dart';
 
 void main() {
+  GestureInitializer.detectSingleTaps = true;
+  GestureInitializer.detectDoubleTaps = true;
+
   runApp(GameWidget());
 }
 
@@ -16,78 +14,117 @@ class GameWidget extends StatelessWidget {
     return MaterialApp(routes: {
       '/': (BuildContext context) => Column(children: [
             RaisedButton(
-                child: const Text("Game"),
+                child: const Text("Example 1"),
                 onPressed: () {
-                  Navigator.of(context).pushNamed("/game");
+                  Navigator.of(context).pushNamed("/ex1");
                 }),
             RaisedButton(
-                child: const Text("BaseGame"),
+                child: const Text("Example 2"),
                 onPressed: () {
-                  Navigator.of(context).pushNamed("/base_game");
+                  Navigator.of(context).pushNamed("/ex2");
                 })
           ]),
-      '/game': (BuildContext context) => MyGame().widget,
-      '/base_game': (BuildContext context) => MyBaseGame().widget
+      '/ex1': (BuildContext context) {Game(); Example1(); return Game().widget;},
+      '/ex2': (BuildContext context) {Game(); Example2(); return Game().widget;}
     });
   }
 }
 
-class RenderedTimeComponent extends TimerComponent {
-  final TextConfig textConfig =
-      const TextConfig(color: const Color(0xFFFFFFFF));
 
-  RenderedTimeComponent(Timer timer) : super(timer);
-
-  @override
-  void render(Canvas canvas) {
-    textConfig.render(
-        canvas, "Elapsed time: ${timer.current}", Position(10, 150));
-  }
-}
-
-class MyBaseGame extends BaseGame with TapDetector, DoubleTapDetector {
-  @override
-  void onTapDown(_) {
-    add(RenderedTimeComponent(Timer(1)..start()));
-  }
-
-  @override
-  void onDoubleTap() {
-    add(RenderedTimeComponent(Timer(5)..start()));
-  }
-}
-
-class MyGame extends Game with TapDetector {
-  final TextConfig textConfig =
-      const TextConfig(color: const Color(0xFFFFFFFF));
-  Timer countdown;
-  Timer interval;
+class Example1 extends GameEntity with SingleTapDetector {
+  final TextConfig textConfig = const TextConfig(color: const Color(0xFFFFFFFF));
+  TextPrefab countdownText;
+  TextPrefab intervalText;
+  TimerComponent countdown;
+  TimerComponent interval;
 
   int elapsedSecs = 0;
 
-  MyGame() {
-    countdown = Timer(2);
-    interval = Timer(1, repeat: true, callback: () {
-      elapsedSecs += 1;
-    });
+  Example1() {
+    TextPrefab(
+        TextComponent("Tap me!", textConfig: textConfig, pivot: Pivot.topLeft),
+        position: Vector2(10, 30)
+    );
+
+    countdownText = TextPrefab(
+        TextComponent("", textConfig: textConfig, pivot: Pivot.topLeft),
+        position: Vector2(10, 100)
+    );
+    intervalText = TextPrefab(
+        TextComponent("", textConfig: textConfig, pivot: Pivot.topLeft),
+        position: Vector2(10, 150)
+    );
+
+    countdown = TimerComponent(2);
+    interval = TimerComponent(1,
+        repeat: true,
+        callback: () {elapsedSecs += 1;}
+    );
     interval.start();
   }
 
   @override
-  void onTapDown(_) {
+  void onSingleTap() {
     countdown.start();
   }
 
   @override
-  void update(double dt) {
-    countdown.update(dt);
-    interval.update(dt);
+  void update() {
+    countdown.update();
+    interval.update();
+    countdownText.textComponent.text = "Countdown: ${countdown.elapsed.toString()}";
+    intervalText.textComponent.text = "Elapsed time: $elapsedSecs";
+  }
+}
+
+
+class Example2 extends GameEntity with SingleTapDetector, DoubleTapDetector {
+  RenderedTimer timer1;
+  RenderedTimer timer5;
+
+  Example2() {
+    TextPrefab(
+        TextComponent(
+            "Tap or double-tap me!",
+            textConfig: const TextConfig(color: const Color(0xFFFFFFFF)),
+            pivot: Pivot.topLeft
+        ),
+        position: Vector2(10, 30)
+    );
   }
 
   @override
-  void render(Canvas canvas) {
-    textConfig.render(canvas, "Countdown: ${countdown.current.toString()}",
-        Position(10, 100));
-    textConfig.render(canvas, "Elapsed time: $elapsedSecs", Position(10, 150));
+  void onSingleTap() {
+    //TODO These currently auto-destroy. Fix this when that default changes.
+    RenderedTimer(TimerComponent(1)..start(), Vector2(10, 150));
+  }
+
+  @override
+  void onDoubleTap() {
+    //TODO These currently auto-destroy. Fix this when that default changes.
+    RenderedTimer(TimerComponent(5)..start(), Vector2(10, 200));
+  }
+}
+
+
+class RenderedTimer extends TimerPrefab {
+  final TextConfig textConfig = const TextConfig(color: const Color(0xFFFFFFFF));
+  TextComponent textComp;
+
+  RenderedTimer(
+      TimerComponent timer,
+      Vector2 position
+  ) : super(
+      timer,
+      position: position
+  ) {
+    textComp = TextComponent("", textConfig: textConfig, pivot: Pivot.topLeft);
+  }
+
+  @override
+  void update() {
+    super.update();
+    textComp.text = "Elapsed time: ${timerComponent.elapsed}";
+    textComp.render();
   }
 }

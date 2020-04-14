@@ -1,6 +1,6 @@
 # go_desktop
 
-This is an example game for testing Flame games on the desktop using the [go-flutter-desktop](https://github.com/go-flutter-desktop/go-flutter) library.
+This is an example game for testing games on the desktop using the [go-flutter-desktop](https://github.com/go-flutter-desktop/go-flutter) library.
 
 This game features a very simple box on the screen where you can move it using WASD keys.
 

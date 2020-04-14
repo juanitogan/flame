@@ -1,92 +1,77 @@
-import 'dart:ui';
-import 'package:flutter/material.dart' hide Animation, Image;
-
-import 'package:flame/flame.dart';
-import 'package:flame/game.dart';
-import 'package:flame/animation.dart';
-import 'package:flame/sprite.dart';
-import 'package:flame/components/animation_component.dart';
-import 'package:flame/components/component.dart';
+import 'package:pogo/game_engine.dart';
 
 void main() async {
-  final Size size = await Flame.util.initialDimensions();
+  WidgetsFlutterBinding.ensureInitialized();
 
-  await Flame.images.load('spritesheet.png');
+  await Assets.rasterCache.load('spritesheet.png');
 
-  final game = MyGame(size);
-  runApp(game.widget);
+  runApp(Game().widget);
+
+  await Screen.waitForStartupSizing();
+
+  MainEntity();
 }
 
-class MyGame extends BaseGame {
-  MyGame(Size screenSize) {
-    size = screenSize;
 
-    final Image spritesheet = Flame.images.fromCache('spritesheet.png');
+class MainEntity extends GameEntity {
+
+  MainEntity() {
+
+    final SpriteImage spritesheet = Assets.rasterCache.get('spritesheet.png');
     const spriteWidth  = 16;
     const spriteHeight = 18;
 
-    final vampireAnimation = Animation.fromImage(
+    final vampireComponent = AnimationComponent.fromRaster(
       spritesheet,
-      frameWidth:  spriteWidth,
-      frameHeight: spriteHeight,
-      frameCount:  8,
-      stepTime:    0.1,
+      frameWidth:    spriteWidth,
+      frameHeight:   spriteHeight,
+      frameCount:    8,
+      frameDuration: 0.1,
     );
-    final ghostAnimation = Animation.fromImage(
+    final ghostComponent = AnimationComponent.fromRaster(
       spritesheet,
-      frameY:      spriteHeight * 1,
-      frameWidth:  spriteWidth,
-      frameHeight: spriteHeight,
-      frameCount:  8,
-      stepTime:    0.1,
+      frameTop:      spriteHeight * 1,
+      frameWidth:    spriteWidth,
+      frameHeight:   spriteHeight,
+      frameCount:    8,
+      frameDuration: 0.1,
     );
 
-    final vampireComponent = AnimationComponent(
-      vampireAnimation,
-      width:  80,
-      height: 90,
-      x:      150,
-      y:      100,
+    final vampire = AnimationPrefab(
+      vampireComponent,
+      position: Vector2(150, 100),
+      scale:    Vector2(5, 5),
     );
-    final ghostComponent = AnimationComponent(
-      ghostAnimation,
-      width:  80,
-      height: 90,
-      x:      150,
-      y:      220,
+    final ghost = AnimationPrefab(
+      ghostComponent,
+      position: Vector2(150, 220),
+      scale:    Vector2(5, 5),
     );
 
-    add(vampireComponent);
-    add(ghostComponent);
-
-    // Some plain sprites
-    final vampireSpriteComponent = SpriteComponent(
-      Sprite.fromImage(
+    // Slice out some non-animated sprites from the same sheet.
+    SpritePrefab(
+      SpriteComponent.fromRaster(
         spritesheet,
-        width:  spriteWidth,
-        height: spriteHeight,
+        frameLeft:     spriteWidth  * 5,
+        frameTop:      spriteHeight * 0,
+        frameWidth:    spriteWidth,
+        frameHeight:   spriteHeight,
       ),
-      width:  80,
-      height: 90,
-      x:      50,
-      y:      100,
+      position: Vector2(50, 100),
+      scale:    Vector2(5, 5),
     );
 
-    final ghostSpriteComponent = SpriteComponent(
-      Sprite.fromImage(
+    SpritePrefab(
+      SpriteComponent.fromRaster(
         spritesheet,
-        x:      spriteWidth  * 0,
-        y:      spriteHeight * 1,
-        width:  spriteWidth,
-        height: spriteHeight,
+        frameLeft:     spriteWidth  * 3,
+        frameTop:      spriteHeight * 1,
+        frameWidth:    spriteWidth,
+        frameHeight:   spriteHeight,
       ),
-      width:  80,
-      height: 90,
-      x:      50,
-      y:      220,
+      position: Vector2(50, 220),
+      scale:    Vector2(5, 5),
     );
 
-    add(vampireSpriteComponent);
-    add(ghostSpriteComponent);
   }
 }

@@ -1,5 +1,5 @@
 name: aseprite
-description: Flame sample for using Aseprite animations
+description: Example project using Aseprite animations
 
 version: 1.0.0+1
 
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flame:
+  pogo:
       path: ../../../
 
 dev_dependencies:
@@ -20,4 +20,4 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/chopper.png
-    - assets/chopper.json
+    - assets/images/chopper.json

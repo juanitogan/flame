@@ -1,31 +1,25 @@
-import 'package:flame/flame.dart';
-import 'package:flame/game.dart';
-import 'package:flame/animation.dart' as flame_animation;
-import 'package:flame/components/animation_component.dart';
-import 'package:flutter/material.dart';
+import 'package:pogo/game_engine.dart';
 
 void main() async {
-  final Size size = await Flame.util.initialDimensions();
-  runApp(MyGame(size).widget);
+  runApp(Game().widget);
+  await Screen.waitForStartupSizing();
+  MainEntity();
 }
 
-class MyGame extends BaseGame {
-  MyGame(Size screenSize) {
-    size = screenSize;
+class MainEntity extends GameEntity {
+
+  MainEntity() {
     _start();
   }
 
   void _start() async {
-    final animation = await flame_animation.Animation.fromAsepriteData(
-        'chopper.png', 'chopper.json');
-    final animationComponent = AnimationComponent(
-        animation,
-        width: 200,
-        height: 200,
-        x: (size.width / 2) - 100,
-        y: (size.height / 2) - 100,
+    final animation = await AnimationComponent.fromAsepriteData(
+        'chopper.png', 'images/chopper.json'
     );
-
-    add(animationComponent);
+    AnimationPrefab(
+        animation,
+        position: Vector2(Screen.size.width / 2, Screen.size.height / 2),
+        scale:    Vector2(4, 4),
+    );
   }
 }

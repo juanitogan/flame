@@ -1,3 +1,3 @@
 # Widgets
 
-A Flutter project showcasing Flame's widgets.
+Example project showing use of PogoWidget.

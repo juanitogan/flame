@@ -2,14 +2,14 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:flame/components/tiled_component.dart';
-import 'package:flame/flame.dart';
-import 'package:flutter/services.dart' show CachingAssetBundle;
+import 'package:flutter/services.dart' show CachingAssetBundle, rootBundle;
+import 'package:pogo/game_engine.dart';
 import 'package:test/test.dart';
 
 void main() {
   test('my first widget test', () async {
-    await Flame.init(bundle: TestAssetBundle());
+    //await Assets.init(bundle: TestAssetBundle());
+    Assets.bundle = TestAssetBundle();
     final tiled = TiledComponent('x');
     await tiled.future;
     expect(1, equals(1));

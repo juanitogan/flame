@@ -1,0 +1,21 @@
+name: nine_patch
+description: Example app for using the nine-patch component
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  pogo:
+      path: ../../../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - assets/images/nine-box.png

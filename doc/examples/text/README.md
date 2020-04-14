@@ -1,3 +1,3 @@
 # text
 
-A sample Flame game showcasing the use of text related components: TextConfig, TextComponent and TextBoxComponent.
+Example project showing the use of text-related components: TextConfig, TextComponent, and MessageBoxComponent.
