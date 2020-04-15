@@ -15,7 +15,7 @@ Pogo aims to implement what I'm calling a "pseudo Entity Component System" for l
 
 ### Background
 
-Pogo was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1).  All due credit to inu-no-policemen on Reddit and Luan Nico of Flame for setting up the core, which remains largely unchanged.  The rest of Flame, however, was showing growing pains, and a reluctance to large changes in design, so I launched a new project which will, hopefully, be agile to needed change before version 1.0.  Even at Pogo 0.0.1 just about everything above Flame's core was changed (see the [changelog](CHANGELOG.md#001---2020-04-04) for more details).  Therefore, if you find a pre-release version of Pogo you like, lock it in, or suffer the possible breaking changes.
+Pogo was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1).  All due credit to inu-no-policemen on Reddit and Luan Nico of Flame for setting up the core, which remains largely unchanged.  The rest of Flame, however, was showing growing pains, and a reluctance to large changes in design, so I launched a new project which will, hopefully, be agile to needed change before version 1.0.  Even at Pogo 0.0.1 just about everything above Flame's core was changed (see the [changelog](CHANGELOG.md#001---2020-04-04) for more details).  Therefore, if you find a pre-release version of Pogo you like, lock it in, or suffer the possible breaking changes.  (Although, if I did a decent job with round 1 here, there shouldn't be any more major shifts in design coming.  Just small shifts.  We'll see.)
 
 The name, Pogo, comes from _Pogo Bug_ (not yet released) -- the game I modded the this engine for.  (_Pogo Bug_ was originally written in QtQuick/QML but not released from that codebase due to their difficult licensing issues.)  Thus, this engine is tried and tested on my own small-but-complete game from day one.  It took maybe 10x longer to work up this Flutter/Dart-based engine than to write the original Qt game.  I hope it proves worth the extra effort.
 
@@ -237,7 +237,7 @@ class Enemy extends GameEntity with GestureZone, TapDetector {
 
 ### Prefabs
 
-Prefabricated entities (prefabs) are helper classes for creating one-time-use entities quickly -- that is to say, you don't need to make a custom class for every object in your game.  Prefabs are also useful for prototyping and other quick work.
+Prefabricated entities ([prefabs](doc/prefabs.md)) are helper classes for creating one-time-use entities quickly -- that is to say, you don't need to make a custom class for every object in your game.  Prefabs are also useful for prototyping and other quick work.
 
 Most class-type components come with a prefab for instantiating just that component.  There are no prefabs that recognize gestures.
 
@@ -259,7 +259,7 @@ There currently is no automatic cleanup of out-of-scope entities.  Therefore, be
 
 If you `destroy()` a parent, all the children will be automatically destroyed for you.  If you don't want to destroy a child, detach it first with `removeChild()` or by setting the child's `parent` property to null.  Thus, you might find yourself creating parent entities whose only purpose it to make scene destruction easy.
 
-(TODO: Think all this through more.)
+(TODO: Think parenting and destruction through more.)
 
 ----
 

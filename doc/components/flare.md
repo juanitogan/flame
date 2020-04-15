@@ -6,8 +6,8 @@ The `FlareComponent` class is a component for use in building a [`GameEntity`](/
 
 | | |
 | :-- | :-- |
-| _<default>_ | Takes a FlutterActorArtboard by reference. |
-| fromFile    | Takes a Flare filename (cached or not).  Returns a Future. |
+| _\<default\>_ | Takes a FlutterActorArtboard by reference. |
+| fromFile      | Takes a Flare filename (cached or not).  Returns a Future. |
 
 **//TODO look into caching**
 

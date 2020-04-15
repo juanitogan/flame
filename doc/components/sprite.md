@@ -8,7 +8,7 @@ Works with both [`Raster`](/doc/images/raster.md) and [`Svg`](/doc/images/svg.md
 
 | | |
 | :-- | :-- |
-| _<default>_     | Takes a cached Raster by reference.  (Same as `fromRaster()` except the frame parameters take a double instead of an int.) |
+| _\<default\>_   | Takes a cached Raster by reference.  (Same as `fromRaster()` except the frame parameters take a double instead of an int.) |
 | fromRaster      | Takes a cached Raster by reference.  **(best practice)** |
 | fromRasterCache | Takes a cached Raster by filename. |
 | fromRasterFile  | Takes a raster filename (cached or not).  Returns a Future. |

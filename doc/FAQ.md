@@ -32,12 +32,12 @@ WidgetsFlutterBinding.ensureInitialized();
 
 ### How do I run the examples?
 
-See the readme in the top-level [example folder](/example).
+See the [main example README](/example).
 
 ### How does the Camera work?
 
-See the [Camera documentation](TODO).
+See the [Camera documentation](/doc/statics/camera.md).
 
 ### How do I handle touch events in my game?
 
-See the [Gesture documentation](TODO).
+See the [Gesture documentation](/doc/input.md).

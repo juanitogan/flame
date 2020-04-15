@@ -12,7 +12,7 @@ _Note: Support is not yet provided for trimmed-spritesheet data (that is, data a
 
 | | |
 | :-- | :-- |
-| _<default>_      | Takes a List of Frames.  **(not common use)** |
+| _\<default\>_    | Takes a List of Frames.  **(not common use)** |
 | fromSpriteList   | Takes a List of SpriteComponents.  **(best practice for SVG)** |
 | fromRaster       | Takes a cached Raster by reference.  **(best practice for raster)** |
 | fromRasterCache  | Takes a cached Raster by filename. |
