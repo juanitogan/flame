@@ -10,6 +10,8 @@ import 'package:pogo/src/palette.dart';
 
 export 'package:pogo/src/components/text_config.dart';
 
+//TODO rewrite
+
 /// Multi-line message box that types out text at a rate controlled by [charDuration].
 ///
 /// * [text]: string to draw (required)
@@ -104,6 +106,7 @@ class MessageBoxComponent {
   bool get isFinished => elapsed > totalCharDuration + endOfMessagePause;
 
   int _previousChar = -1;
+
   int get _currentChar => charDuration == 0.0
       ? text.length - 1
       : math.min(elapsed ~/ charDuration, text.length - 1);
@@ -112,12 +115,12 @@ class MessageBoxComponent {
     int totalCharCount = 0;
     final int currentChar = _currentChar;
     for (int i = 0; i < _lines.length; i++) {
-      totalCharCount += _lines[i].length;
+      totalCharCount += _lines[i].length + 1; // +1 for the space removed between lines
       if (totalCharCount > currentChar) {
         return i;
       }
     }
-    return _lines.length - 1;
+    return _lines.length - 1; // always 0
   }
 
   double _withPadding(double size) => size + 2 * padding;
@@ -138,7 +141,7 @@ class MessageBoxComponent {
     final int currentLine = _currentLine;
     return _lines.sublist(0, currentLine + 1).map((line) {
       final int charCount =
-          (i < currentLine) ? line.length : (currentChar - totalCharCount);
+          (i < currentLine) ? line.length : currentChar - totalCharCount + 1;
       totalCharCount += line.length;
       i++;
       return _getLineWidth(line, charCount);
@@ -172,7 +175,7 @@ class MessageBoxComponent {
   Future<Image> _redrawCache() {
     final PictureRecorder recorder = PictureRecorder();
     //TODO why currentWidth/Height limitation???
-    //TODO must it be on its own canvas? author left no notes explaining anything
+    //TODO must it be on its own canvas? author left no notes explaining anything (just what I've added)
     final Canvas c = Canvas(
         recorder, Rect.fromLTWH(0.0, 0.0, currentWidth, currentHeight));
     _fullRender(c);
@@ -185,15 +188,17 @@ class MessageBoxComponent {
     final int currentLine = _currentLine;
     int charCount = 0;
     double dy = padding;
+    // Paint fully-typed out lines (but not last line).
     for (int line = 0; line < currentLine; line++) {
-      charCount += _lines[line].length;
+      charCount += _lines[line].length + 1; // +1 for the space removed between lines
       textConfig
           .getTextPainter(_lines[line])
           .paint(c, Offset(padding, dy));
       dy += _lineHeight;
     }
+    // Paint partial line or last line.
     final int max =
-        math.min(_currentChar - charCount, _lines[currentLine].length);
+        math.min(_currentChar - charCount + 1, _lines[currentLine].length);
     textConfig
         .getTextPainter(_lines[currentLine].substring(0, max))
         .paint(c, Offset(padding, dy));
