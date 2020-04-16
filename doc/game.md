@@ -18,6 +18,10 @@ void main() async {
   await Screen.setFullScreen();
   await Screen.setPortrait();
 
+  Camera.size = Size(288, 512); // default is native resolution
+
+  System.defaultPivot = Pivot.topLeft; // default default is center
+
   GestureInitializer.detectTaps = true;
   GestureInitializer.detectPans = true;
 
@@ -42,6 +46,10 @@ Line by line:
 `WidgetsFlutterBinding.ensureInitialized()` is required as the first line if you want to call setup features like `Screen.setFullScreen()` before you call `runApp()`.
 
 The [`Screen` static class](/doc/statics/screen.md) contains some setup functions.
+
+The [`Camera` static class](/doc/statics/camera.md) contains the main camera settings in case you need a scaled camera and/or panning.  This is a good place to set camera size/scale, if needed for your game.
+
+The [`System` static class](/doc/statics/system.md) contains the default [Pivot](/doc/pivot.md) setting.
 
 The [`GestureInitializer` static class](/doc/input.md#gestureinitializer-class) contains flags for setting up the main [`GestureDetector`](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html) in the game engine.  You must initialize all gestures here that will be used anywhere in your game.
 

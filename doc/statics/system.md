@@ -6,4 +6,4 @@ The `System` static class provides central access to static data and methods.
 
 | | |
 | :-- | :-- |
-| defaultPivot | Sets the default [Pivot](/doc/pivot.md) point.  Default: `Pivot.center`. |
+| defaultPivot | Sets the default [Pivot](/doc/pivot.md) point for newly-created [components](/doc/components.md) (including [GestureZone](/doc/input.md#gesturezone-mixin)).  Default: `Pivot.center`. |
