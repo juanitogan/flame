@@ -199,6 +199,10 @@ abstract class GameEntity {
     // Don't do anything... unless we add a velocity component, or something.
     // Here because this a required part of the interface.
   }
+  // Note: the following syntax would require the user to always concrete
+  // implement this (currently optional):
+  //void update();
+  // Passing on that idea... for now.
 
   /// Called by the main render loop.  Transforms this entity on the main canvas.
   ///

@@ -26,7 +26,7 @@ Not all constructors use all parameters.
 | | |
 | :-- | :-- |
 | firstFrame     | The frame in the sprite sheet that starts this animation (zero based).  Default: `0`. |
-| frameCount     | The number of frames this animation is composed of.  Default: `1`. |
+| frameCount   * | The number of frames this animation is composed of.  Default: `1`. |
 | frameDuration  | The duration of each frame, in seconds.  Default: `0.1`. |
 | frameDurations | List of duration values, one for each frame.  Overrides frameDuration, if both given. |
 | frameHeight    | Height of each frame.  Default: `null`, that is, full height of the image. |
@@ -46,6 +46,7 @@ Not all constructors use all parameters.
 | :-- | :-- |
 | currentFrame  | Index number of the current frame being drawn. |
 | elapsed       | Read-only.  Seconds of elapsed time since start or last reset. |
+| frameCount  * | Read-only.  The number of frames this animation is composed of. |
 | frameElapsed  | Read-only.  Seconds of elapsed time since start of current frame. |
 | frames      * | Read-only.  List of Frames in the animation. |
 | isFinished    | Read-only.  If `loop` is false, returns whether the animation is finished (stopped after the final frame).  Always returns false otherwise. |

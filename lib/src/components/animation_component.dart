@@ -302,6 +302,9 @@ class AnimationComponent {
   /// Returns whether the animation is on the first frame.
   bool get isFirstFrame => currentFrame == 0;
 
+  /// The number of frames this animation is composed of.
+  int get frameCount => frames.length;
+
   /// Returns whether the animation has only a single frame (and is, thus, a still image).
   bool get isSingleFrame => frames.length == 1;
 
