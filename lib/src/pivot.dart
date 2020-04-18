@@ -23,6 +23,10 @@ class Pivot {
     return Offset(-size.width * offsetFactor.dx, -size.height * offsetFactor.dy);
   }
 
+  Offset translateWH(double width, double height) {
+    return Offset(-width * offsetFactor.dx, -height * offsetFactor.dy);
+  }
+
   Offset translateOffset(Offset position, Size size) {
     return position - Offset(size.width * offsetFactor.dx, size.height * offsetFactor.dy);
   }
