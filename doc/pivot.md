@@ -32,6 +32,7 @@ The `Pivot` class is a type for defining the pivot (or rotation) point for visib
 | translateOffset  | Takes an Offset and Size and returns an absolute Offset to the pivot point. |
 | translateRect    | Takes a Rect and returns an absolute Rect translated to the pivot point. |
 | translateVector2 | Takes a Vector2, width, and height, and returns an absolute Vector2 to the pivot point. |
+| translateWH      | Takes a width and height and returns a relative Offset to the pivot point. |
 
 ----
 
