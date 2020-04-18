@@ -32,7 +32,7 @@ class SpritePrefab extends GameEntity {
     parent:      parent,
   );
 
-  SpritePrefab.empty();
+  //SpritePrefab.empty();
 
   @override
   void update() {
