@@ -4,7 +4,7 @@ Pogo is a 2D game engine for [Flutter](https://flutter.dev/) (Android, iOS, etc.
 
 Pogo aims to implement what I'm calling a "pseudo Entity Component System" for lack of a better term.  Pogo should feel fairly similar to some of the other game engines that are popular for rapid game development with its use of game entities (or game objects) and the components that are available to build those entities.
 
-"Pseudo ECS" because it is not what ECS purists would call an ECS.  Why not a more pure ECS?  1) I didn't see myself as having time to go that far into the ECS pattern; and 2) I believe this pattern is quicker to ramp up on while also being robust enough for most games.  Regardless, hopefully Pogo gives a foundation for building a more pure ECS should anyone choose to launch that spin-off project.
+"Pseudo ECS" because it is not what ECS purists would call an ECS.  Why not a more pure ECS?  (1) I didn't see myself as having time to go that far into the ECS pattern; and (2) I believe this pattern is quicker to ramp up on while also being robust enough for most games.
 
 ### Documentation
 
@@ -15,11 +15,13 @@ Pogo aims to implement what I'm calling a "pseudo Entity Component System" for l
 
 ### Background
 
-Pogo was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1).  All due credit to inu-no-policemen on Reddit and Luan Nico of Flame for setting up the core, which remains largely unchanged.  The rest of Flame, however, was showing growing pains, and a reluctance to large changes in design, so I launched a new project which will, hopefully, be agile to needed change before version 1.0.  Even at Pogo 0.0.1 just about everything above Flame's core was changed, along with many new features critical to how I build games (see the [changelog](CHANGELOG.md#001---2020-04-13) for an overview of just how different Pogo is from Flame).  Therefore, if you find a pre-release version of Pogo you like, lock it in, or suffer the possible breaking changes.  (Although, if I did a decent job with round 1 here, there shouldn't be any more major shifts in design coming.  Just shifts isolated to parts still in need of refactoring.  We'll see.)
+Pogo was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) and rewritten with a goal of making it twice as easy to understand and use.
 
-The name, Pogo, comes from _Pogo Bug_ (not yet released) -- the game I modded the this engine for.  (_Pogo Bug_ was originally written in QtQuick/QML but not released from that codebase due to their difficult licensing issues.)  Thus, this engine is tried and tested on my own small-but-complete game from day one.  It took maybe 10x longer to work up this Flutter/Dart-based engine than to write the original Qt game.  I hope it proves worth the extra effort.
+All due credit to inu-no-policemen on Reddit and Luan Nico of Flame for setting up the core, which remains largely unchanged.  The rest of Flame, however, was showing growing pains, and a reluctance to large changes in design, so I launched a new project which will, hopefully, be agile to needed change before version 1.0.  Even at Pogo 0.0.1 just about everything above Flame's core was changed, along with many new features critical to how I build games (see the [changelog](CHANGELOG.md#001---2020-04-13) for an overview of just how different Pogo is from Flame).  Therefore, if you find a pre-release version of Pogo you like, lock it in, or suffer the possible breaking changes.  (Although, if I did a decent job with round 1 here, there shouldn't be any more major shifts in design coming.  Just shifts isolated to parts still in need of refactoring.  We'll see.)
 
-By the time I release _Pogo Bug_ this engine should be at version 0.1.0.
+The name, Pogo, comes from _Pogo Bug_ (not yet released) -- the game I built this engine for.  (_Pogo Bug_ was originally written in QtQuick/QML but not released from that codebase due to their difficult licensing issues.)  Thus, this engine is tried and tested on my own small-but-complete game from day one.  It took maybe 10x longer to work up this Flutter/Dart-based engine than to write the original Qt game.  It has so far proven worth the extra effort with the Qt port taking much less time and effort in Pogo than how it was going in Flame -- and nearly as easy as QtQuick was.
+
+By the time I release _Pogo Bug_ this engine should be at version 0.1.0... but is totally usable as of 0.0.1.
 
 ### Contributing
 

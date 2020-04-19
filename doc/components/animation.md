@@ -44,20 +44,22 @@ Not all constructors use all parameters.
 
 | | |
 | :-- | :-- |
-| currentFrame  | Index number of the current frame being drawn. |
-| elapsed       | Read-only.  Seconds of elapsed time since start or last reset. |
-| frameCount  * | Read-only.  The number of frames this animation is composed of. |
-| frameElapsed  | Read-only.  Seconds of elapsed time since start of current frame. |
-| frames      * | Read-only.  List of Frames in the animation. |
-| isFinished    | Read-only.  If `loop` is false, returns whether the animation is finished (stopped after the final frame).  Always returns false otherwise. |
-| isFirstFrame  | Read-only.  Whether the animation is on the first frame. |
-| isLastFrame   | Read-only.  Whether the animation is on the last frame. |
-| isSingleFrame | Read-only.  Whether the animation has only a single frame (and is, thus, a still image). |
-| loop        * | Loops the animation when set to true.  Default: `true`. |
-| paused      * | Pauses the animation when set to true.  Default: `false`. |
-| pausedTime    | Read-only.  Seconds of elapsed time since paused.|
-| reverse     * | Reverses the playback direction when set to true.  Default: `false`. |
-| totalDuration | Read-only.  The total computed duration of this animation. |
+| currentFrame       | Index number of the current frame being drawn. |
+| currentFrameHeight | Read-only.  Height of the current frame's sprite. |
+| currentFrameWidth  | Read-only.  Width of the current frame's sprite. |
+| elapsed            | Read-only.  Seconds of elapsed time since start or last reset. |
+| frameCount       * | Read-only.  The number of frames this animation is composed of. |
+| frameElapsed       | Read-only.  Seconds of elapsed time since start of current frame. |
+| frames           * | Read-only.  List of Frames in the animation. |
+| isFinished         | Read-only.  If `loop` is false, returns whether the animation is finished (stopped after the final frame).  Always returns false otherwise. |
+| isFirstFrame       | Read-only.  Whether the animation is on the first frame. |
+| isLastFrame        | Read-only.  Whether the animation is on the last frame. |
+| isSingleFrame      | Read-only.  Whether the animation has only a single frame (and is, thus, a still image). |
+| loop             * | Loops the animation when set to true.  Default: `true`. |
+| paused           * | Pauses the animation when set to true.  Default: `false`. |
+| pausedTime         | Read-only.  Seconds of elapsed time since paused.|
+| reverse          * | Reverses the playback direction when set to true.  Default: `false`. |
+| totalDuration      | Read-only.  The total computed duration of this animation. |
 
 \* Also is a constructor parameter.
 

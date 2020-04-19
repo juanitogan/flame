@@ -41,6 +41,11 @@ class AnimationComponent {
   /// Index of the current frame that should be displayed.
   int currentFrame = 0;
 
+  /// Width of the current frame's sprite.
+  double get currentFrameWidth => frames[currentFrame].sprite.frameWidth;
+  /// Height of the current frame's sprite.
+  double get currentFrameHeight => frames[currentFrame].sprite.frameHeight;
+
   /// Whether the animation runs forwards or in reverse. Should respond to mid-animation toggling.
   bool reverse = false;
 
