@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:flutter/material.dart' show Colors;
+import 'package:pogo/src/components/sprite_image.dart';
 import 'package:pogo/src/game/assets_static.dart';
 import 'package:pogo/src/game/game_canvas_static.dart';
-import 'package:pogo/src/components/sprite_image.dart';
+import 'package:pogo/src/game/system_static.dart';
 import 'package:tiled/tiled.dart' hide Image;
 
 //TODO redux and pogo-ize this; is a pivot relevant?
@@ -17,7 +17,7 @@ class TiledComponent {
   Future future;
   bool _loaded = false;
 
-  static Paint paint = Paint()..color = Colors.white; //TODO why use own palette.dart if Material has Colors?
+  Paint paint = System.defaultPaint;
 
   TiledComponent(this.filename) {
     future = _load();

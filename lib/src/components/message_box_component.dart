@@ -6,7 +6,6 @@ import 'package:pogo/src/components/text_config.dart';
 import 'package:pogo/src/game/game_canvas_static.dart';
 import 'package:pogo/src/game/system_static.dart';
 import 'package:pogo/src/game/time_static.dart';
-import 'package:pogo/src/palette.dart';
 
 export 'package:pogo/src/components/text_config.dart';
 
@@ -21,8 +20,9 @@ export 'package:pogo/src/components/text_config.dart';
 /// * [endOfMessagePause]: seconds to pause after last character is displayed before setting the `isFinished` flag (default: 0.0)
 /// * [textConfig]: [TextConfig] reference for setting font style, etc. (default: `TextConfig` default)
 class MessageBoxComponent {
-  static final Paint _imagePaint = BasicPalette.white.paint
-    ..filterQuality = FilterQuality.high;
+
+  static final Paint _highQualityPaint = System.defaultPaint
+    ..filterQuality = FilterQuality.high; //TODO double-check this; author explains nothing; TextComponent doesn't use it
 
   final String _text;
   String get text => _text;
@@ -165,7 +165,7 @@ class MessageBoxComponent {
     final Offset o = pivot.translate(Size(currentWidth, currentHeight));
     GameCanvas.main.save();
       GameCanvas.main.translate(o.dx, o.dy);
-      GameCanvas.main.drawImage(_cache, Offset.zero, _imagePaint);
+      GameCanvas.main.drawImage(_cache, Offset.zero, _highQualityPaint);
     GameCanvas.main.restore();
   }
 

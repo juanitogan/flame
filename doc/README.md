@@ -51,7 +51,6 @@ Shortcuts to other docs:
 
  * Miscellaneous
    - [Box2D](box2d.md)
-   - [Colors and the Palette](palette.md)
    - [Gamepad](gamepad.md)
    - [Pivot type](pivot.md)
    - [PogoWidgets](pogo_widget.md)

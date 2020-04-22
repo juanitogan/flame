@@ -31,11 +31,12 @@ class MainEntity extends GameEntity {
 }
 
 
-class Palette {
-  static const PaletteEntry white = BasicPalette.white;
-  static const PaletteEntry red = PaletteEntry(Color(0xFFFF0000));
-  static const PaletteEntry blue = PaletteEntry(Color(0xFF0000FF));
+class PaintPalette {
+  static Paint white = Paint()..color = const Color(0xFFFFFFFF);
+  static Paint red = Paint()..color = const Color(0xFFFF0000);
+  static Paint blue = Paint()..color = const Color(0xFF0000FF);
 }
+
 
 class Square extends GameEntity {
   double width;
@@ -57,13 +58,16 @@ class Square extends GameEntity {
       GameCanvas.main.translate(o.dx, o.dy);
 
       // The main white square.
-      GameCanvas.main.drawRect(Rect.fromLTWH(0, 0, width, height), Palette.white.paint);
+      GameCanvas.main.drawRect(Rect.fromLTWH(0, 0, width, height), PaintPalette.white);
       // A red square in the top-left corner of the white one.
-      GameCanvas.main.drawRect(Rect.fromLTWH(0, 0, width / 3, height / 3), Palette.red.paint);
+      GameCanvas.main.drawRect(Rect.fromLTWH(0, 0, width / 3, height / 3), PaintPalette.red);
       // A blue square in the center, showing another way to use the Pivot class.
-      GameCanvas.main.drawRect(Pivot.center.translateRect(
-          Rect.fromLTWH(width / 2, height / 2, width / 3, height / 3)
-      ), Palette.blue.paint);
+      GameCanvas.main.drawRect(
+          Pivot.center.translateRect(
+            Rect.fromLTWH(width / 2, height / 2, width / 3, height / 3)
+          ),
+          PaintPalette.blue
+      );
     GameCanvas.main.restore();
   }
 

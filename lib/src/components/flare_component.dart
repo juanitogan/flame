@@ -163,14 +163,20 @@ class FlareComponent {
 
   // DEBUG MODE ////////
 
-  Color debugColor = const Color(0xFFFF00FF);
+  Color _debugColor = const Color(0xFFFF00FF);
 
-  Paint get _debugPaint => Paint()
-    ..color = debugColor
+  final Paint _debugPaint = Paint()
+    ..color = const Color(0xFFFF00FF)
     ..style = PaintingStyle.stroke
   ;
 
-  TextConfig get _debugTextConfig => TextConfig(color: debugColor, fontSize: 12);
+  Color get debugColor => _debugColor;
+  set debugColor(Color color) {
+    _debugColor = color;
+    _debugPaint.color = color;
+  }
+
+  TextConfig get _debugTextConfig => TextConfig(color: _debugColor, fontSize: 12);
 
   void _renderDebugMode() {
     GameCanvas.main.drawRect(Rect.fromLTWH(0, 0, width, height), _debugPaint);

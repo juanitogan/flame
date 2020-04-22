@@ -61,30 +61,31 @@ class MainEntity extends GameEntity {
       startTime += 4.0; // reset the sequence start time
     }
 
-    // Do more scientifically-wrong stuff while showing off more features like scaling and Z order.
+    // Do more scientifically-wrong stuff while showing off more features
+    // like scaling and dynamic Z ordering!
     if (delta < 1.0 || delta >= 4.0) {
       planet.scale.x  = 1 + delta * stretchFactor;
       planet.scale.y  = 1 - delta * stretchFactor;
-      moon.scale.x = moon.scale.y = 1 + sin((1 - delta) * pi / 2) * moonScaleFactor;
+      moon.scale.x    = moon.scale.y = 1 + sin((1 - delta) * pi / 2) * moonScaleFactor;
       moon.position.y = moonCenter.y - moonDistance * cos((1 - delta) * pi / 2);
     } else if (delta < 2.0) {
-      delta -= 1;
+      delta -= 1.0;
       planet.scale.x  = 1 + (1 - delta) * stretchFactor;
       planet.scale.y  = 1 - (1 - delta) * stretchFactor;
-      moon.scale.x = moon.scale.y = 1 - sin(delta * pi / 2) * moonScaleFactor;
+      moon.scale.x    = moon.scale.y = 1 - sin(delta * pi / 2) * moonScaleFactor;
       moon.position.y = moonCenter.y - moonDistance * cos(delta * pi / 2);
       moon.zOrder     = 200;
     } else if (delta < 3.0) {
-      delta -= 2;
+      delta -= 2.0;
       planet.scale.x  = 1 - delta * stretchFactor;
       planet.scale.y  = 1 + delta * stretchFactor;
-      moon.scale.x = moon.scale.y = 1 - sin((1 - delta) * pi / 2) * moonScaleFactor;
+      moon.scale.x    = moon.scale.y = 1 - sin((1 - delta) * pi / 2) * moonScaleFactor;
       moon.position.y = moonCenter.y + moonDistance * cos((1 - delta) * pi / 2);
     } else if (delta < 4.0) {
-      delta -= 3;
+      delta -= 3.0;
       planet.scale.x  = 1 - (1 - delta) * stretchFactor;
       planet.scale.y  = 1 + (1 - delta) * stretchFactor;
-      moon.scale.x = moon.scale.y = 1 + sin(delta * pi / 2) * moonScaleFactor;
+      moon.scale.x    = moon.scale.y = 1 + sin(delta * pi / 2) * moonScaleFactor;
       moon.position.y = moonCenter.y + moonDistance * cos(delta * pi / 2);
       moon.zOrder     = 0;
     }

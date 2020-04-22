@@ -18,7 +18,7 @@ void main() async {
 
 
 class MainEntity extends GameEntity {
-  final TextConfig fpsTextConfig = TextConfig(color: BasicPalette.white.color);
+  final TextConfig fpsTextConfig = const TextConfig(color: const Color(0xFFFFFFFF));
   TextPrefab fpsText;
 
   MainEntity() {

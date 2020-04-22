@@ -11,8 +11,10 @@ void main() async {
   MainEntity();
 }
 
-TextConfig regular = TextConfig(color: BasicPalette.white.color);
+
+TextConfig regular = const TextConfig(color: const Color(0xFFFFFFFF));
 AudioPool pool = AudioPool('sfx/laser.mp3');
+
 
 class MainEntity extends GameEntity with GestureZone, TapDetector {
 

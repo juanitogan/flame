@@ -12,7 +12,9 @@ export 'dart:ui';
 
 
 //TODO Pogo-ize to allow SVGs... etc.
-//TODO Do we event need/want this? Yeah... a ton of this needs to change if we do.
+//TODO Do we event need/want this? ... a ton of this needs to change if we do.
+//TODO ... and why paintImage this:
+//TODO   https://api.flutter.dev/flutter/painting/DecorationImage-class.html
 
 /// How to fill the screen with the image, always proportionally scaled.
 enum LayerFill { height, width, none }

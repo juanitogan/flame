@@ -13,8 +13,9 @@ void main() async {
 }
 
 
-TextConfig regular = TextConfig(color: BasicPalette.white.color);
+TextConfig regular = const TextConfig(color: const Color(0xFFFFFFFF)); // white
 TextConfig tiny    = regular.copyWith(fontSize: 12.0);
+
 
 class MainEntity extends GameEntity {
   MessageBoxPrefab msgBox;
@@ -74,12 +75,12 @@ class MyMsgBox extends MessageBoxComponent {
   void drawBackground(Canvas c) {
     final Rect rect = Rect.fromLTWH(0, 0, currentWidth, currentHeight);
     // Draw a filled magenta rectangle the size of the message box.
-    c.drawRect(rect, Paint()..color = const Color(0xFFFF00FF));
+    c.drawRect(rect, Paint()..color = const Color(0xFFFF00FF)); // magenta
     // Draw an unfilled black rectangle inside the padding area.
     c.drawRect(
         rect.deflate(padding),
         Paint()
-          ..color = BasicPalette.black.color
+          ..color = const Color(0xFF000000) // black
           ..style = PaintingStyle.stroke
     );
   }

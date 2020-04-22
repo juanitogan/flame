@@ -21,6 +21,7 @@ void main() async {
   Camera.size = Size(288, 512); // default is native resolution
 
   System.defaultPivot = Pivot.topLeft; // default default is center
+  System.defaultPaint.isAntiAlias = false; // low-res games will want this
 
   GestureInitializer.detectTaps = true;
   GestureInitializer.detectPans = true;
@@ -49,7 +50,7 @@ The [`Screen` static class](/doc/statics/screen.md) contains some setup function
 
 The [`Camera` static class](/doc/statics/camera.md) contains the main camera settings in case you need a scaled camera and/or panning.  This is a good place to set camera size/scale, if needed for your game.
 
-The [`System` static class](/doc/statics/system.md) contains the default [Pivot](/doc/pivot.md) setting.
+The [`System` static class](/doc/statics/system.md) contains the default [Pivot](/doc/pivot.md) and Paint settings.
 
 The [`GestureInitializer` static class](/doc/input.md#gestureinitializer-class) contains flags for setting up the main [`GestureDetector`](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html) in the game engine.  You must initialize all gestures here that will be used anywhere in your game.
 

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
@@ -5,14 +7,22 @@ import 'package:flutter/services.dart';
 import 'package:pogo/src/pivot.dart';
 
 export 'package:pogo/src/pivot.dart';
+//handled by game_core.dart//export 'dart:ui' show Paint;
 
 
 /// Static class for system setup and such.
 class System {
 
   //TODO not sure of the best home for this
-  /// Allows changing the default pivot from center to another pivot point.
+  /// Sets the default [Pivot] point for newly-created [components] (including [GestureZone]).
   static Pivot defaultPivot = Pivot.center;
+
+  /// Sets the default [Paint] properties for newly-created [components].
+  /// Default color is white with all other properties left at their Flutter defaults.
+  ///
+  /// A common use of this is that low-res games will likely want to set
+  /// `isAntiAlias = false` (its default is true).
+  static Paint defaultPaint = Paint()..color = const Color(0xFFFFFFFF);
 
 
   /// TODONE Verify if this is still needed (I don't think so).

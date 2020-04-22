@@ -1,7 +1,6 @@
 import 'package:pogo/src/components/sprite_image.dart';
 import 'package:pogo/src/game/assets_static.dart';
 import 'package:pogo/src/game/game_main.dart';
-import 'package:pogo/src/palette.dart';
 
 export 'package:pogo/src/components/sprite_image.dart';
 export 'package:pogo/src/pivot.dart';
@@ -13,7 +12,7 @@ class SpriteComponent {
   Rect  _frameRect;
   Rect  _drawRect; // Annoyingly needed for drawImageRect.
   Pivot pivot;
-  Paint paint = BasicPalette.white.paint;
+  Paint paint = System.defaultPaint;
 
   Rect get frameRect => _frameRect;
   //set frameRect(Rect r) {
@@ -197,12 +196,15 @@ class SpriteComponent {
 
   // DEBUG MODE ////////
 
-  Color debugColor = const Color(0xFFFF00FF);
-
-  Paint get _debugPaint => Paint()
-    ..color = debugColor
+  final Paint _debugPaint = Paint()
+    ..color = const Color(0xFFFF00FF)
     ..style = PaintingStyle.stroke
   ;
+
+  Color get debugColor => _debugPaint.color;
+  set debugColor(Color color) {
+    _debugPaint.color = color;
+  }
 
   void _renderDebugMode() {
     GameCanvas.main.drawRect(frameRect, _debugPaint);

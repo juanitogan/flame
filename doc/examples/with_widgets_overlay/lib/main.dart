@@ -12,12 +12,9 @@ class ExampleGame extends Game with HasWidgetsOverlay {
   ExampleGame() : super.empty() {}
 
   @override
-  void update() {}
-
-  @override
-  void render() {
+  void update() {
     GameCanvas.main.drawRect(const Rect.fromLTWH(100, 100, 100, 100),
-        Paint()..color = BasicPalette.white.color
+        Paint()..color = const Color(0xFFFFFFFF)
     );
   }
 

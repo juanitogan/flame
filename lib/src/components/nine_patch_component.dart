@@ -1,11 +1,12 @@
 import 'dart:ui';
 
-import 'package:pogo/src/game/game_canvas_static.dart';
-import 'package:pogo/src/palette.dart';
 import 'package:pogo/src/components/sprite_component.dart';
+import 'package:pogo/src/game/game_canvas_static.dart';
+import 'package:pogo/src/game/system_static.dart';
 
 //TODO !!URGENT!! replace this class with code that works more like (or with) Flutter's centerSlice property.
 //TODO   https://api.flutter.dev/flutter/widgets/Image/centerSlice.html
+//TODO   https://api.flutter.dev/flutter/dart-ui/Canvas/drawImageNine.html
 
 /// This allows you to create a rectangle textured with a 9-patch image.
 ///
@@ -98,6 +99,6 @@ class NinePatchComponent {
     final xSrc = sprite.frameRect.left + _tileSizeDouble * i;
     final ySrc = sprite.frameRect.top + _tileSizeDouble * j;
     final src = Rect.fromLTWH(xSrc, ySrc, _tileSizeDouble, _tileSizeDouble);
-    GameCanvas.main.drawImageRect(sprite.image.source, src, dest, BasicPalette.white.paint);
+    GameCanvas.main.drawImageRect(sprite.image.source, src, dest, System.defaultPaint);
   }
 }

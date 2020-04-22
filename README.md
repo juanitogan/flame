@@ -29,7 +29,7 @@ Hit me with a PR and I'll try to find time to engage it.  No promises, but I'll 
 
 There is still much to be done.  I quickly hacked through many components from the previous engine, that I didn't need at the moment, just to get them working.  Thus, many of the components here still need to be refactored to be more like the rest.
 
-`NinePatchComponent`, `ParallaxComponent`, and `ParticleComponent` are some examples as things I just quick-hacked and saved for later.  (See the [\[Unreleased\] section in the changelog](CHANGELOG.md#unreleased) for a better TODO list.)  Most things still work as Flame had them working, but they may not be fully "Pogo-ized" yet.  I also haven't touched Box2D yet because _Pogo Bug_ doesn't need it.  (Another game of mine, _GRITS Racing_, uses it super heavily, so I should have the skills to work it in well when I get to it).
+`NinePatchComponent`, `ParallaxComponent`, and `ParticleComponent` are some examples as things I just quick-hacked and saved for later.  (See the [Unreleased section in the changelog](CHANGELOG.md#unreleased) for a better TODO list.)  Most things still work as Flame had them working, but they may not be fully "Pogo-ized" yet.  I also haven't touched Box2D yet because _Pogo Bug_ doesn't need it.  (Another game of mine, _GRITS Racing_, uses it super heavily, so I should have the skills to work it in well when I get to it).
 
 The core components I focused on the most are: `SpriteComponent`, `AnimationComponent`, and the gesture mixins.  These should be used as examples for how to refactor the rest.
 
@@ -99,6 +99,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // required
   await Screen.setFullScreen();
   await Screen.setPortrait();
+
+  Camera.size = Size(288, 512); // default is native resolution
+
+  System.defaultPivot = Pivot.topLeft; // default default is center
+  System.defaultPaint.isAntiAlias = false; // low-res games will want this
 
   GestureInitializer.detectTaps = true;
   GestureInitializer.detectPans = true;

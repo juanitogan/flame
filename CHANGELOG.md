@@ -7,16 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Box2D analysis and likely refactor.
 - `NinePatchComponent` refactor.
-- `ParallaxComponent` refactor.  Add SVG too.  Consider keeping feature or not.
+- `ParallaxComponent` refactor.  Add SVG too.  Consider keeping feature or not.  (I don't use this but use SpriteComponents to make my own.)
 - `ParticleComponent` and `ParticlePrefab` refactor.
 - `TiledComponent` refactor.
 - `TimerComponent` refactor.
 - Take another look at message boxes and text. They're stable for now but there is probably much to do still.
-- Evaluate `palette.dart`.
+- Considering a TapAreaPrefab similar to what I use for simple UI work in my game.
+
+
+## [0.0.2] - 2020-04-21
+### Added
+- `AnimationComponent.frameCount` property added (not sure where this went or what I was thinking).
+- `Pivot.translateWH()` method added.  Takes two doubles: width and height.
+- `AnimationComponent.currentFrameWidth` and `.currentFrameHeight` props added (doubt I'll add size, top, left, offset, rect, but maybe should).
+- `System.defaultPaint` for setting up the default Paint (namely, `isAntiAlias = false` for low-res games).
+
+### Changed
+- Various doc edits.
+- The introduction of `System.defaultPaint` and elimination of `palette.dart` brought various changes throughout.
+
+### Fixed
+- `MessageBox` text parsing fixed to handle one line without dropping a char.
+
+### Removed
+- **WARNING: Breaking changes!**
+- `SpritePrefab.empty()` constructor removed.  Was left over from testing.
+- `PalleteEntry` and `BasicPalette` (all of `palette.dart`) classes removed.  These are helper classes that confuse best practice more than helping.  I figure less than 1% are likely to use.  And, of those, most would be better off with their own solution for Color/Paint constants (or use material.Colors).  Dart's Color and Paint classes are not too hard for game dev as they are.  Given the need for `Paint.isAntiAlias` (and possibly other Paint props) in some games, this really complicates a universal helper.
 
 
 ## [0.0.1] - 2020-04-13
-This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) and this is the first commit as Pogo.  I have some previous commits after Flame 0.18.1 that were submitted as a PR to Flame but that PR was not accepted.  Thus, Pogo was born.  Those changes are here along with many more changes to just about every part of the code.  This includes the introduction of entities and a significant redefinition of what a component is.  I will attempt to give a pretty good overview of all changes here.  The degree of changes is too great to hope to list in absolute detail.  Just look at the diffs over my last few commits and you'll see what I mean.
+This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) and this is the first commit as Pogo.  I have some previous commits after Flame 0.18.1 that were submitted as a PR to Flame but that PR was not accepted.  Thus, Pogo was born.  Those changes are here along with many more changes to just about every part of the code.  This includes the introduction of entities and a significant redefinition of what a component is.  I will attempt to give a pretty good overview of all changes here.  The degree of changes is too great to hope to list in absolute detail.  Just look at the diffs of the commits leading up to this version and you'll see what I mean.
 
 ### Added
 - `game_engine.dart` exports every feature of the engine.  Thus, only one import needed now: `import 'package:pogo/game_engine.dart';`.  Still working on best practices for import/export.
@@ -90,4 +110,10 @@ This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flam
 - `add(Component)` is no longer needed to add objects to the game loop.  "Adding" is now automatic in the entity constructor.
 - `/doc/examples/tapable` example app removed as it became redundant to `gestures`.  At least one other I don't recall.
 
+
 ## [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) - 2020-02-09
+
+
+[Unreleased]: https://github.com/juanitogan/pogo/compare/0.0.2...HEAD
+[0.0.2]: https://github.com/juanitogan/pogo/compare/0.0.1...0.0.2
+[0.0.1]: https://github.com/flame-engine/flame/compare/0.18.1...juanitogan:0.0.1
