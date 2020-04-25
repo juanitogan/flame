@@ -14,7 +14,7 @@ void main() async {
   MainEntity();
 }
 
-class MainEntity extends GameEntity with GestureZone, TapDetector {
+class MainEntity extends GameEntity with GestureArea, TapDetector {
 
   // Predefine some animation components.
   final animation = AnimationComponent.fromRaster(

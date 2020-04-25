@@ -161,31 +161,31 @@ abstract class GameEntity {
 
     // Check for proper gesture initialization in the game core.
     assert(this is! TapDetector || (Game().widget as GestureDetector).onTapDown != null,
-    "To use this Detector, you must set 'GestureInitializer.detectTaps = true' before BasicGame() instantiation."
+    "To use this Detector, 'GestureInitializer.detectTaps = true' must be set before BasicGame() instantiation."
     );
     assert(this is! SecondaryTapDetector || (Game().widget as GestureDetector).onSecondaryTapDown != null,
-    "To use this Detector, you must set 'GestureInitializer.detectSecondaryTaps = true' before BasicGame() instantiation."
+    "To use this Detector, 'GestureInitializer.detectSecondaryTaps = true' must be set before BasicGame() instantiation."
     );
     assert(this is! SingleTapDetector || (Game().widget as GestureDetector).onTap != null,
-    "To use this Detector, you must set 'GestureInitializer.detectSingleTaps = true' before BasicGame() instantiation."
+    "To use this Detector, 'GestureInitializer.detectSingleTaps = true' must be set before BasicGame() instantiation."
     );
     assert(this is! DoubleTapDetector || (Game().widget as GestureDetector).onDoubleTap != null,
-    "To use this Detector, you must set 'GestureInitializer.detectDoubleTaps = true' before BasicGame() instantiation."
+    "To use this Detector, 'GestureInitializer.detectDoubleTaps = true' must be set before BasicGame() instantiation."
     );
     assert(this is! LongPressDetector || (Game().widget as GestureDetector).onLongPress != null,
-    "To use this Detector, you must set 'GestureInitializer.detectLongPresses = true' before BasicGame() instantiation."
+    "To use this Detector, 'GestureInitializer.detectLongPresses = true' must be set before BasicGame() instantiation."
     );
     assert(this is! VerticalDragDetector || (Game().widget as GestureDetector).onVerticalDragStart != null,
-    "To use this Detector, you must set 'GestureInitializer.detectVerticalDrags = true' before BasicGame() instantiation."
+    "To use this Detector, 'GestureInitializer.detectVerticalDrags = true' must be set before BasicGame() instantiation."
     );
     assert(this is! HorizontalDragDetector || (Game().widget as GestureDetector).onHorizontalDragStart != null,
-    "To use this Detector, you must set 'GestureInitializer.detectHorizontalDrags = true' before BasicGame() instantiation."
+    "To use this Detector, 'GestureInitializer.detectHorizontalDrags = true' must be set before BasicGame() instantiation."
     );
     assert(this is! PanDetector || (Game().widget as GestureDetector).onPanStart != null,
-    "To use this Detector, you must set 'GestureInitializer.detectPans = true' before BasicGame() instantiation."
+    "To use this Detector, 'GestureInitializer.detectPans = true' must be set before BasicGame() instantiation."
     );
     assert(this is! ScaleDetector || (Game().widget as GestureDetector).onScaleStart != null,
-    "To use this Detector, you must set 'GestureInitializer.detectScales = true' before BasicGame() instantiation."
+    "To use this Detector, 'GestureInitializer.detectScales = true' must be set before BasicGame() instantiation."
     );
   }
 

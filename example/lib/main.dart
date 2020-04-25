@@ -94,7 +94,7 @@ class MainEntity extends GameEntity {
 }
 
 
-class Moon extends GameEntity with GestureZone, TapDetector {
+class Moon extends GameEntity with GestureArea, TapDetector {
   SpriteComponent moonSprite;
   int spinDirection = -1;
 
@@ -102,7 +102,7 @@ class Moon extends GameEntity with GestureZone, TapDetector {
     moonSprite = SpriteComponent.fromSvgCache("moon.svg");
     this.position = position;
     this.zOrder = zOrder;
-    gestureZoneSize = moonSprite.frameSize;
+    gestureAreaSize = moonSprite.frameSize;
   }
 
   @override

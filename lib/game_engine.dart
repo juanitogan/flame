@@ -46,6 +46,7 @@ export 'src/prefabs/nine_patch_prefab.dart';
 export 'src/prefabs/parallax_prefab.dart';
 export 'src/prefabs/particle_prefab.dart';
 export 'src/prefabs/sprite_prefab.dart';
+export 'src/prefabs/tap_area_prefab.dart';
 export 'src/prefabs/text_prefab.dart';
 export 'src/prefabs/tiled_prefab.dart';
 export 'src/prefabs/timer_prefab.dart';

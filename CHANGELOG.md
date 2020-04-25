@@ -15,6 +15,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Considering a TapAreaPrefab similar to what I use for simple UI work in my game.
 
 
+## [0.0.3] - 2020-04-25
+### Added
+- `TapAreaPrefab` is an experimental prefab for help creating simple GUI dialogs or other objects that may have more than one hot spot.
+
+### Changed
+- **WARNING: Breaking changes!**
+- `GestureZone` etc. renamed to `GestureArea` etc. to be more consistent with Flutter lingo (I hope).  To update, do a non-word global replace that preserves case.
+
+
 ## [0.0.2] - 2020-04-21
 ### Added
 - `AnimationComponent.frameCount` property added (not sure where this went or what I was thinking).
@@ -114,6 +123,7 @@ This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flam
 ## [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) - 2020-02-09
 
 
-[Unreleased]: https://github.com/juanitogan/pogo/compare/0.0.2...HEAD
+[Unreleased]: https://github.com/juanitogan/pogo/compare/0.0.3...HEAD
+[0.0.3]: https://github.com/juanitogan/pogo/compare/0.0.2...0.0.3
 [0.0.2]: https://github.com/juanitogan/pogo/compare/0.0.1...0.0.2
 [0.0.1]: https://github.com/flame-engine/flame/compare/0.18.1...juanitogan:0.0.1

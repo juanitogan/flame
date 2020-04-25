@@ -2,7 +2,7 @@
 
 Pogo is a 2D game engine for [Flutter](https://flutter.dev/) (Android, iOS, etc.).
 
-Pogo aims to implement what I'm calling a "pseudo Entity Component System" for lack of a better term.  Pogo should feel fairly similar to some of the other game engines that are popular for rapid game development with its use of game entities (or game objects) and the components that are available to build those entities.
+Pogo implements what I'm calling a "pseudo Entity Component System" for lack of a better term.  Pogo should feel fairly similar to some of the other game engines that are popular for rapid game development with its use of game entities (or game objects) and the components that are available to build those entities.
 
 "Pseudo ECS" because it is not what ECS purists would call an ECS.  Why not a more pure ECS?  (1) I didn't see myself as having time to go that far into the ECS pattern; and (2) I believe this pattern is quicker to ramp up on while also being robust enough for most games.
 
@@ -208,21 +208,21 @@ class Player extends GameEntity with {
 
 ### Entity gestures
 
-Gesture recognition is added to entities through mixins such as `TapDetector` and `PanDetector`.  Note that the `GestureZone` mixin is also required for most gesture-detector mixins.
+Gesture recognition is added to entities through mixins such as `TapDetector` and `PanDetector`.  Note that the `GestureArea` mixin is also required for most gesture-detector mixins.
 
 Remember to first initialize any needed gestures in your `main()`.  See the example [above](#game-engine-config-and-startup).
 
 The construction of a simple tappable entity looks like this:
 
 ```dart
-class Enemy extends GameEntity with GestureZone, TapDetector {
+class Enemy extends GameEntity with GestureArea, TapDetector {
   SpriteComponent enemySprite;
     
   Enemy(Vector2 position, int zOrder) {
     enemySprite = SpriteComponent.fromSvgCache("enemy.svg");
     this.position = position;
     this.zOrder = zOrder;
-    gestureZoneSize = enemySprite.frameSize;
+    gestureAreaSize = enemySprite.frameSize;
   }
     
   @override

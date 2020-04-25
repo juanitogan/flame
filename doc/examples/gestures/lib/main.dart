@@ -24,7 +24,7 @@ class MainEntity extends GameEntity {
 
 
 class Box extends GameEntity with
-    SingleTapDetector, DoubleTapDetector, GestureZone, TapDetector, PanDetector
+    SingleTapDetector, DoubleTapDetector, GestureArea, TapDetector, PanDetector
 {
   final _whitePaint = Paint()..color = const Color(0xFFFFFFFF);
   final _redPaint = Paint()..color = const Color(0xFFFF0000);
@@ -39,9 +39,9 @@ class Box extends GameEntity with
 
   Box(Vector2 position) {
     this.position = position;
-    gestureZoneOffset = _rect.topLeft;
-    gestureZoneSize = _rect.size; // Should cheat bigger for pan objects.
-    gestureZonePivot = Pivot.center;
+    gestureAreaOffset = _rect.topLeft;
+    gestureAreaSize = _rect.size; // Should cheat bigger for pan objects.
+    gestureAreaPivot = Pivot.center;
     _paint = _whitePaint;
   }
 

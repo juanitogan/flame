@@ -4,9 +4,7 @@ import 'package:pogo/src/components/timer_component.dart';
 export 'package:pogo/src/entities/game_entity.dart';
 export 'package:pogo/src/components/timer_component.dart';
 
-/// Simple entity which wraps a [TimerComponent] instance allowing it to be easily used inside a [Game] game.
-///
-/// A [GameEntity] containing a [ParticleComponent].
+/// A [GameEntity] containing a [TimerComponent].
 ///
 /// This creates a prefabricated entity intended for single-use entities.
 class TimerPrefab extends GameEntity {

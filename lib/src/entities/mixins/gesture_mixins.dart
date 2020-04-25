@@ -16,7 +16,7 @@ export 'package:flutter/gestures.dart' show
 ////////////////////////////////////////////////////////////////////////////////
 /// Mixin class to [GameEntity] providing gesture zone setup for the entity.
 ///
-/// [gestureZoneSize] : Sets the size of the rectangle that taps and
+/// [gestureAreaSize] : Sets the size of the rectangle that taps and
 /// drag-starts are limited to.  Set to `Size.zero` (the default) to disable
 /// zone sizing and respond to gestures anywhere in the game window.
 ///
@@ -25,46 +25,46 @@ export 'package:flutter/gestures.dart' show
 ///
 /// Note that SingleTap, DoubleTap, and LongPress have no location info and,
 /// thus, cannot be limited to the gesture zone of a game entity.
-/// Consequently, they also do not require this [GestureZone] mixin.
+/// Consequently, they also do not require this [GestureArea] mixin.
 ///
-/// Note that there are no prefabs with the [GestureZone] mixin (or any
+/// Note that there are no prefabs with the [GestureArea] mixin (or any
 /// <Gesture>Detector mixin), as that would not be useful without access to
 /// the tap methods (and lead to too many prefabs regardless).
 /// It is possible to extend a prefab with gesture mixins but this is not
 /// considered best practice versus extending [GameEntity] --
 /// but not considered bad practice either.  It's a style choice.
 ///
-mixin GestureZone { //on BasicGameEntity {
+mixin GestureArea { //on BasicGameEntity {
 
   // Data for the gesture components/mixins.
   // (Mixins are for methods, primarily, not data. Oh well. Can't "construct"
   // data unless duping in base and "getting" here. Passing on that for now.)
   // These values are relative to the entity's position.
-  Offset gestureZoneOffset = Offset.zero; // Most use cases likely will not reset.
-  Size   gestureZoneSize   = Size.zero;   // Unlike Image width and height (ints). Unlike Canvas rect too.//TODO add rect probably
-  Pivot  gestureZonePivot  = System.defaultPivot;
+  Offset gestureAreaOffset = Offset.zero; // Most use cases likely will not reset.
+  Size   gestureAreaSize   = Size.zero;   // Unlike Image width and height (ints). Unlike Canvas rect too.//TODO add rect probably
+  Pivot  gestureAreaPivot  = System.defaultPivot;
 
   Vector2 get globalPosition;
 
-  bool _inGestureZone(Offset o) {
+  bool _inGestureArea(Offset o) {
     //if (tapZoneSize == null) {
     //  throw StateError("$runtimeType: tapZoneSize must be set before Tappable use.");
     //}
     // Assume size of zero means the whole game window.
-    if (gestureZoneSize == Size.zero) {
+    if (gestureAreaSize == Size.zero) {
       return true;
     }
     // NOTE: GE has it's own globalPosition -- do not confuse with TapDetails.globalPosition.
-    final double left   = (globalPosition.x + gestureZoneOffset.dx
-        - (gestureZonePivot.offsetFactor.dx * gestureZoneSize.width)
+    final double left   = (globalPosition.x + gestureAreaOffset.dx
+        - (gestureAreaPivot.offsetFactor.dx * gestureAreaSize.width)
         - Camera.rect.left)
         * Camera.scale.dx;
-    final double top    = (globalPosition.y + gestureZoneOffset.dy
-        - (gestureZonePivot.offsetFactor.dy * gestureZoneSize.height)
+    final double top    = (globalPosition.y + gestureAreaOffset.dy
+        - (gestureAreaPivot.offsetFactor.dy * gestureAreaSize.height)
         - Camera.rect.top)
         * Camera.scale.dy;
-    final double right  = left + gestureZoneSize.width  * Camera.scale.dx;
-    final double bottom = top  + gestureZoneSize.height * Camera.scale.dy;
+    final double right  = left + gestureAreaSize.width  * Camera.scale.dx;
+    final double bottom = top  + gestureAreaSize.height * Camera.scale.dy;
     return o.dx >= left && o.dx < right && o.dy >= top && o.dy < bottom;
   }
 
@@ -72,9 +72,9 @@ mixin GestureZone { //on BasicGameEntity {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-/// Mixin class for [GestureZone] that adds tap handlers (and adds the
+/// Mixin class for [GestureArea] that adds tap handlers (and adds the
 /// entity to the list of tappable entities to process by the tap system).
-mixin TapDetector on GestureZone {
+mixin TapDetector on GestureArea {
 
   void onTapDown(TapDownDetails details);
   void onTapUp(TapUpDetails details);
@@ -84,7 +84,7 @@ mixin TapDetector on GestureZone {
   bool _localTap = false;
 
   void handleTapDown(TapDownDetails details) {
-    if (_inGestureZone(details.globalPosition)) {
+    if (_inGestureArea(details.globalPosition)) {
       onTapDown(details);
       _localTap = true;
     }
@@ -92,7 +92,7 @@ mixin TapDetector on GestureZone {
 
   void handleTapUp(TapUpDetails details) {
     if (_localTap) {
-      if (_inGestureZone(details.globalPosition)) {
+      if (_inGestureArea(details.globalPosition)) {
         onTapUp(details);
         _localTap = false;
       } else {
@@ -112,7 +112,7 @@ mixin TapDetector on GestureZone {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-mixin SecondaryTapDetector on GestureZone {
+mixin SecondaryTapDetector on GestureArea {
 
   void onSecondaryTapDown(TapDownDetails details);
   void onSecondaryTapUp(TapUpDetails details);
@@ -122,14 +122,14 @@ mixin SecondaryTapDetector on GestureZone {
   bool _localSecondaryTap = false;
 
   void handleSecondaryTapDown(TapDownDetails details) {
-    if (_inGestureZone(details.globalPosition)) {
+    if (_inGestureArea(details.globalPosition)) {
       onSecondaryTapDown(details);
     }
   }
 
   void handleSecondaryTapUp(TapUpDetails details) {
     if (_localSecondaryTap) {
-      if (_inGestureZone(details.globalPosition)) {
+      if (_inGestureArea(details.globalPosition)) {
         onSecondaryTapUp(details);
         _localSecondaryTap = false;
       } else {
@@ -176,7 +176,7 @@ mixin LongPressDetector {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-mixin VerticalDragDetector on GestureZone {
+mixin VerticalDragDetector on GestureArea {
 
   void onVerticalDragStart(DragStartDetails details);
   void onVerticalDragUpdate(DragUpdateDetails details);
@@ -186,7 +186,7 @@ mixin VerticalDragDetector on GestureZone {
   bool _localVerticalDrag = false;
 
   void handleVerticalDragStart(DragStartDetails details) {
-    if (_inGestureZone(details.globalPosition)) {
+    if (_inGestureArea(details.globalPosition)) {
       onVerticalDragStart(details);
       _localVerticalDrag = true;
     }
@@ -194,7 +194,7 @@ mixin VerticalDragDetector on GestureZone {
 
   void handleVerticalDragUpdate(DragUpdateDetails details) {
     if (_localVerticalDrag) {
-      //if (_inGestureZone(details.globalPosition)) {
+      //if (_inGestureArea(details.globalPosition)) {
         onVerticalDragUpdate(details);
       /*} else {
         // Fake the drag end event. //TODO validate velocity calcs
@@ -217,7 +217,7 @@ mixin VerticalDragDetector on GestureZone {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-mixin HorizontalDragDetector on GestureZone {
+mixin HorizontalDragDetector on GestureArea {
 
   void onHorizontalDragStart(DragStartDetails details);
   void onHorizontalDragUpdate(DragUpdateDetails details);
@@ -227,7 +227,7 @@ mixin HorizontalDragDetector on GestureZone {
   bool _localHorizontalDrag = false;
 
   void handleHorizontalDragStart(DragStartDetails details) {
-    if (_inGestureZone(details.globalPosition)) {
+    if (_inGestureArea(details.globalPosition)) {
       onHorizontalDragStart(details);
       _localHorizontalDrag = true;
     }
@@ -235,7 +235,7 @@ mixin HorizontalDragDetector on GestureZone {
 
   void handleHorizontalDragUpdate(DragUpdateDetails details) {
     if (_localHorizontalDrag) {
-      //if (_inGestureZone(details.globalPosition)) {
+      //if (_inGestureArea(details.globalPosition)) {
         onHorizontalDragUpdate(details);
       /*} else {
         // Fake the drag end event. //TODO validate velocity calcs
@@ -258,7 +258,7 @@ mixin HorizontalDragDetector on GestureZone {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-mixin PanDetector on GestureZone {
+mixin PanDetector on GestureArea {
 
   void onPanStart(DragStartDetails details);
   void onPanUpdate(DragUpdateDetails details);
@@ -268,7 +268,7 @@ mixin PanDetector on GestureZone {
   bool _localPan = false;
 
   void handlePanStart(DragStartDetails details) {
-    if (_inGestureZone(details.globalPosition)) {
+    if (_inGestureArea(details.globalPosition)) {
       onPanStart(details);
       _localPan = true;
     }
@@ -276,7 +276,7 @@ mixin PanDetector on GestureZone {
 
   void handlePanUpdate(DragUpdateDetails details) {
     if (_localPan) {
-      //if (_inGestureZone(details.globalPosition)) {
+      //if (_inGestureArea(details.globalPosition)) {
         onPanUpdate(details);
       /*} else {
         // Fake the drag end event. //TODO validate velocity calcs
@@ -299,7 +299,7 @@ mixin PanDetector on GestureZone {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-mixin ScaleDetector on GestureZone {
+mixin ScaleDetector on GestureArea {
 
   void onScaleStart(ScaleStartDetails details);
   void onScaleUpdate(ScaleUpdateDetails details);
@@ -309,7 +309,7 @@ mixin ScaleDetector on GestureZone {
   bool _localScale = false;
 
   void handleScaleStart(ScaleStartDetails details) {
-    if (_inGestureZone(details.focalPoint)) {
+    if (_inGestureArea(details.focalPoint)) {
       onScaleStart(details);
       _localScale = true;
     }

@@ -16,7 +16,7 @@ TextConfig regular = const TextConfig(color: const Color(0xFFFFFFFF));
 AudioPool pool = AudioPool('sfx/laser.mp3');
 
 
-class MainEntity extends GameEntity with GestureZone, TapDetector {
+class MainEntity extends GameEntity with GestureArea, TapDetector {
 
   MainEntity() {
     TextPrefab(

@@ -1,8 +1,8 @@
 # Input
 
-Input is made available through a collection of [gesture-detector mixins](#gesture-detector-mixins) on `GameEntity`.  Most of these also work through another mixin, [`GestureZone`](#gesturezone-mixin), that allows defining a gesture zone relative to the entity's position.
+Input is made available through a collection of [gesture-detector mixins](#gesture-detector-mixins) on a [GameEntity](game_entity.md).  Most of these also work through another mixin, [GestureArea](#gestureArea-mixin), that allows defining a gesture zone relative to the entity's position.
 
-Note that Pogo goes a step beyond Flutter and divided the onTap events into two mixins: `TapDetector` and `SingleTapDetector`.  This allows Pogo to keep Flutter's gesture arena as simple as possible when setting up Flutter's [`GestureDetector` widget](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html).  Most games will want Pogo's `TapDetector` and not need `SingleTapDetector`.
+Note that Pogo goes a step beyond Flutter and divided the onTap events into two mixins: TapDetector and SingleTapDetector.  This allows Pogo to keep Flutter's gesture arena as simple as possible when setting up Flutter's [GestureDetector widget](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html).  Most games will want Pogo's TapDetector and not need SingleTapDetector.
 
 [More on Flutter's gestures is found here](https://flutter.dev/docs/development/ui/advanced/gestures).
 
@@ -11,7 +11,7 @@ See also: [Gamepad](gamepad.md).
 
 # GestureInitializer class
 
-The `GestureInitializer` static class provides central access to static flags used to initialize the main [GestureDetector]((https://api.flutter.dev/flutter/widgets/GestureDetector-class.html)).
+The GestureInitializer static class provides central access to static flags used to initialize the main [GestureDetector]((https://api.flutter.dev/flutter/widgets/GestureDetector-class.html)).
 
 You must initialize all gestures that will be used anywhere in your game.  Do this in your `main()` before referencing `Game()`.
 
@@ -51,20 +51,20 @@ also using both of them with pan or scale.
 recognition in the _gesture arena_.
 
 If needing many types of gestures in your game, it may be best to not use
-Flutter's `GestureDetector` and implement your own pointer `Listener`
+Flutter's GestureDetector and implement your own pointer Listener
 instead:
 [Flutter Deep Dive: Gestures](https://medium.com/flutter-community/flutter-deep-dive-gestures-c16203b3434f).
 
 
-# GestureZone mixin
+# GestureArea mixin
 
 ## Properties
 
 | | |
 | :-- | :-- |
-| gestureZoneOffset | Top-left corner of the zone relative to entity position.  Default: `Offset.zero`. |
-| gestureZoneSize   | Sets the size of the rectangle that taps and drag-starts are limited to.  Set to `Size.zero` to disable zone sizing and respond to gestures anywhere in the game window.  Hint: small objects and drag/pan objects may need sizes larger than the visible components.  Default: `Size.zero`. |
-| gestureZonePivot  | Pivot of the zone.  Default: `System.defaultPivot` which defaults to `Pivot.center`. |
+| gestureAreaOffset | Top-left corner of the zone relative to entity position.  Default: `Offset.zero`. |
+| gestureAreaSize   | Sets the size of the rectangle that taps and drag-starts are limited to.  Set to `Size.zero` to disable zone sizing and respond to gestures anywhere in the game window.  Hint: small objects and drag/pan objects may need sizes larger than the visible components.  Default: `Size.zero`. |
+| gestureAreaPivot  | Pivot of the zone.  Default: `System.defaultPivot` which defaults to `Pivot.center`. |
 
 
 # Gesture-detector mixins
@@ -81,9 +81,9 @@ instead:
 | PanDetector            * | onPanStart, onPanUpdate, onPanEnd |
 | ScaleDetector          * | onScaleStart, onScaleUpdate, onScaleEnd |
 
-\* Requires the `GestureZone` mixin as well.
+\* Requires the [GestureArea](gesturearea-mixin) mixin as well.
 
-Note that the detectors that do not require the `GestureZone` mixin cannot be limited by a zone and will trigger their events from gestures anywhere in the game window.  They will also have a slower response time by their very nature.
+Note that the detectors that do not require the GestureArea mixin cannot be limited by a zone and will trigger their events from gestures anywhere in the game window.  They will also have a slower response time by their very nature.
 
 ----
 

@@ -10,7 +10,7 @@ Built-in components are the components built into the `GameEntity` class.  Since
 
 ## Mixin components
 
-Mixin components are the components made available by mixin classes.  Currently, only [`GestureZone`](input.md#gesturezone-mixin) and the [gesture detectors](input.md#gesture-detector-mixins) are available as mixins.
+Mixin components are the components made available by mixin classes.  Currently, only [`GestureArea`](input.md#gestureArea-mixin) and the [gesture detectors](input.md#gesture-detector-mixins) are available as mixins.
 
 ## Class-type components
 

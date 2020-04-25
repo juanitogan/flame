@@ -14,7 +14,7 @@ export 'package:pogo/src/pivot.dart';
 class System {
 
   //TODO not sure of the best home for this
-  /// Sets the default [Pivot] point for newly-created [components] (including [GestureZone]).
+  /// Sets the default [Pivot] point for newly-created [components] (including [GestureArea]).
   static Pivot defaultPivot = Pivot.center;
 
   /// Sets the default [Paint] properties for newly-created [components].
