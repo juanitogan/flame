@@ -2,7 +2,7 @@
 
 Shortcuts to other docs:
 
- * [Pogo README](/README.md).  Read this first.  It has what you need to know to [get started](/README.md#getting-started-guide)
+ * [Pogo README](/README.md).  Read this first.  It includes the [Getting Started Guide](/README.md#getting-started-guide).
  * [Pogo FAQ](/doc/FAQ.md)
  * [Pogo CHANGELOG](/CHANGELOG.md)
 

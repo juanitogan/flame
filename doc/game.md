@@ -18,7 +18,7 @@ void main() async {
   await Screen.setFullScreen();
   await Screen.setPortrait();
 
-  Camera.size = Size(288, 512); // default is native resolution
+  Camera.size = Size(135, 240); // default is native resolution
 
   System.defaultPivot = Pivot.topLeft; // default default is center
   System.defaultPaint.isAntiAlias = false; // low-res games will want this

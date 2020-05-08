@@ -1,10 +1,12 @@
 # :full_moon: Pogo Game Engine
 
-Pogo is a 2D game engine for [Flutter](https://flutter.dev/) (Android, iOS, etc.).
+Pogo is a 2D game engine for [Flutter](https://flutter.dev/) (Android, iOS, plus web and desktop in beta).
 
 Pogo implements what I'm calling a "pseudo Entity Component System" for lack of a better term.  Pogo should feel fairly similar to some of the other game engines that are popular for rapid game development with its use of game entities (or game objects) and the components that are available to build those entities.
 
 "Pseudo ECS" because it is not what ECS purists would call an ECS.  Why not a more pure ECS?  (1) I didn't see myself as having time to go that far into the ECS pattern; and (2) I believe this pattern is quicker to ramp up on while also being robust enough for most games.
+
+![example app preview](doc/example_app.gif "example app")
 
 ### Documentation
 
@@ -15,23 +17,23 @@ Pogo implements what I'm calling a "pseudo Entity Component System" for lack of 
 
 ### Background
 
-Pogo was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) and rewritten with a goal of making it twice as easy to understand and use.
+Pogo was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) and rewritten with the goal of making it twice as easy to understand and use.
 
-All due credit to inu-no-policemen on Reddit and Luan Nico of Flame for setting up the core, which remains largely unchanged.  The rest of Flame, however, was showing growing pains, and a reluctance to large changes in design, so I launched a new project which will, hopefully, be agile to needed change before version 1.0.  Even at Pogo 0.0.1 just about everything above Flame's core was changed, along with many new features critical to how I build games (see the [changelog](CHANGELOG.md#001---2020-04-13) for an overview of just how different Pogo is from Flame).  Therefore, if you find a pre-release version of Pogo you like, lock it in, or suffer the possible breaking changes.  (Although, if I did a decent job with round 1 here, there shouldn't be any more major shifts in design coming.  Just shifts isolated to parts still in need of refactoring.  We'll see.)
+All due credit to inu-no-policemen on Reddit and Luan Nico of Flame for setting up the core, which remains largely unchanged.  The rest of Flame, however, was showing growing pains, and a reluctance to large changes in design, so I launched a new project which will, hopefully, be agile to needed change before version 1.0.  Even at Pogo 0.0.1 just about everything above Flame's core was changed, along with many new features critical to how I build games (see the [first CHANGELOG entry](CHANGELOG.md#001---2020-04-13) for an overview of just how different Pogo is from Flame).  Therefore, if you find a pre-release version of Pogo you like, lock it in, or suffer the possible breaking changes.  (Although, if I did a decent job with round 1 here, there shouldn't be any more major shifts in design coming.  Just shifts isolated to parts still in need of refactoring.  We'll see.)
 
-The name, Pogo, comes from _Pogo Bug_ (not yet released) -- the game I built this engine for.  (_Pogo Bug_ was originally written in QtQuick/QML but not released from that codebase due to their difficult licensing issues.)  Thus, this engine is tried and tested on my own small-but-complete game from day one.  It took maybe 10x longer to work up this Flutter/Dart-based engine than to write the original Qt game.  It has so far proven worth the extra effort with the Qt port taking much less time and effort in Pogo than how it was going in Flame -- and nearly as easy as QtQuick was.
+The name, Pogo, comes from _Pogo Bug_ (not yet released) -- the game I built this engine for.  (_Pogo Bug_ was originally written in QtQuick/QML but not released from that codebase due to their difficult licensing issues.)  Thus, this engine is tried and tested on my own small-but-complete game from day one.  It took maybe 10x longer to work up this Flutter/Dart-based engine than to write the original Qt game.  Judging by how quickly I ported _Pogo Bug_ to Pogo versus how much trouble Flame was giving me, it seems Pogo was worth the effort.  Pogo feels nearly as quick to build a game in as QtQuick... with better performance.
 
-By the time I release _Pogo Bug_ this engine should be at version 0.1.0... but is totally usable as of 0.0.1.
+By the time I release _Pogo Bug_ this engine should be at version 0.1.0... but is totally usable as of 0.0.1 for many games.
 
 ### Contributing
 
-Hit me with a PR and I'll try to find time to engage it.  No promises, but I'll try.  Hopefully others will jump in and help.  I have pretty high standards for PRs (particularly on naming and lingo more so than code style), but I also enjoy people who make a great case for significant changes in design (and I certainly am no expert in designing game engines).
+Hit me with a PR and I'll try to find time to engage it.  No promises, but I'll try.  Hopefully others will jump in and help.  I pay close attention to naming and API consistency more so than code style -- code can be refactored without breaking things, naming and structure cannot.
 
 There is still much to be done.  I quickly hacked through many components from the previous engine, that I didn't need at the moment, just to get them working.  Thus, many of the components here still need to be refactored to be more like the rest.
 
-`NinePatchComponent`, `ParallaxComponent`, and `ParticleComponent` are some examples as things I just quick-hacked and saved for later.  (See the [Unreleased section in the changelog](CHANGELOG.md#unreleased) for a better TODO list.)  Most things still work as Flame had them working, but they may not be fully "Pogo-ized" yet.  I also haven't touched Box2D yet because _Pogo Bug_ doesn't need it.  (Another game of mine, _GRITS Racing_, uses it super heavily, so I should have the skills to work it in well when I get to it).
+[NinePatchComponent](doc/components/nine_patch.md), [ParallaxComponent](doc/components/parallax.md), and [ParticleComponent](doc/components/particle.md) are some examples as things I just quick-hacked and saved for later.  (See the [Unreleased section in the changelog](CHANGELOG.md#unreleased) for a better TODO list.)  Most things still work as Flame had them working, but they may not be fully "Pogo-ized" yet.  I also haven't touched Box2D yet because _Pogo Bug_ doesn't need it.  (Another game of mine, _GRITS Racing_, uses it super heavily, so I should have the skills to work it in well when I get to it).
 
-The core components I focused on the most are: `SpriteComponent`, `AnimationComponent`, and the gesture mixins.  These should be used as examples for how to refactor the rest.
+The core components I focused on the most are: [SpriteComponent](doc/components/sprite.md), [AnimationComponent](doc/components/animation.md), and the [gesture mixins](doc/input.md).  [TextComponent](doc/components/text.md) got a pretty solid work over as well.  These should be used as examples for how to refactor the rest.
 
 ----
 
@@ -100,7 +102,7 @@ void main() async {
   await Screen.setFullScreen();
   await Screen.setPortrait();
 
-  Camera.size = Size(288, 512); // default is native resolution
+  Camera.size = Size(135, 240); // default is native resolution
 
   System.defaultPivot = Pivot.topLeft; // default default is center
   System.defaultPaint.isAntiAlias = false; // low-res games will want this
@@ -132,7 +134,7 @@ It is recommended to cache your assets (the ones that currently _can_ be cached)
 
 ## Game entities
 
-A Pogo game is made entirely of game entities.  An entity can be a sprite, a bullet, a container or parent to other entities (such as a scene, menu, or complex player), or whatever you need it to be.
+A Pogo game is made entirely of game entities (from the GameEntity class).  An entity can be a sprite, a bullet, a container or parent to other entities (such as a scene, menu, or complex player), or whatever you need it to be.
 
 Every game entity has:
  * a transform: `position`, `zOrder`, `rotation`, and `scale`
@@ -140,9 +142,9 @@ Every game entity has:
  * the core `update()` method
  * an `enabled` property and a few other features
 
-[More game entity details here](doc/game_entity.md).
+[More GameEntity details here](doc/game_entity.md).
 
-Game entities are made up of components.  Some components are built into the entity (such as position/movable), some are added through mixins (such as the `TapDetector` mixin), and some are added by calling [component classes](/doc/components.md) (such as `SpriteComponent`).
+Game entities are made up of components.  Some components are built into the entity (such as position/movable), some are added through mixins (such as the [TapDetector](doc/input.md#gesture-detector-mixins) mixin), and some are added by calling [component classes](doc/components.md) (such as [SpriteComponent](doc/components/sprite.md)).
 
 Class-type components typically come with an `update()` or a `render()` method (or both) that must be called from the game entity's own `update()` in order for them to work.
 
@@ -208,7 +210,7 @@ class Player extends GameEntity with {
 
 ### Entity gestures
 
-Gesture recognition is added to entities through mixins such as `TapDetector` and `PanDetector`.  Note that the `GestureArea` mixin is also required for most gesture-detector mixins.
+Gesture recognition is added to entities through mixins such as TapDetector and PanDetector.  Note that the GestureArea mixin is also required for most gesture-detector mixins.
 
 Remember to first initialize any needed gestures in your `main()`.  See the example [above](#game-engine-config-and-startup).
 
@@ -252,7 +254,7 @@ Prefabricated entities ([prefabs](doc/prefabs.md)) are helper classes for creati
 
 Most class-type components come with a prefab for instantiating just that component.  There are no prefabs that recognize gestures.
 
-A very simple use of the `SpritePrefab` looks like this:
+A very simple use of the SpritePrefab looks like this:
 
 ```dart
 class SomeScene extends GameEntity {

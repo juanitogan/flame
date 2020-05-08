@@ -21,7 +21,7 @@ class System {
   /// Default color is white with all other properties left at their Flutter defaults.
   ///
   /// A common use of this is that low-res games will likely want to set
-  /// `isAntiAlias = false` (its default is true).
+  /// `.isAntiAlias = false` (the default is true) to turn AA off for the edges of images.
   static Paint defaultPaint = Paint()..color = const Color(0xFFFFFFFF);
 
 

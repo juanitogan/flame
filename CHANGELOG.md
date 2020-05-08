@@ -12,12 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `TiledComponent` refactor.
 - `TimerComponent` refactor.
 - Take another look at message boxes and text. They're stable for now but there is probably much to do still.
-- Considering a TapAreaPrefab similar to what I use for simple UI work in my game.
+- Investigate the minor artifacts from canvas scaling in low-res games.
 
 
 ## [0.0.3] - 2020-04-25
 ### Added
-- `TapAreaPrefab` is an experimental prefab for help creating simple GUI dialogs or other objects that may have more than one hot spot.
+- `TapAreaPrefab` is an experimental prefab to aid in creating simple GUI dialogs (or other objects) that may have more than one hot spot.
 
 ### Changed
 - **WARNING: Breaking changes!**
@@ -105,6 +105,7 @@ This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flam
 - All docs totally rewritten.  _"Totally."_  Tried to remove all conflicting info and also write something easier to ramp up on.  This took almost as much time as the rest.
 
 ### Removed
+- **WARNING: Breaking changes!**
 - `resize()` method and all related objects.  Not needed with the new camera and resize callback.  This feature has confused me since I haven't seen anything like it before and I fail to see why camera position and scaling can't handle everything.  But, well, maybe someone has a use case they can show me.
 - `render()` removed after finding little reason to keep it.  Things run just fine without it and, given Flutter's control of these lower-lever things like execution order, why pretend otherwise?
 - `Spritesheet` helper class.  Not needed with the new sprite and animation constructors.
@@ -123,6 +124,7 @@ This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flam
 ## [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) - 2020-02-09
 
 
+<!-- NOTE: Don't forget to update links on other sites.  Like: itch.io. -->
 [Unreleased]: https://github.com/juanitogan/pogo/compare/0.0.3...HEAD
 [0.0.3]: https://github.com/juanitogan/pogo/compare/0.0.2...0.0.3
 [0.0.2]: https://github.com/juanitogan/pogo/compare/0.0.1...0.0.2
