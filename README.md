@@ -12,7 +12,7 @@ Pogo implements what I'm calling a "pseudo Entity Component System" for lack of 
 
  * [**Getting Started Guide**](#getting-started-guide) :beginner: (further down on this page)
  * [**Pogo Reference Documentation**](doc/README.md) :books:
- * [The main example app](example/lib/main.dart) shows how the core features fit together
+ * [The main example app](example/lib/main.dart) (seen above) shows how the core features fit together
  * [Various other example apps](doc/examples) demonstrate each component
 
 ### Background

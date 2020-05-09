@@ -25,5 +25,3 @@ You can delete the new `test` folder for each example project (none use it curre
 DOS: `rmdir /s test`
 
 If still have trouble with the extremely troublesome Android Studio, try going to File > Project Structure... and fixing any problems found.  (Possible warning here as I have had trouble with things breaking while fixing.)  Also, from "run" dropdown on the toolbar, select Edit Configurations... to resolve any other problems with identifying which example to run.
-
-If you get a message during compile about `path_provider` or `PathProviderPlugin.java`, it seems you can ignore it.  It goes away for me with later compiles.
