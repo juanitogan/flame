@@ -47,15 +47,12 @@ What you need to know up front.
 
 ## Adding the game engine to your project
 
-Clone/copy this repo to next to your game project and add it to your `pubspec.yaml`:
+Add the Pogo package dependency to your project's `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  pogo:
-    path: ../pogo/
+  pogo: ^0.1.1
 ```
-
-Maybe I'll get it onto the [pub.dev](https://pub.dev/) site someday so you can add it like a real package.
 
 A single import is required in each source file to access the game engine objects, types, etc.:
 

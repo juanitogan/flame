@@ -1,6 +1,4 @@
-import 'dart:ui';
-
-import '../../components/particle_component.dart';
+import 'package:pogo/src/components/particle_component.dart';
 
 /// Implements basic behavior for nesting [ParticleComponent] instances
 /// into each other.
