@@ -12,7 +12,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `TiledComponent` refactor.
 - `TimerComponent` refactor.
 - Take another look at message boxes and text. They're stable for now but there is probably much to do still.
-- Investigate the minor artifacts from canvas scaling in low-res games.
+- Investigate the minor artifacts from non-integer canvas scaling in low-res games.
+- I've noticed math and/or scaling/position problems with the `--enable-software-rendering` flag in both API 16 and 23 (and likely all others).
+
+
+## [0.1.0] - 2020-05-24
+With the release of [_Pogo Bug_](https://play.google.com/store/apps/details?id=com.littlebigspeed.pogobug) on Android, the Pogo Game Engine is now bona fide and ready for release as v0.1.0.
+
+### Changed
+- `pubspec.yaml`: updated `path_provider` from 1.6.0 to 1.6.6 to remove a bug/warning.
+- `pubspec.yaml`: updated `flutter_svg` from 0.17.1 to 0.17.4 to work with the latest Flutter update.
+- Minor doc edits.
 
 
 ## [0.0.3] - 2020-04-25
@@ -81,7 +91,7 @@ This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flam
 - The `Flame` static class and the `Util` helper class were replaced by several static classes.  Most of the contents of `Flame` was moved to `Assets`.  Most of the contents of `Util` was moved to `Screen`.
 - Caches renamed, `Flame.images` to `Assets.rasterCache`, `Flame.audio` to `Assets.audioCache` (and their respective classes renamed too: `FlameAudio` to `AudioCache`, etc.).  Others?
 - Cache methods renamed, `clear()` to `remove()`, `clearCache()` to `clear()`, to be more inline with other Dart objects.
-- Regarding what Flamed called "components," this took a great deal of sorting out -- all the details of which I will not list.  The base `Component` seemed be part-component/part-entity, while handling neither well, and with confusing mixin dependencies.  Thus, most feature components had a similar identity crisis where most were some sort of entity/component combo, while others were specialized entities, and others were a difficult mash of entity, component, and/or primitive object.  Fixing this broke everything (too put it lightly) and triggered the majority of all the other changes here.  In short, and very loosely, `Component`+`PositionComponent`+`ComposedComponent` became `GameEntity` with true-component features (like size) removed.  Some components were renamed to prefabs (such as `AnimationComponent` to `AnimationPrefab`, then `Animation` to `AnimationComponent`, same with sprites) while most others were demoted to simple components by stripping out the entity stuff.  These kept their name and new prefabs were created for them.  What this adds up to, for the most part, is that `add()` (which is no longer used) is replaced by a call to the prefab instead (i.e. `add(SpriteComponent())` to `SpritePrefab(SpriteComponent())`) and then the contained component syntax needs to be fixed, and the new prefab syntax added.  Get all that?  **Yeah, it's gonna be a mess if trying to port a large project from Flame.**
+- Regarding what Flamed called "components," this took a great deal of sorting out -- all the details of which I will not list.  The base `Component` seemed be part-component/part-entity, while handling neither well, and with confusing mixin dependencies.  Thus, most feature components had a similar identity crisis where most were some sort of entity/component combo, while others were specialized entities, and others were a difficult mash of entity, component, and/or primitive object.  Fixing this broke everything (to put it lightly) and triggered the majority of all the other changes here.  In short, and very loosely, `Component`+`PositionComponent`+`ComposedComponent` became `GameEntity` with true-component features (like size) removed.  Some components were renamed to prefabs (such as `AnimationComponent` to `AnimationPrefab`, then `Animation` to `AnimationComponent`, same with sprites) while most others were demoted to simple components by stripping out the entity stuff.  These kept their name and new prefabs were created for them.  What this adds up to, for the most part, is that `add()` (which is no longer used) is replaced by a call to the prefab instead (i.e. `add(SpriteComponent())` to `SpritePrefab(SpriteComponent())`) and then the contained component syntax needs to be fixed, and the new prefab syntax added.  Get all that?  **Yeah, it's gonna be a mess if trying to port a large project from Flame.**
 - `isHud()` replaced by `isOverlay`.  (Not sure what all the functions were about.)  More generic term.  Not all overlays are HUDs.
 - The static `priority()` was replaced by `zOrder` which is also now fully dynamic.
 - `angle` renamed to `rotation` (and added `rotationDeg`).
@@ -125,7 +135,8 @@ This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flam
 
 
 <!-- NOTE: Don't forget to update links on other sites.  Like: itch.io. -->
-[Unreleased]: https://github.com/juanitogan/pogo/compare/0.0.3...HEAD
+[Unreleased]: https://github.com/juanitogan/pogo/compare/0.1.0...HEAD
+[0.1.0]: https://github.com/juanitogan/pogo/compare/0.0.3...0.1.0
 [0.0.3]: https://github.com/juanitogan/pogo/compare/0.0.2...0.0.3
 [0.0.2]: https://github.com/juanitogan/pogo/compare/0.0.1...0.0.2
 [0.0.1]: https://github.com/flame-engine/flame/compare/0.18.1...juanitogan:0.0.1
