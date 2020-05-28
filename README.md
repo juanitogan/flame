@@ -51,7 +51,7 @@ Add the Pogo package dependency to your project's `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  pogo: ^0.1.1
+  pogo: ^0.1.2
 ```
 
 A single import is required in each source file to access the game engine objects, types, etc.:
@@ -100,8 +100,8 @@ import 'package:pogo/game_engine.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // required
-  await Screen.setFullScreen();
-  await Screen.setPortrait();
+  await Screen.setFullScreen(); // mobile - not for web app use
+  await Screen.setPortrait(); // mobile - not for web app use
 
   Camera.size = Size(135, 240); // default is native resolution
 

@@ -15,8 +15,8 @@ import 'package:pogo/game_engine.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // required
-  await Screen.setFullScreen();
-  await Screen.setPortrait();
+  await Screen.setFullScreen(); // mobile - not for web app use
+  await Screen.setPortrait(); // mobile - not for web app use
 
   Camera.size = Size(135, 240); // default is native resolution
 

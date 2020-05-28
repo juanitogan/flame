@@ -25,4 +25,7 @@ The `Screen` static class provides central access to static data and methods.
 | waitForStartupSizing  | Waits for the initial screen/window dimensions to be available. |
 | setSize               | For internal use.  Note: Should not be set by user. |
 
-The orientation methods don't seem to work with my Android emulator so... dunno.
+**Notes:**
+
+* The orientation methods don't seem to work with my Android emulators so... dunno.
+* Any use of the `setFullScreen()` method and/or the orientation methods will currently make a web app invisible.  I don't yet know if this is a bug, or just the way it is.  I would think they should just be ignored on platforms where they don't apply.  \[TODO: Since these are just wrapper methods, I should probably just remove them.  Or... maybe I can use these wrappers to check the platform and workaround/respond accordingly.\]

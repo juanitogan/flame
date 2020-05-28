@@ -16,6 +16,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - I've noticed math and/or scaling/position problems with the `--enable-software-rendering` flag in both API 16 and 23 (and likely all others).
 
 
+## [0.1.2] - 2020-05-27
+### Added
+- Added web app hints to some docs.
+
+### Changed
+- Removed yet another unused import identified by pub.dev.
+
+### Removed
+- Removed the `PogoBinding` class that extended BindingBase.  This was a relic from Flame (called FlameBinding) of unknown use except for a note that it was used to setup Flutter services.  It looked like a singleton.  Likely something needed for an early version of Flutter.  Anyhow, the latest Flutter in the beta channel doesn't like it, so I simply removed it due to no known references to it.
+
+
 ## [0.1.1] - 2020-05-24
 ### Added
 - Now published on [pub.dev](https://pub.dev/packages/pogo).
@@ -144,7 +155,8 @@ This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flam
 
 
 <!-- NOTE: Don't forget to update links on other sites.  Like: itch.io. -->
-[Unreleased]: https://github.com/juanitogan/pogo/compare/0.1.1...HEAD
+[Unreleased]: https://github.com/juanitogan/pogo/compare/0.1.2...HEAD
+[0.1.2]: https://github.com/juanitogan/pogo/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/juanitogan/pogo/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/juanitogan/pogo/compare/0.0.3...0.1.0
 [0.0.3]: https://github.com/juanitogan/pogo/compare/0.0.2...0.0.3
