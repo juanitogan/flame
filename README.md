@@ -20,6 +20,7 @@ Pogo implements what I'm calling a "pseudo Entity Component System" for lack of 
 | Game | Android | iOS | macOS | Linux | Windows | Web |
 | :--- | :-----: | :-: | :---: | :---: | :-----: | :-: |
 | **_Pogo Bug_** | [released](https://play.google.com/store/apps/details?id=com.littlebigspeed.pogobug) | todo |
+| example app | | | | | | [released](https://juanitogan.itch.io/pogo) |
 
 ### Background
 
