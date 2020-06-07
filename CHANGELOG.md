@@ -5,11 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- Box2D analysis and likely refactor.
+- **NOTE:** 0.2.0 will introduce "built-in" and "external" components.  Components (and their respective prefabs) that are not deemed necessary for the core of a basic 2D engine will be moved to their own projects (`pogo_*`).  Currently, this means components that rely on 3rd-party libraries such as: `TiledComponent`, `FlareComponent`, and `Box2DComponent`.  Not sure yet about non-3rd-party extras such as: `ParticleComponent` and `ParallaxComponent`.  These are currently a mess and I can't say I'll ever find time to dig into them.  (Note that `FlareParticle` needs to move with the rest of the Flare stuff.)
+  - After looking at the continued growing pains of Flame and its willy-nilly addition of any component that doesn't break the engine -- regardless of how muddy or useless it is -- I have once again been inspired to "do it different" with Pogo.  Flame has been really helpful in this regard.
+  - Moving 3rd-party plugins out should push Pogo significantly towards version 1.0.  And, make builds a bit thinner too.
+  - This should also simplify PR handling and maybe even help these components get the attention they need.
+  - Moving Box2D out is a tough decision.  On one hand, it can be appropriate for a game engine to include a physics engine.  On the other hand, Pogo is just a thin layer on top of Flutter and probably should not be dictating which physics engine a game dev should be using.  Also, Box2D still needs major analysis and refactoring... and may not really a be component.  I really need a good Box2D example app to figure this out better.
 - `NinePatchComponent` refactor.
-- `ParallaxComponent` refactor.  Add SVG too.  Consider keeping feature or not.  (I don't use this but use SpriteComponents to make my own.)
+- `ParallaxComponent` refactor.  Add SVG too.  Consider keeping feature in core or move out.  (I don't use this and instead use SpriteComponents to make my own parallaxes.)
 - `ParticleComponent` and `ParticlePrefab` refactor.
-- `TiledComponent` refactor.
+- `TiledComponent` refactor.  (to be moved to own project)
 - `TimerComponent` refactor.
 - Take another look at message boxes and text. They're stable for now but there is probably much to do still.
 - Investigate the minor artifacts from non-integer canvas scaling in low-res games.
