@@ -79,7 +79,7 @@ With the release of [_Pogo Bug_](https://play.google.com/store/apps/details?id=c
 
 
 ## [0.0.1] - 2020-04-13
-This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) and this is the first commit as Pogo.  I have some previous commits after Flame 0.18.1 that were submitted as a PR to Flame but that PR was not accepted.  Thus, Pogo was born.  Those changes are here along with many more changes to just about every part of the code.  This includes the introduction of entities and a significant redefinition of what a component is.  I will attempt to give a pretty good overview of all changes here.  The degree of changes is too great to hope to list in absolute detail.  Just look at the diffs of the commits leading up to this version and you'll see what I mean.
+This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) and this is the first commit as Pogo.  I have some previous commits after Flame 0.18.1 that were submitted as a PR to Flame but that PR was not accepted.  Thus, Pogo was born.  Those changes are here along with many more changes to just about every part of the code.  This includes the introduction of entities and a significant redefinition of what a component is.  I will attempt to give a pretty good overview of all changes here.  The degree of changes is too great to hope to list in absolute detail.  Just look at the [diffs of the commits](https://github.com/flame-engine/flame/compare/0.18.1...juanitogan:0.0.1) leading up to this version and you'll see what I mean.
 
 ### Added
 - `game_engine.dart` exports every feature of the engine.  Thus, only one import needed now: `import 'package:pogo/game_engine.dart';`.  Still working on best practices for import/export.

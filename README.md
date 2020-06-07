@@ -1,8 +1,8 @@
 # :full_moon: Pogo Game Engine
 
-Pogo is a 2D game engine for [Flutter](https://flutter.dev/) (Android, iOS, plus web and desktop in beta).
+Pogo is a 2D game engine for [Flutter](https://flutter.dev/) (Android, iOS, web in beta, desktop in alpha).
 
-Pogo implements what I'm calling a "'Pseudo' Entity Component System" for lack of a better term.  Pogo's Pseudo ECS is very similar to the design pattern of other game engines that are extremely popular for rapid game development.  Pogo games are made entirely of game entities (a.k.a. game objects).  Game entities are built with modular components that are easy to understand.
+Pogo implements what I'm calling a "_Pseudo_ Entity Component System" for lack of a better term.  Pogo's Pseudo ECS is very similar to the design pattern of other game engines that are extremely popular for rapid game development.  Pogo games are made entirely of game entities (a.k.a. game objects).  Game entities are built with modular components that are easy to understand.
 
 Why a Pseudo ECS instead of a more pure ECS?  (1) I didn't see myself as having time to go that far into the ECS pattern; and (2) I believe this pattern is quicker to ramp up on while still being more than robust enough for any game written in Dart.
 
@@ -26,7 +26,7 @@ Why a Pseudo ECS instead of a more pure ECS?  (1) I didn't see myself as having 
 
 Pogo was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) and redesigned with the goal of making it twice as easy to understand and use.  And... I believe I succeeded, with features like: game entities, better component design, intrinsic entity parenting, dynamic Z ordering, and sensible sprite and animation components.
 
-All due credit to inu-no-policemen on Reddit and Luan Nico of Flame for setting up the core, which remains somewhat unchanged.  The rest of Flame, however, was showing growing pains, plus a reluctance to large changes in design.  Thus, I launched a new project which will, hopefully, be more agile to needed change before version 1.0.  Even at Pogo 0.0.1, just about everything above Flame's core was changed.  I also added many new features critical to how I build games.  See the [first CHANGELOG entry](CHANGELOG.md#001---2020-04-13) for an overview of just how enourmously different Pogo is from Flame.
+All due credit to inu-no-policemen on Reddit and Luan Nico of Flame for setting up the core, which remains fairly unchanged.  The rest of Flame, however, was showing growing pains, plus a reluctance to large changes in design.  Thus, I launched a new project which will, hopefully, be more agile to needed change before version 1.0.  Even at Pogo 0.0.1, just about everything above Flame's core was changed.  I also added many new features critical to how I build games.  See the [first CHANGELOG entry](CHANGELOG.md#001---2020-04-13) for an overview of just how enourmously different Pogo is from Flame.
 
 Therefore, if you find a pre-release version of Pogo you like, lock it in, or be prepared for possible breaking changes.  (Although, if I did a decent job with round one here, there shouldn't be any more major shifts in design coming -- just shifts isolated to parts still in need of refactoring.  We'll see.)
 
