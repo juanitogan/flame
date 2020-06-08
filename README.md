@@ -24,9 +24,9 @@ Why a Pseudo ECS instead of a more pure ECS?  (1) I didn't see myself as having 
 
 ### Background
 
-Pogo was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) and redesigned with the goal of making it twice as easy to understand and use.  And... I believe I succeeded, with features like: game entities, better component design, intrinsic entity parenting, dynamic Z ordering, and sensible sprite and animation components.
+Pogo was forked from [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) and redesigned with the goal of making it twice as easy to understand and use.  And... I believe I succeeded, with features like: game entities, better component design, intrinsic entity hierarchy, dynamic Z ordering, sensible sprite and animation components, fewer red herrings, and better docs.
 
-All due credit to inu-no-policemen on Reddit and Luan Nico of Flame for setting up the core, which remains fairly unchanged.  The rest of Flame, however, was showing growing pains, plus a reluctance to large changes in design.  Thus, I launched a new project which will, hopefully, be more agile to needed change before version 1.0.  Even at Pogo 0.0.1, just about everything above Flame's core was changed.  I also added many new features critical to how I build games.  See the [first CHANGELOG entry](CHANGELOG.md#001---2020-04-13) for an overview of just how enourmously different Pogo is from Flame.
+All due credit to inu-no-policemen on Reddit and Luan Nico of Flame for setting up the core, which remains fairly unchanged.  The rest of Flame, however, was showing growing pains, plus a reluctance to large changes in design.  Thus, I launched a new project which will, hopefully, be more agile to needed change before version 1.0.  Even at Pogo 0.0.1, just about everything above Flame's core was changed.  I also added many new features critical to how I build games.  See the [first CHANGELOG entry](CHANGELOG.md#001---2020-04-13) for an overview of just how enormously different Pogo is from Flame.
 
 Therefore, if you find a pre-release version of Pogo you like, lock it in, or be prepared for possible breaking changes.  (Although, if I did a decent job with round one here, there shouldn't be any more major shifts in design coming -- just shifts isolated to parts still in need of refactoring.  We'll see.)
 
@@ -204,7 +204,7 @@ class Player extends GameEntity with {
     // Instantiate and add children.
     rightHand = Sword(Vecter2(10, 0), 1);
     leftHand = Saber(Vecter2(-10, 0), 1);
-    addChild(righHand);
+    addChild(rightHand);
     addChild(leftHand);
 
     // Another way to add a child.
@@ -298,5 +298,5 @@ External (and untested with Pogo):
 
 ## Credits
 
- * [inu-no-policemen's post on reddit](https://www.reddit.com/r/dartlang/comments/69luui/minimal_flutter_game_loop/).
+ * [inu-no-policemen's post on Reddit](https://www.reddit.com/r/dartlang/comments/69luui/minimal_flutter_game_loop/).
  * Luan Nico and all the contributors to the [Flame](https://github.com/flame-engine/flame) project.
