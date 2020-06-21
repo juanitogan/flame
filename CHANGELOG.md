@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - I've noticed math and/or scaling/position problems with the `--enable-software-rendering` flag in both API 16 and 23 (and likely all others).
 
 
+## [0.2.1] - 2020-06-20
+### Changed
+- Reverted flutter_svg 0.18.0 back to 0.17.3+1 because the latest version depends on a pre-release version of Flutter.  Who builds packages like this?
+
+
 ## [0.2.0] - 2020-06-20
 ### Changed
 - **WARNING: Breaking changes!**
@@ -167,7 +172,8 @@ This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flam
 ## [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) - 2020-02-09
 
 
-[Unreleased]: https://github.com/juanitogan/pogo/compare/0.2.0...HEAD
+[Unreleased]: https://github.com/juanitogan/pogo/compare/0.2.1...HEAD
+[0.2.1]: https://github.com/juanitogan/pogo/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/juanitogan/pogo/compare/0.1.2...0.2.0
 [0.1.2]: https://github.com/juanitogan/pogo/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/juanitogan/pogo/compare/0.1.0...0.1.1

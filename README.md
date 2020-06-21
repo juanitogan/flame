@@ -54,7 +54,7 @@ Add the [Pogo package](https://pub.dev/packages/pogo) dependency to your project
 
 ```yaml
 dependencies:
-  pogo: ^0.2.0
+  pogo: ^0.2.1
 ```
 
 A single import is required in each source file to access all the core game engine objects, types, etc.:
