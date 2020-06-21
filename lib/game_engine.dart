@@ -29,18 +29,15 @@ export 'src/components/sprite_image.dart';
 export 'src/components/text_config.dart';
 
 export 'src/components/animation_component.dart';
-export 'src/components/flare_component.dart';
 export 'src/components/message_box_component.dart';
 export 'src/components/nine_patch_component.dart';
 export 'src/components/parallax_component.dart';
 export 'src/components/particle_component.dart';
 export 'src/components/sprite_component.dart';
 export 'src/components/text_component.dart';
-export 'src/components/tiled_component.dart';
 export 'src/components/timer_component.dart';
 
 export 'src/prefabs/animation_prefab.dart';
-export 'src/prefabs/flare_prefab.dart';
 export 'src/prefabs/message_box_prefab.dart';
 export 'src/prefabs/nine_patch_prefab.dart';
 export 'src/prefabs/parallax_prefab.dart';
@@ -48,7 +45,6 @@ export 'src/prefabs/particle_prefab.dart';
 export 'src/prefabs/sprite_prefab.dart';
 export 'src/prefabs/tap_area_prefab.dart';
 export 'src/prefabs/text_prefab.dart';
-export 'src/prefabs/tiled_prefab.dart';
 export 'src/prefabs/timer_prefab.dart';
 
 export 'src/particles/accelerated_particle.dart';
@@ -58,7 +54,6 @@ export 'src/particles/composite_particle.dart';
 export 'src/particles/computed_particle.dart';
 export 'src/particles/curved_particle.dart';
 export 'src/particles/entity_particle.dart';
-export 'src/particles/flare_particle.dart';
 export 'src/particles/image_particle.dart';
 export 'src/particles/moving_particle.dart';
 export 'src/particles/paint_particle.dart';

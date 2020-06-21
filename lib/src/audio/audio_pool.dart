@@ -7,6 +7,7 @@ import 'package:synchronized/synchronized.dart';
 typedef void Stoppable();
 
 //TODO !! this seems to need a redux... or another tool
+//TODO Test against [assets_audio_player](https://pub.dev/packages/assets_audio_player) and other solutions.
 
 /// An AudioPool is a provider of AudioPlayers that leaves them pre-loaded to minimize delays.
 ///

@@ -2,7 +2,7 @@
 
 **//TODO: the old version of this is working but this is slated to be rebuilt; will rewrite doc after that**
 
-**This code may be outdated, see the example app**
+**This code may be outdated; see the example app for more current code.**
 
 See the [**particles** example app](/doc/examples/particles/lib/main.dart).
 

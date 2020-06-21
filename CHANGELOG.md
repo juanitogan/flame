@@ -5,19 +5,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- **NOTE:** 0.2.0 will introduce "built-in" and "external" components.  Components (and their respective prefabs) that are not deemed necessary for the core of a basic 2D engine will be moved to their own projects (`pogo_*`).  Currently, this means components that rely on 3rd-party libraries such as: `TiledComponent`, `FlareComponent`, and `Box2DComponent`*.  Not sure yet about non-3rd-party extras such as: `ParticleComponent` and `ParallaxComponent`.  These are currently a mess and I can't say I'll ever find time to dig into them.  (Note that `FlareParticle` needs to move with the rest of the Flare stuff.)
-  - After looking at the continued growing pains of Flame and its willy-nilly addition of any component that doesn't break the engine -- regardless of how muddy or useless it is -- I have once again been inspired to "do it different" with Pogo.  Flame has been really helpful in this regard.
-  - Moving 3rd-party plugins out should push Pogo significantly towards version 1.0.  And, make builds a bit thinner too.
-  - This should also simplify PR handling and maybe even help these components get the attention they need.
-  - * Moving Box2D out is a tough decision.  On one hand, it can be appropriate for a game engine to include a physics engine.  On the other hand, Pogo is just a thin layer on top of Flutter and probably should not be dictating which physics engine a game dev should be using.  Also, the Box2D integration still needs major analysis and refactoring.  Seeing it in Flame as a single "component" makes my brain hurt.  It should be another type of plugin (perhaps a mixin) that comes with a whole set of components.  I really need a good Box2D example app to figure this out better.
 - `NinePatchComponent` refactor.
-- `ParallaxComponent` refactor.  Add SVG too.  Consider keeping feature in core or move out.  (I don't use this and instead use SpriteComponents to make my own parallaxes.)
-- `ParticleComponent` and `ParticlePrefab` refactor.
-- `TiledComponent` refactor.  (to be moved to own project)
+- `ParallaxComponent` refactor.  Add SVG too.  Consider keeping in core or move out.  (I don't use this and instead use SpriteComponents to make my own parallaxes.)
+- `ParticleComponent` and `ParticlePrefab` refactor.  Consider keeping in core or move out.
 - `TimerComponent` refactor.
 - Take another look at message boxes and text. They're stable for now but there is probably much to do still.
 - Investigate the minor artifacts from non-integer canvas scaling in low-res games.
 - I've noticed math and/or scaling/position problems with the `--enable-software-rendering` flag in both API 16 and 23 (and likely all others).
+
+
+## [0.2.0] - 2020-06-20
+### Changed
+- **WARNING: Breaking changes!**
+- This update introduces "built-in" and "external" components (plugins).  Components (and their respective particles and prefabs) that were not deemed necessary for the core of a basic 2D engine were moved to their own projects (`pogo_*`).  This meant, especially, components that rely on 3rd-party libraries: `TiledComponent`, `FlareComponent`, and `Box2DComponent`.
+  - Not sure yet about non-3rd-party extras such as: `ParticleComponent` and `ParallaxComponent`.  These are currently a mess and I can't say I'll ever find time to dig into them.
+  - After looking at the continued growing pains of Flame and its willy-nilly addition of any component that doesn't break the engine -- regardless of how muddy or useless it is -- I have once again been inspired to "do it different" with Pogo.  Flame has been really helpful in this regard.
+  - Moving 3rd-party plugins out should push Pogo significantly towards version 1.0.
+  - This should also simplify PR handling and maybe even help these components get the attention they need.
+
+### Removed
+- TiledComponent and TiledPrefab moved out to its own `pogo_tiled` project.
+- FlareComponent, FlareParticle, and FlarePrefab moved out to its own `pogo_rive` project.  Everything here was renamed from Flare to Rive to match the new branding of the Rive product.
+- All Box2D stuff moved out to its own `pogo_box2d` project.  Moving Box2D out was a tough decision.  On one hand, it can be appropriate for a game engine to include a physics engine.  On the other hand, Pogo is just a thin layer on top of Flutter and probably should not be dictating which physics engine a game dev should be using.  Also, the Box2D integration still needs major analysis and refactoring.  Seeing it in Flame as a single "component" or two makes my brain hurt.  It should be another type of plugin (perhaps a mixin) that comes with a suite of components.
 
 
 ## [0.1.2] - 2020-05-27
@@ -158,8 +167,8 @@ This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flam
 ## [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) - 2020-02-09
 
 
-<!-- NOTE: Don't forget to update links on other sites.  Like: itch.io. -->
-[Unreleased]: https://github.com/juanitogan/pogo/compare/0.1.2...HEAD
+[Unreleased]: https://github.com/juanitogan/pogo/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/juanitogan/pogo/compare/0.1.2...0.2.0
 [0.1.2]: https://github.com/juanitogan/pogo/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/juanitogan/pogo/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/juanitogan/pogo/compare/0.0.3...0.1.0

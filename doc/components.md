@@ -21,7 +21,7 @@ Class-type components must be instantiated by an entity in order to be used (upd
 > Note: I may choose to someday automatically register component `update()` and `render()` methods so you don't have to call them explicitly... but not today. 
 
 
-| Contents |
+| Built-in components |
 | :-- |
-| [SpriteComponent](components/sprite.md) <br/> [AnimationComponent](components/animation.md) <br/> [FlareComponent](components/flare.md) <br/> [MessageBoxComponent](components/text.md#messageboxcomponent-class) <br/> [NinePatchComponent](components/nine_patch.md) <br/> [ParallaxComponent](components/parallax.md) <br/> [ParticleComponent](components/particle.md) <br/> [TextComponent](components/text.md) <br/> [TiledComponent](components/tiled.md) <br/> [TimerComponent](components/timer.md) |
+| [SpriteComponent](components/sprite.md) <br/> [AnimationComponent](components/animation.md) <br/> [MessageBoxComponent](components/text.md#messageboxcomponent-class) <br/> [NinePatchComponent](components/nine_patch.md) <br/> [ParallaxComponent](components/parallax.md) <br/> [ParticleComponent](components/particle.md) <br/> [TextComponent](components/text.md) <br/> [TimerComponent](components/timer.md) |
 

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:pogo/game_engine.dart';
+import 'package:pogo_rive/plugin.dart';
 
 import 'package:flutter/material.dart' hide Animation, Image;
 
@@ -12,15 +13,15 @@ void main() async {
     'boom3.png', //Credit to Stumpy Strust https://opengameart.org/content/explosion-sheet
   ]);
 
-  // Preload the Flare.
-  final flareAnimation = await FlareComponent.fromFile('assets/diamond.flr', 'Spin', scale: 0.1);
+  // Preload the Rive (Flare) animation.
+  final riveAnimation = await RiveComponent.fromFile('assets/diamond.flr', 'Spin', scale: 0.1);
 
   Game().debugMode = true;
   runApp(Game().widget);
 
   final Size screenSize = await Screen.waitForStartupSizing();
 
-  MainEntity(screenSize: screenSize, flareAnimation: flareAnimation);
+  MainEntity(screenSize: screenSize, riveAnimation: riveAnimation);
 }
 
 
@@ -47,11 +48,11 @@ class MainEntity extends GameEntity {
 
   Offset cellSize;  //TODO switch to Vector2 maybe
   Offset halfCellSize;
-  FlareComponent flareAnimation;
+  RiveComponent riveAnimation;
 
   MainEntity({
     this.screenSize,
-    this.flareAnimation,
+    this.riveAnimation,
   }) {
     cellSize = Offset(screenSize.width / gridSize, screenSize.height / gridSize);
     halfCellSize = cellSize * .5;
@@ -93,7 +94,7 @@ class MainEntity extends GameEntity {
       animationParticle(),
       fireworkParticle(),
       componentParticle(),
-      flareParticle(),
+      riveParticle(),
     ];
 
     // Place all the [Particle] instances
@@ -462,16 +463,16 @@ class MainEntity extends GameEntity {
     );
   }
 
-  /// [FlareParticle] renders fiven [FlareComponent] inside
+  /// [RiveParticle] renders fiven [RiveComponent] inside
   /// as you can see, animation could be reused across
   /// different particles.
-  ParticleComponent flareParticle() {
-    final flare = CompositeParticle(children: <ParticleComponent>[
+  ParticleComponent riveParticle() {
+    final rive = CompositeParticle(children: <ParticleComponent>[
       // Circle Particle for background
       CircleParticle(
           paint: Paint()..color = Colors.white12,
-          radius: flareAnimation.width / 2),
-      FlareParticle(flare: flareAnimation),
+          radius: riveAnimation.width / 2),
+      RiveParticle(rive: riveAnimation),
     ]);
 
     final List<Offset> corners = [
@@ -486,7 +487,7 @@ class MainEntity extends GameEntity {
         generator: (i) => MovingParticle(
           to: corners[i] * .4,
           curve: SineCurve(),
-          child: flare,
+          child: rive,
         ),
       ),
     );

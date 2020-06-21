@@ -4,7 +4,9 @@ For an overview of how to setup your assets, see the [getting started guide](/RE
 
 Tested audio file types: MP3, OGG, and WAV.
 
-Pogo currently uses the [audioplayers](https://github.com/luanpotter/audioplayers) library.
+Pogo currently uses the [audioplayers](https://pub.dev/packages/audioplayers) library.
+
+TODO: Test against [assets_audio_player](https://pub.dev/packages/assets_audio_player) and other solutions.
 
 ## Usage
 

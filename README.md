@@ -1,6 +1,6 @@
 # :full_moon: Pogo Game Engine
 
-Pogo is a 2D game engine for [Flutter](https://flutter.dev/) (Android, iOS, web in beta, desktop in alpha).
+Pogo is a 2D game engine for [Flutter](https://flutter.dev/) (Android, iOS) (web in beta) (desktop in alpha).
 
 Pogo implements what I'm calling a "_Pseudo_ Entity Component System" for lack of a better term.  Pogo's Pseudo ECS is very similar to the design pattern of other game engines that are extremely popular for rapid game development.  Pogo games are made entirely of game entities (a.k.a. game objects).  Game entities are built with modular components that are easy to understand.
 
@@ -30,19 +30,17 @@ All due credit to inu-no-policemen on Reddit and Luan Nico of Flame for setting 
 
 Therefore, if you find a pre-release version of Pogo you like, lock it in, or be prepared for possible breaking changes.  (Although, if I did a decent job with round one here, there shouldn't be any more major shifts in design coming -- just shifts isolated to parts still in need of refactoring.  We'll see.)
 
-The name, Pogo, comes from [_Pogo Bug_](https://play.google.com/store/apps/details?id=com.littlebigspeed.pogobug) -- the game I built this engine for.  (_Pogo Bug_ was originally written in QtQuick/QML but not released from that codebase due to Qt's difficult licensing issues.)  Thus, this engine is tried and tested on my own small-but-complete game from day one.  It took maybe 10x longer to work up this Flutter/Dart-based engine than to write the original Qt game.  Judging by how quickly I then ported _Pogo Bug_ to Pogo, versus how much trouble Flame was giving me, it seems Pogo was worth the effort.  Pogo feels nearly as quick to build a game in as QtQuick was... and with better performance.
+The name, Pogo, comes from [_Pogo Bug_](https://juanitogan.itch.io/pogobug) -- the game I built this engine for.  (_Pogo Bug_ was originally written in QtQuick/QML but not released from that codebase due to Qt's difficult licensing issues.)  Thus, this engine is tried and tested on my own small-but-complete game from day one.  It took maybe 10x longer to work up this Flutter/Dart-based engine than to write the original Qt game.  Judging by how quickly I then ported _Pogo Bug_ to Pogo, versus how much trouble Flame was giving me, it seems Pogo was worth the effort.  Pogo feels nearly as quick to build a game in as QtQuick was... and with better performance.
 
 ### Contributing
 
 Hit me with a PR and I'll try to find time to engage it.  No promises, but I'll try.  Hopefully others will jump in and help.  I pay close attention to naming and API consistency more so than code style -- code can be refactored without breaking things, naming and structure cannot.
 
-There is still much to be done.  I quickly hacked through many components from the previous engine that I didn't need at the moment, just to get them working.  Thus, some components still need to be refactored to be more like the rest.
+There is still much to be done.  I quickly hacked through some components from the previous engine that I didn't need at the moment, just to get them working.  Thus, some components still need to be refactored to be more like the rest.
 
 [NinePatchComponent](doc/components/nine_patch.md), [ParallaxComponent](doc/components/parallax.md), and [ParticleComponent](doc/components/particle.md) are some examples of things I just quick-hacked and saved for later.  (See the [Unreleased section in the changelog](CHANGELOG.md#unreleased) for a better TODO list.)  Most things still work as Flame had them working, but they may not be fully "Pogo-ized" yet.  I also haven't touched Box2D yet because _Pogo Bug_ doesn't need it.  (Another game of mine, _GRITS Racing_, uses Box2D heavily, so I should have the skills to work it in well when I get to it).
 
 The core components I focused on the most are: [SpriteComponent](doc/components/sprite.md), [AnimationComponent](doc/components/animation.md), and the [gesture mixins](doc/input.md).  [TextComponent](doc/components/text.md) got a pretty solid work over as well.  These should be used as examples for how to refactor the rest.
-
-:information_source: Note the changes coming with [Pogo 0.2.0](CHANGELOG.md#unreleased).
 
 ----
 
@@ -52,14 +50,14 @@ What you need to know up front.
 
 ## Adding the game engine to your project
 
-Add the Pogo package dependency to your project's `pubspec.yaml`:
+Add the [Pogo package](https://pub.dev/packages/pogo) dependency to your project's `pubspec.yaml`, for example (check your version number):
 
 ```yaml
 dependencies:
-  pogo: ^0.1.2
+  pogo: ^0.2.0
 ```
 
-A single import is required in each source file to access the game engine objects, types, etc.:
+A single import is required in each source file to access all the core game engine objects, types, etc.:
 
 ```dart
 import 'package:pogo/game_engine.dart';
@@ -281,20 +279,6 @@ If you `destroy()` a parent, all the children will be automatically destroyed fo
 (TODO: Think through parenting and destruction more.)
 
 ----
-
-## 3rd-party plugins
-
-Built in:
-
- * [AudioPlayers](https://github.com/luanpotter/audioplayers) is the audio engine.
- * [Tiled](https://github.com/feroult/tiled.dart) adds support for parsing and using TMX files from Tiled.
- * [Box2D](https://github.com/flame-engine/box2d.dart) adds wrappers over Box2D for the physics engine.
- * TODO: finish this list
-
-External (and untested with Pogo):
-
- * [flame_gamepad](https://github.com/fireslime/flame_gamepad) adds support to gamepad. Android only.
- * [play_games](https://github.com/luanpotter/play_games) integrates to Google Play Games Services (GPGS). Adds login, achievements, saved games and leaderboard. Android only. Be sure to check the instructions on how to configure, as it's not trivial.
 
 ## Credits
 

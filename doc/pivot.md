@@ -36,4 +36,4 @@ The `Pivot` class is a type for defining the pivot (or rotation) point for visib
 
 ----
 
-See the [**primatives** example app](/doc/examples/primatives/lib/main.dart).
+See the [**primatives** example app](/doc/examples/primitives/lib/main.dart).
