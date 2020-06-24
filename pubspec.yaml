@@ -1,6 +1,6 @@
 name: pogo
 description: 2D game engine for Flutter. Implements a logical game-entity system for rapid development of simple games.
-version: 0.2.1
+version: 0.2.2
 homepage: https://github.com/juanitogan/pogo
 
 environment:
