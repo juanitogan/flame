@@ -6,7 +6,7 @@ Tested audio file types: MP3, OGG, and WAV.
 
 Pogo currently uses the [audioplayers](https://pub.dev/packages/audioplayers) library.
 
-TODO: Test against [assets_audio_player](https://pub.dev/packages/assets_audio_player) and other solutions.
+TODO: Test against [just_audio](https://pub.dev/packages/just_audio), [assets_audio_player](https://pub.dev/packages/assets_audio_player) and other solutions.
 
 ## Usage
 
@@ -43,7 +43,7 @@ To play indefinitely, use one of the `loop` functions:
 
 Alternatively, you can use the [`Bgm` class (via `Assets.bgm`)](bgm.md) to play looping background music tracks. The `Bgm` class lets Flame manage the auto pausing and resuming of background music tracks when pausing/resuming the game/app.
 
-The difference between the `play/loop` and `playLongAudio/loopLongAudio` is that `play/loop` makes uses of optimized features that allow sounds to be looped without gaps between their iterations, and almost no drop on the game frame rate will happen. You should whenever possible, prefer these methods. `playLongAudio/loopLongAudio` allows for audios of any length to be played, but they do create frame rate drop, and the looped audio will experience a small gap between iterations.
+The difference between `play`/`loop` and `playLongAudio`/`loopLongAudio` is that `play`/`loop` make use of optimized features that allow sounds to be looped without gaps between their iterations, and almost no drop on the game frame rate will happen. You should whenever possible, prefer these methods. `playLongAudio`/`loopLongAudio` allow for audio of any length to be played, but they do create frame rate drop, and the looped audio will experience a small gap between iterations.
 
 Both the `play` and `loop` methods return an [`AudioPlayer`](https://pub.dev/documentation/audioplayers/latest/audioplayers/AudioPlayer-class.html) instance that allows you to stop, pause, and configure other specifications.
 
@@ -55,6 +55,8 @@ There is a lot of logging.  This is reminiscent of the original AudioPlayer plug
 
 ### Caching
 
+**Warning: Caching does not work with web apps and the use of `load` or `loadAll` can break the app without an error message.**
+
 Audio files need to be loaded into memory before playback.  Therefore, the first time you play a file you might get a delay if it is not loaded yet.  To pre-load an audio files to reduce lag:
 
 ```dart
@@ -64,7 +66,7 @@ Audio files need to be loaded into memory before playback.  Therefore, the first
 To cache multiple files from a List of filenames:
 
 ```dart
-    Assets.audioCache.loadAll(['explosion.mp3', 'music.mp3'])
+    Assets.audioCache.loadAll(['explosion.mp3', 'music.mp3']);
 ```
 
 Both load methods return a `Future` for the `File`s loaded.

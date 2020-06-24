@@ -4,6 +4,11 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:audioplayers/audio_cache.dart' as ac;
 
 //TODO shop for other audio tools to see if better performance can be found
+//     audioplayers, assets_audio_player, just_audio, ...
+//     Have tested all three on web builds and all seem just as bad.
+//     Well, problem on FF is that overlapping sounds don't mix right until
+//     another tab also plays sound, then come back and it plays right!?????
+//     This is regardless of pooling audio players or not.
 
 /// Handles audio caching and functions.
 class AudioCache {
@@ -45,11 +50,13 @@ class AudioCache {
   }
 
   /// Loads a single file into the cache.
+  /// Returns a dart:io [File] object referencing the file on the system.
   Future<File> load(String filename) {
-    return _audioCache.load(filename);  //TODO what, exactly, is this File return? and why?
+    return _audioCache.load(filename);
   }
 
   /// Loads a List of files into the cache.
+  /// Returns a dart:io [File] object referencing the file on the system.
   Future<List<File>> loadAll(List<String> filenames) {
     return _audioCache.loadAll(filenames);
   }

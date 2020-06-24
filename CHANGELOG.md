@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+#### Todo
+- Re-evaluate all audio tools and document.  Includes: `AudioCache`, `AudioPool`, and `Bgm`.  Should a pool helper class be in the core???
 - `NinePatchComponent` refactor.
 - `ParallaxComponent` refactor.  Add SVG too.  Consider keeping in core or move out.  (I don't use this and instead use SpriteComponents to make my own parallaxes.)
 - `ParticleComponent` and `ParticlePrefab` refactor.  Consider keeping in core or move out.
@@ -12,6 +14,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Take another look at message boxes and text. They're stable for now but there is probably much to do still.
 - Investigate the minor artifacts from non-integer canvas scaling in low-res games.
 - I've noticed math and/or scaling/position problems with the `--enable-software-rendering` flag in both API 16 and 23 (and likely all others).
+
+#### Done
+
+
+## [0.2.2] - 2020-06-23
+### Changed
+- Made AudioPool more web-friendly, for what its worth.  No more web-performant though.  Overlapping web audio is still lousy (depending on browser, luck, and who knows what).
+- **WARNING: Breaking changes!**  Renamed some parameters of AudioPool to better match the rest of Pogo.
+- Added other notes and hints to the docs about audio in web apps.
+
+### Removed
+- Removed dependency on `path_provider: ^1.6.6`.  Don't know what it was left over from.  Guessing early audio stuff.  Well, it did chase away some warnings due to other plugins that have outdated dependencies on it.  If a tool cannot keep up, it should probably be dropped (audioplayers).
 
 
 ## [0.2.1] - 2020-06-20
@@ -172,7 +186,8 @@ This project was forked from [Flame 0.18.1](https://github.com/flame-engine/flam
 ## [Flame 0.18.1](https://github.com/flame-engine/flame/tree/0.18.1) - 2020-02-09
 
 
-[Unreleased]: https://github.com/juanitogan/pogo/compare/0.2.1...HEAD
+[Unreleased]: https://github.com/juanitogan/pogo/compare/0.2.2...HEAD
+[0.2.2]: https://github.com/juanitogan/pogo/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/juanitogan/pogo/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/juanitogan/pogo/compare/0.1.2...0.2.0
 [0.1.2]: https://github.com/juanitogan/pogo/compare/0.1.1...0.1.2

@@ -19,7 +19,7 @@ Why a Pseudo ECS instead of a more pure ECS?  (1) I didn't see myself as having 
 
 | Game | Android | iOS | macOS | Linux | Windows | Web |
 | :--- | :-----: | :-: | :---: | :---: | :-----: | :-: |
-| **_Pogo Bug_** | [released](https://play.google.com/store/apps/details?id=com.littlebigspeed.pogobug) | todo |
+| **_Pogo Bug_** | [released](https://play.google.com/store/apps/details?id=com.littlebigspeed.pogobug) | todo | | | | [beta](https://juanitogan.itch.io/pogobug) |
 | example app | | | | | | [released](https://juanitogan.itch.io/pogo) |
 
 ### Background
@@ -50,11 +50,11 @@ What you need to know up front.
 
 ## Adding the game engine to your project
 
-Add the [Pogo package](https://pub.dev/packages/pogo) dependency to your project's `pubspec.yaml`, for example (check your version number):
+Add the [`pogo`](https://pub.dev/packages/pogo) package [dependency](https://flutter.dev/docs/development/packages-and-plugins/using-packages) to your project's `pubspec.yaml`, for example (check your version number):
 
 ```yaml
 dependencies:
-  pogo: ^0.2.1
+  pogo: ^0.2.2
 ```
 
 A single import is required in each source file to access all the core game engine objects, types, etc.:
@@ -83,7 +83,7 @@ The default asset tree looks like this:
         └── player.svg
 ```
 
-Also, you must list all asset files in your `pubspec.yaml` file:
+Also, you must [list all asset files](https://flutter.dev/docs/development/ui/assets-and-images) in your `pubspec.yaml` file:
 
 ```yaml
 flutter:
@@ -92,6 +92,16 @@ flutter:
     - assets/images/background.png
     - assets/svgs/enemy.svg
     - assets/svgs/player.svg
+```
+
+This also works if you want to include all files in a folder (note that you must list each subfolder you want to include):
+
+```yaml
+flutter:
+  assets:
+    - assets/audio/
+    - assets/images/
+    - assets/svgs/
 ```
 
 ## Game engine config and startup
@@ -114,7 +124,7 @@ void main() async {
   GestureInitializer.detectTaps = true;
   GestureInitializer.detectPans = true;
 
-  await Assets.audioCache.load("explosion.mp3");
+  await Assets.audioCache.load("explosion.mp3"); // not for web app use
   await Assets.rasterCache.load("background.png");
   await Assets.svgCache.loadAll(["enemy.svg", "player.svg"], scale: 0.75);
 

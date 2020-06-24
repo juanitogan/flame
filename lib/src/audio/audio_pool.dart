@@ -6,34 +6,35 @@ import 'package:synchronized/synchronized.dart';
 
 typedef void Stoppable();
 
-//TODO !! this seems to need a redux... or another tool
-//TODO Test against [assets_audio_player](https://pub.dev/packages/assets_audio_player) and other solutions.
+//TODO evaluate this more - seems useful, but mixing also seems fine without this
 
 /// An AudioPool is a provider of AudioPlayers that leaves them pre-loaded to minimize delays.
 ///
-/// All AudioPlayers loaded are for the same [sound]. If you want multiple sounds use multiple [AudioPool].
-/// Use this class if you'd like have extremely quick firing, repetitive and simultaneous sounds, like shooting a laser in a fast-paced spaceship game.
+/// All AudioPlayers loaded are for the same given source [filename].
+/// If you want to pool multiple sounds use multiple [AudioPool]s.
+/// Use this class for repetitive and overlapping sounds, like the gun sound in a shooter game.
 class AudioPool {
   AudioCache cache;
   Map<String, AudioPlayer> currentPlayers = {};
   List<AudioPlayer> availablePlayers = [];
 
-  String sound;
-  bool repeating;
+  String filename;
+  bool loop;
   int minPlayers, maxPlayers;
 
   final Lock _lock = Lock();
 
   AudioPool(
-      this.sound,
+      this.filename,
       {
-        this.repeating = false,
-        this.maxPlayers = 1,
+        this.loop = false,
         this.minPlayers = 1,
+        this.maxPlayers = 1,
         String subPath = 'audio/'
       }
   ) {
     cache = AudioCache(prefix: subPath);
+    //TODO assert min>=1 and max>=min
   }
 
   Future init() async {
@@ -68,7 +69,7 @@ class AudioPool {
       };
 
       subscription = player.onPlayerCompletion.listen((_) {
-        if (repeating) {
+        if (loop) {
           player.resume();
         } else {
           stop();
@@ -81,7 +82,7 @@ class AudioPool {
 
   Future<AudioPlayer> _createNewAudioPlayer() async {
     final AudioPlayer player = AudioPlayer();
-    final String url = (await cache.load(sound)).path;
+    final String url = await cache.getAbsoluteUrl(filename); // web-friendly load/pathfinder
     await player.setUrl(url);
     await player.setReleaseMode(ReleaseMode.STOP);
     return player;

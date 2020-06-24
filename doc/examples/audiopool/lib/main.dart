@@ -1,6 +1,7 @@
 import 'package:pogo/game_engine.dart';
 
-//TODO yeah... this and/or AudioPool needs work
+// Note that this doesn't always work well in the in the emulators
+// but works fine on a device.
 
 void main() async {
   GestureInitializer.detectTaps = true;
@@ -23,6 +24,7 @@ class MainEntity extends GameEntity with GestureArea, TapDetector {
       TextComponent("hit me!", textConfig: regular),
       position: Vector2(Screen.size.width / 2, Screen.size.height / 2),
     );
+    pool.init();
   }
 
   @override

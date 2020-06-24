@@ -26,7 +26,7 @@ void main() async {
   GestureInitializer.detectTaps = true;
   GestureInitializer.detectPans = true;
 
-  await Assets.audioCache.load("explosion.mp3");
+  await Assets.audioCache.load("explosion.mp3"); // not for web app use
   await Assets.rasterCache.load("background.png");
   await Assets.svgCache.loadAll(["enemy.svg", "player.svg"], scale: 0.75);
 
